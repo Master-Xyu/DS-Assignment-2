@@ -33,20 +33,25 @@ public class Task implements Callable<Boolean> {
 	}
 	@Override
 	public Boolean call() {
-		if(input()[1].equals("ready"))
+		String[] message = input();
+		if(message[1].equals("ready"))
 			ready = true;
+		else if(message[1].equals("exit"))
+			return true;
 		while(true) {
 			if(turn == false)
 				continue;
 			if(over == true)
 				break;
-			String[] message = {"alert","turn"};
+			message = new String[2];
+			message[0] = "alert";
+			message[1] = "turn";
 			output(message);
 			turn = false;
 		}
+		ready = false;
 		if(input()[1].equals("Y")) {
-			over = false;
-			ready = false;
+			over = false;			
 			call();
 		}
 		return true;

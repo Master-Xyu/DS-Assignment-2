@@ -18,7 +18,9 @@ public class CheckThread extends Thread {
 		String[] on = {"alert", "online"};
 		while(true) {
 			try {
-				Thread.sleep(3000);
+				Thread.sleep(5000);
+				if(g.voting == true)
+					continue;
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}

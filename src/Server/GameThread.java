@@ -20,23 +20,23 @@ public class GameThread extends Thread {
 		String[] message = new String[2];
 		message[0] = "alert";
 		message[1] = "ready";
-		Boolean ready = true;
+		Boolean ready = false;
 		while(true) {
-			for(int i = 0; i < tList.size(); i++) {
-				tList.get(i).output(message);
-				if(tList.get(i).isReady() == false) {
+			try {
+				Thread.sleep(3000);
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
+			for(int i=0; (i<tList.size()) & (tList.size() > 1);i++) {
+				if(!tList.get(i).isReady()) {
 					ready = false;
 					break;
 				}
+				ready = true;
 			}
 			if(ready == true)
 				break;
-			ready = true;
-			try {
-				Thread.sleep(3000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
+			ready = false;
 		}
 		on = true;
 		ready = true;
@@ -63,11 +63,16 @@ public class GameThread extends Thread {
 	}
 	
 	public void game() throws Exception {
-		String[] message = {"alert", "start", Integer.toString(tList.size())};
+		String[] message = new String[4];
+		message[0] = "alert";
+		message[1] = "start";
+		message[2] = Integer.toString(tList.size());
 		int[] score = new int[tList.size()];
-		for(int i = 0; i<score.length;i++)
+		for(int i = 0; i<score.length;i++) {
 			score[i] = 0; 
-		groupSend(100, message);
+			message[3] = Integer.toString(i);
+			tList.get(i).output(message);
+		}
 		int count = 0;
 		while(true) {
 			for(int i=0; i<tList.size(); i++) {
@@ -75,8 +80,12 @@ public class GameThread extends Thread {
 					break;
 				tList.get(i).setTurn(true);
 				message = tList.get(i).input();
+				if(message[1].equals("exit"))
+					throw new Exception();
 				groupSend(i, message);
 				message = tList.get(i).input();
+				if(message[1].equals("exit"))
+					throw new Exception();
 				groupSend(i, message);
 				if(vote(i)) {
 					score[i]++;
@@ -96,7 +105,10 @@ public class GameThread extends Thread {
 			if(count == 65)
 				break;
 		}
-		
+		message = new String[2];
+		message[0] = "alert";
+		message[1] = "gameover";
+		groupSend(100,message);
 	}
 	
 	public Boolean vote(int i) throws Exception{
