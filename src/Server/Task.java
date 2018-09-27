@@ -63,7 +63,7 @@ public class Task implements Callable<Boolean> {
 		return Trans.read(in);
 	}
 	public void output(String[] message) {
-		return Trans.send(out,message);
+		Trans.send(out,message);
 	}
 	public Boolean isReady() {
 		return ready;

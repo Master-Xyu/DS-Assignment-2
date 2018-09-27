@@ -1,5 +1,6 @@
 package Server;
 import java.awt.List;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -23,7 +24,7 @@ public class server {
 				Socket client = server.accept();
 				if(gt.on == true) {					
 					String[] message= {"alert","Game is on!"};
-					Trans.send(client.getOutputStream(), message);
+					Trans.send(new DataOutputStream(client.getOutputStream()), message);
 					continue;
 				}
 				else {
