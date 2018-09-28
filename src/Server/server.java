@@ -28,6 +28,7 @@ public class server {
 					continue;
 				}
 				else {
+					// TODO username
 					Task t = new Task(client);
 					tList.add(t);
 					Future<Boolean> f = es.submit(t);

@@ -17,6 +17,7 @@ public class Task implements Callable<Boolean> {
 	private DataOutputStream out;
 	private Boolean turn;
 	private Boolean over;
+	private String username;
 	
 	public Task(Socket client) {
 		this.client = client;
@@ -28,8 +29,8 @@ public class Task implements Callable<Boolean> {
 			in = new DataInputStream(client.getInputStream());
 			out = new DataOutputStream(client.getOutputStream());
 		}catch(Exception e) {
-			
 		}
+		username = Trans.read(in)[1];
 	}
 	@Override
 	public Boolean call() {
@@ -76,5 +77,8 @@ public class Task implements Callable<Boolean> {
 	}
 	public void setOver(Boolean over) {
 		this.over = over;
+	}
+	public String getUsername() {
+		return this.username;
 	}
 }

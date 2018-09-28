@@ -67,6 +67,7 @@ public class GameThread extends Thread {
 		message[0] = "alert";
 		message[1] = "start";
 		message[2] = Integer.toString(tList.size());
+		// TODO username
 		int[] score = new int[tList.size()];
 		for(int i = 0; i<score.length;i++) {
 			score[i] = 0; 
@@ -76,7 +77,7 @@ public class GameThread extends Thread {
 		int count = 0;
 		while(true) {
 			for(int i=0; i<tList.size(); i++) {
-				if(count++==64)
+				if(count++==400)
 					break;
 				tList.get(i).setTurn(true);
 				message = tList.get(i).input();
@@ -92,6 +93,7 @@ public class GameThread extends Thread {
 					message = new String[3];
 					message[0] = "score";
 					message[1] = "plus";
+					//TODO username
 					message[2] = Integer.toString(i);
 				}
 				else {
