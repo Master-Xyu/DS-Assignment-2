@@ -35,6 +35,7 @@ public class clientGUI implements MouseListener{
 	Container container3 = new Container();
 	Container container4 = new Container();
 	JButton border[][] = new JButton[row][col];
+	JButton score[];
 	ArrayList<ArrayList<Integer>> word= new ArrayList();
 	ArrayList<Integer> c = new ArrayList();
 	char borderKey[][] = new char[row][col];
@@ -81,18 +82,25 @@ public class clientGUI implements MouseListener{
 		showWord();
 		showFunc();
 	}
+	
+	public void updateScore(scoreBoard b) {
+		for(int i=0;i<b.getNumber();i++)
+		{
+			JButton x = new JButton();
+			score[i].setText(b.getPlayer()[i]+":"+b.getScore()[i]);
+		}
+	}
 
 	
 
 	private void showInfo() {
 		scoreBoard b = client.getScore();
 		int num = b.getNumber();
+		score = new JButton[num];
 		String[] players = b.getPlayer();
 		int[] scores = b.getScore();
 		frame.getContentPane().add(container1,BorderLayout.NORTH);
 		container1.setLayout(new GridLayout(num+3,20));
-		JButton player = new JButton();
-		player.setText("Player:");
 		JLabel label1 = new JLabel("Instruction:"); 
 		label1.setForeground(Color.black);
 		label1.setOpaque(true);
@@ -115,7 +123,7 @@ public class clientGUI implements MouseListener{
 			x.setBackground(Color.white);
 			x.setOpaque(true);
 			x.setBorderPainted(true); 
-			border[i][j] = x;
+			score[i] = x;
 			container1.add(x);
 		}
 		
