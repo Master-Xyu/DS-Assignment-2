@@ -7,10 +7,14 @@ import java.awt.EventQueue;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+
 import java.awt.GridLayout;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.awt.Toolkit;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
@@ -19,7 +23,11 @@ import java.awt.event.ActionEvent;
 
 public class clientGUI implements MouseListener{
 
-	private JFrame frame;
+	public int width = Toolkit.getDefaultToolkit().getScreenSize().width;
+    public int height = Toolkit.getDefaultToolkit().getScreenSize().height;
+    public int windowsWedth = 800;
+    public int windowsHeight = 800;
+	public JFrame frame;
 	int row = 20;
 	int col = 20;
 	Container container1 = new Container();
@@ -37,7 +45,7 @@ public class clientGUI implements MouseListener{
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public void start() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -63,7 +71,8 @@ public class clientGUI implements MouseListener{
 	private void initialize() {
 		frame = new JFrame();
 		frame.setBackground(Color.red);
-		frame.setSize(800, 800);
+		frame.setBounds((width - windowsWedth) / 2,
+                (height - windowsHeight) / 2, 800, 800);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(new BorderLayout(10,10));
 		
@@ -76,8 +85,39 @@ public class clientGUI implements MouseListener{
 	
 
 	private void showInfo() {
+		scoreBoard b = client.getScore();
+		int num = b.getNumber();
+		String[] players = b.getPlayer();
+		int[] scores = b.getScore();
 		frame.getContentPane().add(container1,BorderLayout.NORTH);
-		container1.setLayout(new GridLayout(1,26));
+		container1.setLayout(new GridLayout(num+3,20));
+		JButton player = new JButton();
+		player.setText("Player:");
+		JLabel label1 = new JLabel("Instruction:"); 
+		label1.setForeground(Color.black);
+		label1.setOpaque(true);
+		container1.add(label1);
+		JTextField text1 = new JTextField();
+		text1.setEditable(false);
+		text1.setForeground(Color.black);
+		text1.setOpaque(true);
+		container1.add(text1);
+		JLabel label2 = new JLabel("Score:"); 
+		label2.setForeground(Color.black);
+		label2.setOpaque(true);
+		container1.add(label2);
+		for(int i=0;i<num;i++)
+		{
+			JButton x = new JButton();
+			x.setEnabled(false);
+			x.setText(players[i]+":"+scores[i]);
+			x.setMargin(new Insets(0,0,0,0));
+			x.setBackground(Color.white);
+			x.setOpaque(true);
+			x.setBorderPainted(true); 
+			border[i][j] = x;
+			container1.add(x);
+		}
 		
 	}
 
@@ -146,7 +186,8 @@ public class clientGUI implements MouseListener{
 		JButton z = new JButton("EXIT");
 		z.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.exit(0);
+				pre.frame.setVisible(true);
+				frame.dispose();
 			}
 		});
 		z.setMargin(new Insets(0,0,0,0));
