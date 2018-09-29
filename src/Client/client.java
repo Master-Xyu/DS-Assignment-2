@@ -19,11 +19,11 @@ public class client extends Thread{
 
 	private ArrayList<ArrayList<Integer>> word;
 	
+	private static boolean state = false;
 	
 	private Socket socket;
 	private Listener ls;
-	
-	private boolean isReady;
+
 
 	
 	
@@ -42,6 +42,8 @@ public class client extends Thread{
 	
 			this.ls = new Listener(in, out);
 			ls.start();
+			
+			state = true;
 			
 			
 			
@@ -185,4 +187,29 @@ public class client extends Thread{
 		
 	}
 	
+	public String connect(String username) {
+		
+		String[] message= {"alert", username};
+		Trans.send(out, message);
+		
+		return "Ready!";
+		
+		
+	}
+	
+	public static String ready() {
+		
+		if(state)
+			return "online";
+		else
+			return "offline";
+		
+		
+	}
+	
+	public scoreBoard getScore() {
+		
+		return ls.getScore();
+		
+	}
 }
