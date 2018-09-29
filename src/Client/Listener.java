@@ -14,8 +14,11 @@ public class Listener extends Thread{
 
 	
 	private boolean[][] state = new boolean[20][20];
-	private ArrayList<Coordinate> word = new ArrayList();	
+	private ArrayList<Coordinate> word = new ArrayList();
+	private int wordLength;
 	private ArrayList<Coordinate> matrixState = new ArrayList();	
+	
+	private scoreBoard score;
 	
 	private boolean isReady = false;
 	
@@ -31,6 +34,7 @@ public class Listener extends Thread{
 		
 		this.in = in;
 		this.out = out;
+
 		for(int i=0; i<20; i++)
 			for(int j=0; j<20; j++) {
 				
@@ -45,23 +49,38 @@ public class Listener extends Thread{
 		try {
 			
 			String[] message = Trans.read(in);
-			if(message[0].equals("alert") && message[1].equals("online")) {
-				
-				String[] reply= {"alert","Y"};
-				Trans.send(out, reply);
-				
-			}else if(message[0].equals("alert") && message[1].equals("turn")){
+			if(message[0].equals("alert") && message[1].equals("turn")){
 				
 				isReady = true;
 			
-			}else if(message[0].equals("word")) {
+			}
+			else if(message[0].equals("alert") && message[1].equals("start")) {
+				
+				initializeScoreBoard(message);
+				
+			}
+			else if(message[0].equals("alert") && message[1].equals("gameover")){
+				
+				System.exit(0);
+				
+			}else if(message[0].equals("alert") && message[1].equals("disconnected")) {
+				
+				System.exit(0);
+				
+			}
+			else if(message[0].equals("word")) {
 				
 				resolveWord(message);
+				
 			}
 			else if(message[0].equals("letter")) {
 				
 				fillLetter(message);
 				
+			}
+			else if(message[0].equals("score") && message[1].equals("plus")) {
+				
+				scorePlus(message);
 				
 			}
 				
@@ -74,7 +93,7 @@ public class Listener extends Thread{
 		}
 	}
 	
-	public void resolveWord(String[] message) {
+	private void resolveWord(String[] message) {
 		
 		
 		word.clear();
@@ -90,10 +109,12 @@ public class Listener extends Thread{
 			
 		}
 		
+		wordLength = word.size();
+		
 	}
 	
 	
-	public void fillLetter(String[] message) {
+	private void fillLetter(String[] message) {
 		
 		int dx = Integer.parseInt(message[1]);
 		int dy = Integer.parseInt(message[2]);
@@ -101,6 +122,29 @@ public class Listener extends Thread{
 	    state[dx][dy] = true;
 	    matrixState.add(new Coordinate(dx, dy, letter));
 	    
+		
+	}
+	
+	private void initializeScoreBoard(String[] message) {
+		
+		int number = Integer.parseInt(message[2]);
+		this.score = new scoreBoard(number);
+		
+		String[] name = new String[number];
+		for(int i=0; i<number; i++) {
+			
+			name[i] = message[i+4];
+			
+		}
+		
+		score.setPlayer(name);
+		
+	}
+	
+	
+	private void scorePlus(String[] message) {
+		
+		score.update(Integer.parseInt(message[2]), wordLength);
 		
 	}
 	

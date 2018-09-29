@@ -61,7 +61,7 @@ public class client extends Thread{
 		
 		if(ls.isReady() &&  !ls.getCurrentState()[letter.getDx()][letter.getDy()]) {
 			
-			String[] message = {"letter", ""+ letter.getDx(), "" + letter.getDy(), "" + letter.getLetter()};
+			String[] message = {"letter",  ""+ letter.getDx(), "" + letter.getDy(), "" + letter.getLetter()};
 			Trans.send(out, message);
 			ls.setReady(false);
 			return true;
@@ -83,6 +83,7 @@ public class client extends Thread{
 			String[] message = new String[60];                   //possible maximum number of the information in 'word'
 			
 			message[0] = "word";
+
 			for(int i=0; i<word.size(); i++) {
 				
 				message[3*i + 1] = "" + word.get(i).getDx();
