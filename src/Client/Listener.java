@@ -128,7 +128,7 @@ public class Listener extends Thread{
 	private void initializeScoreBoard(String[] message) {
 		
 		int number = Integer.parseInt(message[2]);
-		this.score = new scoreBoard(number);
+		this.setScore(new scoreBoard(number));
 		
 		String[] name = new String[number];
 		for(int i=0; i<number; i++) {
@@ -137,14 +137,14 @@ public class Listener extends Thread{
 			
 		}
 		
-		score.setPlayer(name);
+		getScore().setPlayer(name);
 		
 	}
 	
 	
 	private void scorePlus(String[] message) {
 		
-		score.update(Integer.parseInt(message[2]), wordLength);
+		getScore().update(Integer.parseInt(message[2]), wordLength);
 		
 	}
 	
@@ -162,6 +162,10 @@ public class Listener extends Thread{
 		
 		return state;
 	}
-	
+
+	public scoreBoard getScore() {
+		return score;
+	}
+
 
 }
