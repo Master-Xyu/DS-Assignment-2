@@ -1,36 +1,48 @@
 package Server;
 
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
 import java.util.ArrayList;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
-import java.lang.*;
 
 public class CheckThread extends Thread {
-	private ArrayList<Future<Boolean>> fList;
-	private ArrayList<Task> tList;
-	private GameThread g;
+	ArrayList<Future<Boolean>> fList;
+	GameThread gt;
+	ArrayList<Task> tList;
+	ServerSocket server;
+	ExecutorService es;
 	
-	public CheckThread(ArrayList<Future<Boolean>> fList, ArrayList<Task> tList, GameThread g) {
+	public CheckThread(ArrayList<Future<Boolean>> fList, GameThread gt, ArrayList<Task> tList, ServerSocket server, ExecutorService es){
 		this.fList = fList;
+		this.gt = gt;
 		this.tList = tList;
-		this.g = g;
+		this.server = server;
+		this.es = es;
 	}
+	
 	public void run() {
-		String[] on = {"alert", "online"};
 		while(true) {
+			Socket client;
 			try {
-				Thread.sleep(5000);
-				if(g.voting == true)
+				client = server.accept();
+				if(gt.on == true) {					
+					String[] message= {"alert","Game is on!"};
+					Trans.send(new DataOutputStream(client.getOutputStream()), message);
 					continue;
-			} catch (InterruptedException e) {
+				}
+				Task t = new Task(client);
+				tList.add(t);
+				Future<Boolean> f = es.submit(t);
+				fList.add(f);
+			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			for(int i = 0; i<tList.size(); i++) {
-				tList.get(i).output(on);
-				if(tList.get(i).input()[1].equals("exit")) {
-					g.disconnected = true;
-					return;
-				}
-			}
 		}
+	}
+	public void setGameThread(GameThread gt) {
+		this.gt = gt;
 	}
 }

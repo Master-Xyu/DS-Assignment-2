@@ -17,22 +17,29 @@ public class server {
 		int clientID = 0;
 		GameThread gt = new GameThread(fList, tList);
 		gt.start();
+		CheckThread ct = new CheckThread(fList, gt, tList, server, es);
 		try {
 			server = new ServerSocket(port);
 			System.out.println("Server is online.");
 			while(true) {
-				Socket client = server.accept();
 				if(gt.on == true) {					
-					String[] message= {"alert","Game is on!"};
-					Trans.send(new DataOutputStream(client.getOutputStream()), message);
-					continue;
+					for(int i=0; i < tList.size(); i++) {					
+						if(fList.get(i).isDone() == true) {
+							gt.disconnect();
+							fList.remove(i);
+							tList.remove(i);
+							for(int j=0; j < tList.size(); j++) {
+								tList.get(j).disconnect();
+							}
+							gt = new GameThread(fList, tList);
+							ct.setGameThread(gt);
+							break;
+						}					
+					}
 				}
-				else {
-					// TODO username
-					Task t = new Task(client);
-					tList.add(t);
-					Future<Boolean> f = es.submit(t);
-					fList.add(f);
+				if(!gt.isAlive()) {
+					gt = new GameThread(fList, tList);
+					ct.setGameThread(gt);
 				}
 			}
 		} catch (IOException e) {

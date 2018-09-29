@@ -7,6 +7,7 @@ import java.util.concurrent.Callable;
 
 import javax.sql.rowset.spi.TransactionalWriter;
 
+import org.omg.CORBA.PRIVATE_MEMBER;
 import org.omg.CORBA.TRANSACTION_MODE;
 
 public class Task implements Callable<Boolean> {
@@ -18,6 +19,7 @@ public class Task implements Callable<Boolean> {
 	private Boolean turn;
 	private Boolean over;
 	private String username;
+	private String[] inMessage;
 	
 	public Task(Socket client) {
 		this.client = client;
@@ -40,30 +42,45 @@ public class Task implements Callable<Boolean> {
 		else if(message[1].equals("exit"))
 			return true;
 		while(true) {
-			if(turn == false)
-				continue;
-			if(over == true)
+			message = input();
+			if(message[1].equals("exit"))
 				break;
-			message = new String[2];
-			message[0] = "alert";
-			message[1] = "turn";
-			output(message);
-			turn = false;
+			if(message[1].equals("Y")) {	
+				ready = true;
+				continue;
+			}
+			if(message[1].equals("N")) {		
+				return true;
+			}
+			inMessage = new String[message.length];
+			for(int i = 0; i< message.length; i++)
+				inMessage[i]= new String(message[i]);
 		}
+		return false;
+	}
+	
+	public void turn() {
+		String[] message = new String[2];
+		message = new String[2];
+		message[0] = "alert";
+		message[1] = "turn";
+		output(message);
+	}
+	
+	public void disconnect() {
+		String[] message = new String[2];
+		message[0] = "alert";
+		message[1] = "disconnected";
+		output(message);
 		ready = false;
-		if(input()[1].equals("Y")) {
-			over = false;			
-			call();
-		}
-		return true;
 	}
 	public void setCurent(Boolean c) {
 		current = c;
 	}
-	public String[] input() {
+	private String[] input() {
 		return Trans.read(in);
 	}
-	public void output(String[] message) {
+	public synchronized void output(String[] message) {
 		Trans.send(out,message);
 	}
 	public Boolean isReady() {
@@ -80,5 +97,13 @@ public class Task implements Callable<Boolean> {
 	}
 	public String getUsername() {
 		return this.username;
+	}
+	public String[] getInMessage() {
+		while(inMessage == null) {}
+		String[] message = new String[inMessage.length];
+		for(int i = 0; i< message.length; i++)
+			message[i]= new String(inMessage[i]);
+		inMessage = null;
+		return message;
 	}
 }

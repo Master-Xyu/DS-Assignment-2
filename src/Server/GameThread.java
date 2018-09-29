@@ -9,17 +9,13 @@ public class GameThread extends Thread {
 	private ArrayList<Future<Boolean>> fList;
 	private ArrayList<Task> tList;
 	public Boolean on = false;
-	public Boolean voting = false;
-	public Boolean disconnected = false;
+	
 	public GameThread(ArrayList<Future<Boolean>> fList, ArrayList<Task> tList) {
 		this.fList = fList;
 		this.tList = tList;
 	}
 	
 	public void run() {
-		String[] message = new String[2];
-		message[0] = "alert";
-		message[1] = "ready";
 		Boolean ready = false;
 		while(true) {
 			try {
@@ -27,7 +23,7 @@ public class GameThread extends Thread {
 			} catch (Exception e1) {
 				e1.printStackTrace();
 			}
-			for(int i=0; (i<tList.size()) & (tList.size() > 1);i++) {
+			for(int i=0; (i<tList.size()) && (tList.size() > 1);i++) {
 				if(!tList.get(i).isReady()) {
 					ready = false;
 					break;
@@ -40,71 +36,50 @@ public class GameThread extends Thread {
 		}
 		on = true;
 		ready = true;
-		try {
-			CheckThread check = new CheckThread(fList, tList, this);
-			check.start();
-			game();
-			check.interrupt();
-		}catch(SecurityException e1) {	
-		}
-		catch(Exception e) {
-			message[0] = "alert";
-			message[1] = "disconnected";
-			disconnected = false;
-			try {
-				groupSend(100, message);
-			} catch (Exception e1) {
-				e1.printStackTrace();
-			}			
-		}
-		for(int i=0; i<tList.size();i++)
-			tList.get(i).setOver(true);	
-		run();
+		
+		game();	
+		on = false;
 	}
 	
-	public void game() throws Exception {
-		String[] message = new String[4];
+	public void game(){
+		String[] message = new String[4 + tList.size()];
 		message[0] = "alert";
 		message[1] = "start";
 		message[2] = Integer.toString(tList.size());
-		// TODO username
-		int[] score = new int[tList.size()];
-		for(int i = 0; i<score.length;i++) {
-			score[i] = 0; 
+		for(int i = 0; i < tList.size(); i++)
+			message[4 + i] = tList.get(i).getUsername();
+		for(int i = 0; i < tList.size(); i++) {
 			message[3] = Integer.toString(i);
 			tList.get(i).output(message);
 		}
+		int[] score = new int[tList.size()];
+		
 		int count = 0;
 		while(true) {
-			for(int i=0; i<tList.size(); i++) {
+			for(int turn=0; turn<tList.size(); turn++) {
 				if(count++==400)
 					break;
-				tList.get(i).setTurn(true);
-				message = tList.get(i).input();
-				if(message[1].equals("exit"))
-					throw new Exception();
-				groupSend(i, message);
-				message = tList.get(i).input();
-				if(message[1].equals("exit"))
-					throw new Exception();
-				groupSend(i, message);
-				if(vote(i)) {
-					score[i]++;
+				tList.get(turn).turn();
+				message = tList.get(turn).getInMessage();
+				groupSend(turn, message);
+				message = tList.get(turn).getInMessage();
+				groupSend(turn, message);
+				if(vote(turn)) {
+					score[turn]++;
 					message = new String[3];
 					message[0] = "score";
 					message[1] = "plus";
-					//TODO username
-					message[2] = Integer.toString(i);
+					message[2] = Integer.toString(turn);
+					
 				}
 				else {
 					message = new String[2];
 					message[0] = "score";
 					message[1] = "unchanged";
 				}
-				voting = false;
 				groupSend(100, message);
 			}
-			if(count == 65)
+			if(count == 400)
 				break;
 		}
 		message = new String[2];
@@ -113,31 +88,28 @@ public class GameThread extends Thread {
 		groupSend(100,message);
 	}
 	
-	public Boolean vote(int i) throws Exception{
-		voting = true;
+	public Boolean vote(int i){
 		String[] message;
 		Boolean agreed = true;
 		for(int j=0; j<tList.size(); j++) {
-			if(disconnected == true)
-				throw new Exception();
 			if(j == i)
 				continue;
-			message = tList.get(j).input();
-			if(message[1].equals("N"))
+			message = tList.get(j).getInMessage();
+			if(message[1].equals("disagree"))
 				agreed = false;
-			else if(message[1].equals("exit"))
-				throw new Exception();
 		}
 		return agreed;
 	}
 	
-	public void groupSend(int n, String[] message) throws Exception {
-		if(disconnected == true)
-			throw new Exception();
+	public void groupSend(int n, String[] message){
 		for(int j = 0; j<tList.size(); j++) {
 			if(n == j)
 				continue;
 			tList.get(j).output(message);
 		}
+	}
+	
+	public void disconnect() {
+		this.interrupt();
 	}
 }
