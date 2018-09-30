@@ -3,6 +3,7 @@ package Server;
 import java.util.ArrayList;
 import java.util.concurrent.Future;
 
+import javax.annotation.processing.RoundEnvironment;
 import javax.xml.ws.handler.MessageContext;
 
 public class GameThread extends Thread {
@@ -55,27 +56,26 @@ public class GameThread extends Thread {
 		int[] score = new int[tList.size()];
 		
 		int count = 0;
+		int round = 0;
 		while(true) {
+			round++;
 			for(int turn=0; turn<tList.size(); turn++) {
 				if(count++==400)
 					break;
-				tList.get(turn).turn();
+				tList.get(turn).turn(round);
 				message = tList.get(turn).getInMessage();
 				groupSend(turn, message);
 				message = tList.get(turn).getInMessage();
 				groupSend(turn, message);
+				message = new String[3];
+				message[0] = "score";
+				message[1] = Integer.toString(turn);
 				if(vote(turn)) {
-					score[turn]++;
-					message = new String[3];
-					message[0] = "score";
-					message[1] = "plus";
-					message[2] = Integer.toString(turn);
-					
+					//score[turn]++;
+					message[2] = "plus";	
 				}
 				else {
-					message = new String[2];
-					message[0] = "score";
-					message[1] = "unchanged";
+					message[2] = "unchanged";
 				}
 				groupSend(100, message);
 			}
