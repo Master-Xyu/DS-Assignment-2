@@ -17,9 +17,10 @@ public class server {
 		int clientID = 0;
 		GameThread gt = new GameThread(fList, tList);
 		gt.start();
-		CheckThread ct = new CheckThread(fList, gt, tList, server, es);
 		try {
 			server = new ServerSocket(port);
+			CheckThread ct = new CheckThread(fList, gt, tList, server, es);
+			ct.start();
 			System.out.println("Server is online.");
 			while(true) {
 				if(gt.on == true) {					

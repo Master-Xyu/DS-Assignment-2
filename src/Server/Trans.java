@@ -16,6 +16,7 @@ public class Trans {
 		try {
 			JSONParser parser = new JSONParser();
 			JSONObject msg = (JSONObject) parser.parse(in.readUTF());
+			
 			tmp[0] = (String) msg.get("command");
 			tmp[1] = (String) msg.get("content");
 			if(tmp[0].equals("connect")) {
@@ -50,10 +51,7 @@ public class Trans {
 					res[(i-1)*3+3]=(String) msg.get("letter"+i);
 				}
 			}
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -65,8 +63,8 @@ public class Trans {
 			JSONObject response = new JSONObject();
 			if(message.length>1)
 			{
-				if(message[0].equals("Connect")) {
-					response.put("Command",message[0]);
+				if(message[0].equals("connect")) {
+					response.put("command",message[0]);
 					response.put("playername",message[1]);
 				}
 				if(message[0].equals("alert")) {

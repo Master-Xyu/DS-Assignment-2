@@ -32,14 +32,14 @@ public class Task implements Callable<Boolean> {
 			out = new DataOutputStream(client.getOutputStream());
 		}catch(Exception e) {
 		}
-		username = Trans.read(in)[1];
-		String[] message = {"alert","ready required"};
-		Trans.send(out, message);
 	}
 	@Override
 	public Boolean call() {
-		String[] message = input();
-		if(message[0].equals("ready"))
+		username = Trans.read(in)[1];
+		String[] message = {"alert","ready required"};
+		Trans.send(out, message);
+		message = input();
+		if(message[1].equals("ready"))
 			ready = true;
 		else if(message[1].equals("exit"))
 			return true;

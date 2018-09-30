@@ -7,9 +7,6 @@ import java.io.IOException;
 
 import java.net.Socket;
 import java.util.ArrayList;
-
-import Server.Trans;
-
 import java.net.ConnectException;
 
 public class client extends Thread{
