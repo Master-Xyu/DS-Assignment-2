@@ -101,17 +101,21 @@ public class Listener extends Thread{
 		
 		
 		word.clear();
+		String thisWord = "";
 		for(int i=1; i+3<message.length; i=i+3 ) {
 			
 			
 			int dx = Integer.parseInt(message[i]);
 			int dy = Integer.parseInt(message[i+1]);
 			String letter =message[i+2];
+		    thisWord = thisWord + letter;
 
 		    
 		    word.add(new Coordinate(dx, dy, letter));
 			
 		}
+		
+		pre.gui.vote(thisWord, word);
 		
 		wordLength = word.size();
 		
@@ -142,6 +146,7 @@ public class Listener extends Thread{
 		}
 		
 		getScore().setPlayer(name);
+		pre.window.startgame();
 		
 	}
 	

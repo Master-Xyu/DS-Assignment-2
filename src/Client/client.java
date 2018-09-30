@@ -63,7 +63,7 @@ public class client extends Thread{
 		
 		if(ls.isReady() &&  !ls.getCurrentState()[letter.getDx()][letter.getDy()]) {
 			
-			String[] message = {"letter",  ""+ letter.getDx(), "" + letter.getDy(), "" + letter.getLetter()};
+			String[] message = {"letter",  ""+ letter.getDx(), "" + letter.getDy(), letter.getLetter()};
 			Trans.send(out, message);
 			ls.setReady(false);
 			return true;
@@ -90,7 +90,7 @@ public class client extends Thread{
 				
 				message[3*i + 1] = "" + word.get(i).getDx();
 				message[3*i + 2] = "" + word.get(i).getDy();
-				message[3*i + 3] = "" + word.get(i).getLetter();
+				message[3*i + 3] = word.get(i).getLetter();
 
  			
 			}
@@ -114,7 +114,8 @@ public class client extends Thread{
 			
 			for(int i=0; i+1<word.size(); i++) {
 				
-				if(word.get(i).getLetter() != null
+				if(word.get(i).getLetter() != null);
+				if(word.get(i).getLetter() !=  ""
 						&& word.get(i).getDx() == word.get(i+1).getDx() 
 						&& Math.abs(word.get(i).getDy() - word.get(i+1).getDy()) == 1)
 						continue;
@@ -128,7 +129,8 @@ public class client extends Thread{
 			
 			for(int i=0; i+1<word.size(); i++) {
 				
-				if(word.get(i).getLetter() != null
+				if(word.get(i).getLetter() != null)
+				if(word.get(i).getLetter() != ""
 						&& word.get(i).getDy() == word.get(i+1).getDy() 
 						&& Math.abs(word.get(i).getDx() - word.get(i+1).getDx()) == 1)
 						continue;
@@ -206,6 +208,7 @@ public class client extends Thread{
 			return "offline";
 	}
 	
+
 	public String gameStart() {
 		
 		if(Trans.read(in)[1].equals("start"))
@@ -215,10 +218,33 @@ public class client extends Thread{
 			return "notyet";
 		
 	}
+
+	
+	public void vote(String voting) {
+		
+		if(voting.equals("yes")) {
+			
+			String[] message= {"alert", "Y"};
+			Trans.send(out, message);
+			
+		}
+	
+		else{
+			
+			String[] message= {"alert", "N"};
+			Trans.send(out, message);
+			
+		}
+		
+	}
+
+	
 	
 	public scoreBoard getScore() {
 		
 		return ls.getScore();
 		
 	}
+	
+	
 }
