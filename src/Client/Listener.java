@@ -82,7 +82,7 @@ public class Listener extends Thread{
 				fillLetter(message);
 				
 			}
-			else if(message[0].equals("score") && message[1].equals("plus")) {
+			else if(message[0].equals("score") && message[2].equals("plus")) {
 				
 				scorePlus(message);
 				
