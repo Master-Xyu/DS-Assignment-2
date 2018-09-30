@@ -27,18 +27,18 @@ public class client extends Thread{
 
 	
 	
-	public client() {
+	public client(String address,int port) {
 		
 		try {
 			
 	
-			Socket socket = new Socket("localhost", 1101);
+			Socket socket = new Socket(address, port);
 			
 			this.in = new DataInputStream(socket.getInputStream());
 			this.out = new DataOutputStream(socket.getOutputStream());
 			
-			String[] message= {"alert","ready"};
-			Trans.send(out, message);
+			//String[] message= {"alert","connect"};
+			//Trans.send(out, message);
 	
 			this.ls = new Listener(in, out);
 			ls.start();
@@ -189,18 +189,26 @@ public class client extends Thread{
 	
 	public String connect(String username) {
 		
-		String[] message= {"alert", username};
+		String[] message= {"connect", username};
 		Trans.send(out, message);
 		
-		return "Ready!";
+		return "Ready required!";
 		
 		
 	}
 	
-	public static String ready() {
-		
+	public String ready() {
+		String[] message= {"alert", "ready"};
+		Trans.send(out, message);
 		if(state)
-			return "online";
+		{
+			if(Trans.read(in)[1].equals("online"))
+			{
+				return "online";
+			}
+			else
+				return "offline";
+		}
 		else
 			return "offline";
 		

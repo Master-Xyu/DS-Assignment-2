@@ -8,6 +8,7 @@ import java.awt.EventQueue;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import java.awt.GridLayout;
@@ -94,7 +95,7 @@ public class clientGUI implements MouseListener{
 	
 
 	private void showInfo() {
-		scoreBoard b = client.getScore();
+		scoreBoard b = pre.myclient.getScore();
 		int num = b.getNumber();
 		score = new JButton[num];
 		String[] players = b.getPlayer();
@@ -194,8 +195,7 @@ public class clientGUI implements MouseListener{
 		JButton z = new JButton("EXIT");
 		z.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				pre.frame.setVisible(true);
-				frame.dispose();
+				shutdown();
 			}
 		});
 		z.setMargin(new Insets(0,0,0,0));
@@ -205,6 +205,16 @@ public class clientGUI implements MouseListener{
 		z.addMouseListener(this);
 		container4.add(z);
 		
+	}
+	
+	public void shutdown() {
+		pre.frame.setVisible(true);
+		frame.dispose();
+	}
+	
+	public void offline() {
+		JOptionPane.showMessageDialog(null,"Offline!");
+		shutdown();
 	}
 
 	@Override
