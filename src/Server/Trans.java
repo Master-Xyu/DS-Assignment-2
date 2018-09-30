@@ -66,7 +66,7 @@ public class Trans {
 			if(message.length>1)
 			{
 				if(message[0].equals("Connect")) {
-					response.put("Command",message[0]);
+					response.put("command",message[0]);
 					response.put("playername",message[1]);
 				}
 				if(message[0].equals("alert")) {
