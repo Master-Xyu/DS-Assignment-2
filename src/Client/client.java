@@ -215,6 +215,16 @@ public class client extends Thread{
 		
 	}
 	
+	public String gameStart() {
+		
+		if(Trans.read(in)[1].equals("start"))
+			return "start";
+		
+		else
+			return "notyet";
+		
+	}
+	
 	public scoreBoard getScore() {
 		
 		return ls.getScore();
