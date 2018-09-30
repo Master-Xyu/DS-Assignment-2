@@ -114,7 +114,7 @@ public class client extends Thread{
 			
 			for(int i=0; i+1<word.size(); i++) {
 				
-				if(word.get(i).getLetter() != '\0'
+				if(word.get(i).getLetter() != null
 						&& word.get(i).getDx() == word.get(i+1).getDx() 
 						&& Math.abs(word.get(i).getDy() - word.get(i+1).getDy()) == 1)
 						continue;
@@ -128,7 +128,7 @@ public class client extends Thread{
 			
 			for(int i=0; i+1<word.size(); i++) {
 				
-				if(word.get(i).getLetter() != '\0'
+				if(word.get(i).getLetter() != null
 						&& word.get(i).getDy() == word.get(i+1).getDy() 
 						&& Math.abs(word.get(i).getDx() - word.get(i+1).getDx()) == 1)
 						continue;

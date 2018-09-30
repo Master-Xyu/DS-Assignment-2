@@ -4,9 +4,9 @@ public class Coordinate {
 	
 	private int dx;
 	private int dy;
-	private char letter;
+	private String letter;
 	
-	public Coordinate(int dx, int dy, char letter) {
+	public Coordinate(int dx, int dy, String letter) {
 
 		this.dx = dx;
 		this.dy = dy;
@@ -33,11 +33,11 @@ public class Coordinate {
 		this.dy = dy;
 	}
 
-	public char getLetter() {
+	public String getLetter() {
 		return letter;
 	}
 
-	public void setLetter(char letter) {
+	public void setLetter(String letter) {
 		this.letter = letter;
 	}
 
