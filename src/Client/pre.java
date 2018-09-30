@@ -203,8 +203,7 @@ public class pre {
 		JButton btnClose = new JButton("CLOSE");
 		btnClose.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(myclient.gameStart().equals("start"))
-					startgame();
+				System.exit(0);
 			}
 		});
 		btnClose.setFont(new Font("Arial", Font.PLAIN, 25));
