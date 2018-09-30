@@ -39,7 +39,7 @@ public class Task implements Callable<Boolean> {
 	@Override
 	public Boolean call() {
 		String[] message = input();
-		if(message[1].equals("ready"))
+		if(message[0].equals("ready"))
 			ready = true;
 		else if(message[1].equals("exit"))
 			return true;
@@ -61,11 +61,11 @@ public class Task implements Callable<Boolean> {
 		return false;
 	}
 	
-	public void turn() {
+	public void turn(int round) {
 		String[] message = new String[2];
 		message = new String[2];
-		message[0] = "alert";
-		message[1] = "turn";
+		message[0] = "turn";
+		message[1] = Integer.toString(round);
 		output(message);
 	}
 	
