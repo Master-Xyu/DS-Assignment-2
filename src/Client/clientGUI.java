@@ -37,9 +37,9 @@ public class clientGUI implements MouseListener{
 	Container container4 = new Container();
 	JButton border[][] = new JButton[row][col];
 	JButton score[];
-	ArrayList<ArrayList<Integer>> word= new ArrayList();
+	ArrayList<Coordinate> word= new ArrayList();
 	ArrayList<Integer> c = new ArrayList();
-	char borderKey[][] = new char[row][col];
+	String borderKey[][] = new String[row][col];
 	String[] wordKey = {"A","B","C","D","E","F","G","H","I","J","K","L"
 			,"M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"};
 	JButton wordList[] = new JButton[wordKey.length];
@@ -237,6 +237,11 @@ public class clientGUI implements MouseListener{
 					border[tx][ty].setEnabled(true);
 					border[tx][ty].setBackground(Color.white);
 					border[tx][ty].setText(wordKey[i]);
+					Coordinate set = new Coordinate();
+					set.setDx(tx);
+					set.setDy(tx);
+					set.setLetter(wordKey[i]);
+					pre.myclient.submitLetter(set);
 					System.out.println("("+tx+","+ty+")"+"->"+"wordKey[i]");
 				}
 			}
@@ -253,10 +258,10 @@ public class clientGUI implements MouseListener{
 		}
 		else {
 			clearChar();
-			ArrayList<Integer> tmp=new ArrayList();
+			Coordinate tmp=new Coordinate();
 			if(word.size()==0) {
-				tmp.add(tx);
-				tmp.add(ty);
+				tmp.setDx(tx);
+				tmp.setDy(ty);
 				word.add(tmp);
 				border[tx][ty].setBackground(Color.blue);
 				border[tx][ty].setEnabled(false);
@@ -265,14 +270,14 @@ public class clientGUI implements MouseListener{
 				if(validSelect(tx,ty)) {
 					border[tx][ty].setBackground(Color.blue);
 					border[tx][ty].setEnabled(false);
-					tmp.add(tx);
-					tmp.add(ty);
+					tmp.setDx(tx);
+					tmp.setDy(ty);
 					word.add(tmp);
 				}
 				else {
 					clearWord();
-					tmp.add(tx);
-					tmp.add(ty);
+					tmp.setDx(tx);
+					tmp.setDy(ty);
 					word.add(tmp);
 					border[tx][ty].setBackground(Color.blue);
 					border[tx][ty].setEnabled(false);
@@ -285,7 +290,7 @@ public class clientGUI implements MouseListener{
 		int flag=0;
 		for(int i=0;i<word.size();i++)
 		{
-			if(word.get(i).get(0)==tx&&Math.abs(word.get(i).get(1)-ty)<=word.size())
+			if(word.get(i).getDx()==tx&&Math.abs(word.get(i).getDy()-ty)<=word.size())
 			{
 				flag++;
 			}
@@ -295,7 +300,7 @@ public class clientGUI implements MouseListener{
 		flag=0;
 		for(int i=0;i<word.size();i++)
 		{
-			if(word.get(i).get(1)==ty&&Math.abs(word.get(i).get(0)-tx)<=word.size())
+			if(word.get(i).getDy()==ty&&Math.abs(word.get(i).getDx()-tx)<=word.size())
 			{
 				flag++;
 			}
@@ -319,8 +324,8 @@ public class clientGUI implements MouseListener{
 	private void clearWord() {
 		for(int i=0;i<word.size();i++)
 		{
-			border[word.get(i).get(0)][word.get(i).get(1)].setEnabled(true);
-			border[word.get(i).get(0)][word.get(i).get(1)].setBackground(Color.white);
+			border[word.get(i).getDx()][word.get(i).getDy()].setEnabled(true);
+			border[word.get(i).getDx()][word.get(i).getDy()].setBackground(Color.white);
 		}
 		word.clear();
 		
@@ -347,6 +352,35 @@ public class clientGUI implements MouseListener{
 	public void mouseExited(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	public boolean vote(String word, ArrayList<Coordinate> loc) {
+		int number = loc.size();
+		for(int i=0;i<number;i++)
+			border[loc.get(i).getDx()][loc.get(i).getDy()].setBackground(Color.GRAY);
+		if(JOptionPane.showConfirmDialog(null, "vote to "+word+"?", "Vote", JOptionPane.YES_NO_OPTION)==0)
+		{
+			for(int i=0;i<number;i++)
+				border[loc.get(i).getDx()][loc.get(i).getDy()].setBackground(Color.WHITE);
+			return true;
+		}
+		else 
+		{
+			for(int i=0;i<number;i++)
+				border[loc.get(i).getDx()][loc.get(i).getDy()].setBackground(Color.WHITE);
+			return false;
+		}
+	}
+	
+	public void updateLetter(Coordinate loc, String letter) {
+		border[loc.getDx()][loc.getDy()].setText(letter);
+		borderKey[loc.getDx()][loc.getDy()]=letter;
+	}
+
+	public void updateWord(ArrayList<Coordinate> loc) {
+		int number = loc.size();
+		for(int i=0;i<number;i++)
+			border[loc.get(i).getDx()][loc.get(i).getDy()].setEnabled(false);;
 	}
 
 }

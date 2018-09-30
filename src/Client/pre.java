@@ -42,6 +42,7 @@ public class pre {
 	private JTextField textField_2;
 	private JTextField textField_3;
 	public static pre window;
+	public static clientGUI gui;
 
 	/**
 	 * Launch the application.
@@ -254,8 +255,8 @@ public class pre {
 		});
 	}
 	public void startgame() {
-		clientGUI myclient = new clientGUI();
-		myclient.start();
+		gui = new clientGUI();
+		gui.start();
 		frame.setVisible(false);
 	}
 }
