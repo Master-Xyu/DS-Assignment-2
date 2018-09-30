@@ -41,6 +41,7 @@ public class pre {
 	public static client myclient;
 	private JTextField textField_2;
 	private JTextField textField_3;
+	public static pre window;
 
 	/**
 	 * Launch the application.
@@ -49,7 +50,7 @@ public class pre {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					pre window = new pre();
+					window = new pre();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -201,7 +202,7 @@ public class pre {
 		JButton btnClose = new JButton("CLOSE");
 		btnClose.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.exit(0);
+				myclient.gameStart();
 			}
 		});
 		btnClose.setFont(new Font("Arial", Font.PLAIN, 25));
@@ -247,12 +248,14 @@ public class pre {
 				textField_1.setText("Wait for the game to start!");
 				String state = myclient.ready();
 				if(state.equals("online")) {
-					clientGUI myclient = new clientGUI();
-					myclient.start();
-					frame.setVisible(false);
+					textField_1.setText("Ready!");
 				}
 			}
 		});
 	}
-
+	public void startgame() {
+		clientGUI myclient = new clientGUI();
+		myclient.start();
+		frame.setVisible(false);
+	}
 }
