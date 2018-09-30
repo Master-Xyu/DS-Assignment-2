@@ -20,6 +20,10 @@ public class Listener extends Thread{
 	
 	private scoreBoard score;
 	
+	public void setScore(scoreBoard score) {
+		this.score = score;
+	}
+
 	private boolean isReady = false;
 	
 	public boolean isReady() {
