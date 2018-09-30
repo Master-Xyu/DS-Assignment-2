@@ -63,11 +63,7 @@ public class Trans {
 			JSONObject response = new JSONObject();
 			if(message.length>1)
 			{
-<<<<<<< HEAD
-				if(message[0].equals("connect")) {
-=======
 				if(message[0].equals("Connect")) {
->>>>>>> branch 'master' of https://github.com/Master-Xyu/DS-Assignment-2
 					response.put("command",message[0]);
 					response.put("playername",message[1]);
 				}
