@@ -33,6 +33,8 @@ public class Task implements Callable<Boolean> {
 		}catch(Exception e) {
 		}
 		username = Trans.read(in)[1];
+		String[] message = {"alert","ready required"};
+		Trans.send(out, message);
 	}
 	@Override
 	public Boolean call() {
