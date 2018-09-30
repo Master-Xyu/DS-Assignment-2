@@ -107,7 +107,7 @@ public class Listener extends Thread{
 			
 			int dx = Integer.parseInt(message[i]);
 			int dy = Integer.parseInt(message[i+1]);
-			String letter =message[i+2];
+		    String letter =message[i+2];
 		    thisWord = thisWord + letter;
 
 		    
@@ -126,7 +126,7 @@ public class Listener extends Thread{
 		
 		int dx = Integer.parseInt(message[1]);
 		int dy = Integer.parseInt(message[2]);
-		String letter =message[3];
+	    String letter =message[3];
 	    state[dx][dy] = true;
 	    matrixState.add(new Coordinate(dx, dy, letter));
 	    

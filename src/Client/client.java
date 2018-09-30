@@ -7,6 +7,9 @@ import java.io.IOException;
 
 import java.net.Socket;
 import java.util.ArrayList;
+
+import Server.Trans;
+
 import java.net.ConnectException;
 
 public class client extends Thread{
@@ -111,7 +114,6 @@ public class client extends Thread{
 			
 			for(int i=0; i+1<word.size(); i++) {
 				
-				if(word.get(i).getLetter() != null);
 				if(word.get(i).getLetter() !=  ""
 						&& word.get(i).getDx() == word.get(i+1).getDx() 
 						&& Math.abs(word.get(i).getDy() - word.get(i+1).getDy()) == 1)
@@ -126,7 +128,6 @@ public class client extends Thread{
 			
 			for(int i=0; i+1<word.size(); i++) {
 				
-				if(word.get(i).getLetter() != null)
 				if(word.get(i).getLetter() != ""
 						&& word.get(i).getDy() == word.get(i+1).getDy() 
 						&& Math.abs(word.get(i).getDx() - word.get(i+1).getDx()) == 1)
@@ -200,12 +201,22 @@ public class client extends Thread{
 		String[] message= {"alert", "ready"};
 		Trans.send(out, message);
 		if(state)
-			return "online";
+		{
+			if(Trans.read(in)[1].equals("online"))
+			{
+				return "online";
+			}
+			else
+				return "offline";
+		}
 		else
 			return "offline";
+		
+		
 	}
 	
-
+	/*
+	 * 
 	public String gameStart() {
 		
 		if(Trans.read(in)[1].equals("start"))
@@ -215,7 +226,8 @@ public class client extends Thread{
 			return "notyet";
 		
 	}
-
+	
+	*/
 	
 	public void vote(String voting) {
 		
