@@ -38,6 +38,7 @@ public class pre {
 	public static JFrame frame;
 	private JTextField textField_1;
 	private JTextField textField;
+	public client myclient = new client();
 
 	/**
 	 * Launch the application.
@@ -178,7 +179,8 @@ public class pre {
 					textField_1.setText("Please input player name!");
 				}
 				else {
-					String state = client.connect(textField.getText());
+					//String state = myclient.connect(textField.getText());
+					String state = textField.getText();
 					textField_1.setText(state);
 					if(state.equals("Ready required!")) {
 						btnReady.setVisible(true);
@@ -192,7 +194,7 @@ public class pre {
 		btnReady.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				textField_1.setText("Wait for the game to start!");
-				String state = client.ready();
+				String state = myclient.ready();
 				if(state.equals("online")) {
 					clientGUI myclient = new clientGUI();
 					myclient.start();
