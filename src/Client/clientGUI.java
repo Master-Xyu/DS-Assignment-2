@@ -40,6 +40,7 @@ public class clientGUI implements MouseListener{
 	ArrayList<Coordinate> word= new ArrayList();
 	ArrayList<Integer> c = new ArrayList();
 	String borderKey[][] = new String[row][col];
+	boolean blocks[][] = new boolean[row][col];
 	String[] wordKey = {"A","B","C","D","E","F","G","H","I","J","K","L"
 			,"M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"};
 	JButton wordList[] = new JButton[wordKey.length];
@@ -71,6 +72,11 @@ public class clientGUI implements MouseListener{
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		for(int p=0;p<20;p++)
+			for(int q=0;q<20;q++)
+			{
+				blocks[p][q]=true;
+			}
 		frame = new JFrame();
 		frame.setBackground(Color.red);
 		frame.setBounds((width - windowsWedth) / 2,
@@ -183,7 +189,11 @@ public class clientGUI implements MouseListener{
 		y.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(word.size()!=0)
-					System.out.println(word);//CLAIM Word£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡
+				{
+					pre.myclient.submitWord(word);
+					System.out.println(word);
+				}
+					
 			}
 		});
 		y.setMargin(new Insets(0,0,0,0));
@@ -262,6 +272,7 @@ public class clientGUI implements MouseListener{
 			if(word.size()==0) {
 				tmp.setDx(tx);
 				tmp.setDy(ty);
+				tmp.setLetter(border[tx][ty].getText());
 				word.add(tmp);
 				border[tx][ty].setBackground(Color.blue);
 				border[tx][ty].setEnabled(false);
@@ -272,12 +283,14 @@ public class clientGUI implements MouseListener{
 					border[tx][ty].setEnabled(false);
 					tmp.setDx(tx);
 					tmp.setDy(ty);
+					tmp.setLetter(border[tx][ty].getText());
 					word.add(tmp);
 				}
 				else {
 					clearWord();
 					tmp.setDx(tx);
 					tmp.setDy(ty);
+					tmp.setLetter(border[tx][ty].getText());
 					word.add(tmp);
 					border[tx][ty].setBackground(Color.blue);
 					border[tx][ty].setEnabled(false);
@@ -372,15 +385,28 @@ public class clientGUI implements MouseListener{
 		}
 	}
 	
-	public void updateLetter(Coordinate loc, String letter) {
-		border[loc.getDx()][loc.getDy()].setText(letter);
-		borderKey[loc.getDx()][loc.getDy()]=letter;
+	public void updateLetter(Coordinate loc) {
+		border[loc.getDx()][loc.getDy()].setText(loc.getLetter());
+		borderKey[loc.getDx()][loc.getDy()]=loc.getLetter();
 	}
 
 	public void updateWord(ArrayList<Coordinate> loc) {
 		int number = loc.size();
 		for(int i=0;i<number;i++)
-			border[loc.get(i).getDx()][loc.get(i).getDy()].setEnabled(false);;
+		{
+			border[loc.get(i).getDx()][loc.get(i).getDy()].setEnabled(false);
+			blocks[loc.get(i).getDx()][loc.get(i).getDy()]=false;
+			updateBlocks();
+		}
+	}
+
+	private void updateBlocks() {
+		for(int i=0;i<20;i++)
+			for(int j=0;j<20;j++)
+			{
+				border[i][j].setEnabled(blocks[i][j]);
+			}
+		
 	}
 
 }
