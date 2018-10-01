@@ -283,35 +283,41 @@ public class clientGUI implements MouseListener{
 		}
 		else if(isDone==2&&word.size()==0)
 		{
-			clearChar();
-			Coordinate tmp=new Coordinate();
-			tmp.setDx(tx);
-			tmp.setDy(ty);
-			tmp.setLetter(border[tx][ty].getText());
-			word.add(tmp);
-			border[tx][ty].setBackground(Color.blue);
-			border[tx][ty].setEnabled(false);
+			if(borderKey[tx][ty]!=null)
+			{
+				clearChar();
+				Coordinate tmp=new Coordinate();
+				tmp.setDx(tx);
+				tmp.setDy(ty);
+				tmp.setLetter(border[tx][ty].getText());
+				word.add(tmp);
+				border[tx][ty].setBackground(Color.blue);
+				border[tx][ty].setEnabled(false);
+			}
 		}
 		else if(isDone==2&&word.size()!=0)
 		{
-			clearChar();
-			Coordinate tmp=new Coordinate();
-			if(validSelect(tx,ty)) {
-				border[tx][ty].setBackground(Color.blue);
-				border[tx][ty].setEnabled(false);
-				tmp.setDx(tx);
-				tmp.setDy(ty);
-				tmp.setLetter(border[tx][ty].getText());
-				word.add(tmp);
-			}
-			else {
-				clearWord();
-				tmp.setDx(tx);
-				tmp.setDy(ty);
-				tmp.setLetter(border[tx][ty].getText());
-				word.add(tmp);
-				border[tx][ty].setBackground(Color.blue);
-				border[tx][ty].setEnabled(false);
+			if(borderKey[tx][ty]!=null)
+			{
+				clearChar();
+				Coordinate tmp=new Coordinate();
+				if(validSelect(tx,ty)) {
+					border[tx][ty].setBackground(Color.blue);
+					border[tx][ty].setEnabled(false);
+					tmp.setDx(tx);
+					tmp.setDy(ty);
+					tmp.setLetter(border[tx][ty].getText());
+					word.add(tmp);
+				}
+				else {
+					clearWord();
+					tmp.setDx(tx);
+					tmp.setDy(ty);
+					tmp.setLetter(border[tx][ty].getText());
+					word.add(tmp);
+					border[tx][ty].setBackground(Color.blue);
+					border[tx][ty].setEnabled(false);
+				}
 			}
 		}
 	}
