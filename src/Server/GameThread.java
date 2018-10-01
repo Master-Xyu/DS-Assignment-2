@@ -89,7 +89,7 @@ public class GameThread extends Thread {
 				message = new String[3];
 				message[0] = "score";
 				message[1] = Integer.toString(turn);
-				if(vote(100)) {
+				if(vote(turn)) {
 					//score[turn]++;
 					message[2] = "plus";	
 				}
