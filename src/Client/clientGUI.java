@@ -484,6 +484,9 @@ public class clientGUI implements MouseListener{
 		pre.window.frame.setVisible(true);
 		pre.window.disconnect();
 	}
+	
+	public void gameover() {
+	}
 
 
 }
