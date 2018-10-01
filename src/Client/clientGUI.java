@@ -390,7 +390,7 @@ public class clientGUI implements MouseListener{
 		
 	}
 	
-	public boolean vote(String word, ArrayList<Coordinate> loc) {
+	public void vote(String word, ArrayList<Coordinate> loc) {
 		int number = loc.size();
 		for(int i=0;i<number;i++)
 			border[loc.get(i).getDx()][loc.get(i).getDy()].setBackground(Color.GRAY);
@@ -398,13 +398,13 @@ public class clientGUI implements MouseListener{
 		{
 			for(int i=0;i<number;i++)
 				border[loc.get(i).getDx()][loc.get(i).getDy()].setBackground(Color.WHITE);
-			return true;
+			pre.myclient.vote("yes");
 		}
 		else 
 		{
 			for(int i=0;i<number;i++)
 				border[loc.get(i).getDx()][loc.get(i).getDy()].setBackground(Color.WHITE);
-			return false;
+			pre.myclient.vote("no");
 		}
 	}
 	
