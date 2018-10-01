@@ -117,7 +117,7 @@ public class Trans {
 				if(message[0].equals("score")) {
 					response.put("command",message[0]);
 					response.put("num",message[1]);
-					response.put("state",message[1]);
+					response.put("state",message[2]);
 				}
 				if(message[0].equals("connect")) {
 					response.put("command",message[0]);
