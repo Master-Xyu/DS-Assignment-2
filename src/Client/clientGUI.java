@@ -263,8 +263,8 @@ public class clientGUI implements MouseListener{
 					set.setDx(tx);
 					set.setDy(tx);
 					set.setLetter(wordKey[i]);
-					pre.myclient.submitLetter(set);
 					System.out.println("("+tx+","+ty+")"+"->"+"wordKey[i]");
+					pre.myclient.submitLetter(set);
 					isDone=2;
 				}
 			}
@@ -325,7 +325,7 @@ public class clientGUI implements MouseListener{
 				flag++;
 			}
 		}
-		if(flag==word.size())
+		if(flag==word.size()&&borderKey[tx][ty]!="")
 			return true;
 		flag=0;
 		for(int i=0;i<word.size();i++)
@@ -335,7 +335,7 @@ public class clientGUI implements MouseListener{
 				flag++;
 			}
 		}
-		if(flag==word.size())
+		if(flag==word.size()&&borderKey[tx][ty]!="")
 			return true;
 		return false;
 	}
