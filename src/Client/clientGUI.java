@@ -469,7 +469,6 @@ public class clientGUI implements MouseListener{
 		{
 			pre.myclient.submitWord(word);
 			isDone=3;
-			pre.myclient.submit();
 			clearWord();
 			hideBlocks();
 		}
