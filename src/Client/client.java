@@ -200,19 +200,7 @@ public class client extends Thread{
 	public String ready() {
 		String[] message= {"alert", "ready"};
 		Trans.send(out, message);
-		if(state)
-		{
-			if(Trans.read(in)[1].equals("online"))
-			{
-				return "online";
-			}
-			else
-				return "offline";
-		}
-		else
-			return "offline";
-		
-		
+		return "online";
 	}
 	
 	/*

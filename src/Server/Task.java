@@ -36,6 +36,9 @@ public class Task implements Callable<Boolean> {
 	@Override
 	public Boolean call() {
 		username = Trans.read(in)[1];
+		
+		System.out.println(username + " connected");
+		
 		String[] message = {"alert","ready required"};
 		Trans.send(out, message);
 		message = input();
