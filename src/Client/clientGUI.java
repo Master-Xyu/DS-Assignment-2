@@ -88,6 +88,7 @@ public class clientGUI implements MouseListener{
 		showBoarder();
 		showWord();
 		showFunc();
+		hideBlocks();
 	}
 	
 	public void updateScore(scoreBoard b) {
