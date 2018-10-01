@@ -45,6 +45,7 @@ public class clientGUI implements MouseListener{
 			,"M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"};
 	JButton wordList[] = new JButton[wordKey.length];
 	JButton op[]=new JButton[4];
+	int isDone=0;
 
 	/**
 	 * Launch the application.
@@ -191,10 +192,12 @@ public class clientGUI implements MouseListener{
 		JButton y = new JButton("CLAIM");
 		y.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(word.size()!=0)
+				if(isDone==1&&word.size()!=0)
 				{
 					pre.myclient.submitWord(word);
 					System.out.println(word);
+					isDone=2;
+					pre.myclient.submit();
 					hideBlocks();
 				}
 					
@@ -207,10 +210,14 @@ public class clientGUI implements MouseListener{
 		y.addMouseListener(this);
 		op[2] = y;
 		container4.add(y);
-		JButton k = new JButton("PASS");
+		JButton k = new JButton("DONE");
 		k.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//pre.myclient.pass();
+				if(isDone==0||isDone==1)
+				{
+					hideBlocks();
+				}
+				pre.myclient.submit();
 				hideBlocks();
 			}
 		});
@@ -273,13 +280,15 @@ public class clientGUI implements MouseListener{
 					set.setLetter(wordKey[i]);
 					pre.myclient.submitLetter(set);
 					System.out.println("("+tx+","+ty+")"+"->"+"wordKey[i]");
-					hideBlocks();
+					isDone=1;
 				}
 			}
 	}
 
 	private void select(int tx, int ty) {
-		if(border[tx][ty].getText().equals("")) {
+		
+		if(isDone==0) 
+		{
 			clearWord();
 			clearChar();
 			c.add(tx);
@@ -287,35 +296,37 @@ public class clientGUI implements MouseListener{
 			border[tx][ty].setBackground(Color.red);
 			border[tx][ty].setEnabled(false);
 		}
-		else {
+		else if(isDone==1&&word.size()==0)
+		{
 			clearChar();
 			Coordinate tmp=new Coordinate();
-			if(word.size()==0) {
+			tmp.setDx(tx);
+			tmp.setDy(ty);
+			tmp.setLetter(border[tx][ty].getText());
+			word.add(tmp);
+			border[tx][ty].setBackground(Color.blue);
+			border[tx][ty].setEnabled(false);
+		}
+		else if(isDone==1&&word.size()!=0)
+		{
+			clearChar();
+			Coordinate tmp=new Coordinate();
+			if(validSelect(tx,ty)) {
+				border[tx][ty].setBackground(Color.blue);
+				border[tx][ty].setEnabled(false);
+				tmp.setDx(tx);
+				tmp.setDy(ty);
+				tmp.setLetter(border[tx][ty].getText());
+				word.add(tmp);
+			}
+			else {
+				clearWord();
 				tmp.setDx(tx);
 				tmp.setDy(ty);
 				tmp.setLetter(border[tx][ty].getText());
 				word.add(tmp);
 				border[tx][ty].setBackground(Color.blue);
 				border[tx][ty].setEnabled(false);
-			}
-			else {
-				if(validSelect(tx,ty)) {
-					border[tx][ty].setBackground(Color.blue);
-					border[tx][ty].setEnabled(false);
-					tmp.setDx(tx);
-					tmp.setDy(ty);
-					tmp.setLetter(border[tx][ty].getText());
-					word.add(tmp);
-				}
-				else {
-					clearWord();
-					tmp.setDx(tx);
-					tmp.setDy(ty);
-					tmp.setLetter(border[tx][ty].getText());
-					word.add(tmp);
-					border[tx][ty].setBackground(Color.blue);
-					border[tx][ty].setEnabled(false);
-				}
 			}
 		}
 	}
@@ -457,6 +468,7 @@ public class clientGUI implements MouseListener{
 	}
 	
 	public void myTurn() {
+		isDone=0;
 		showBlocks();
 	}
 
