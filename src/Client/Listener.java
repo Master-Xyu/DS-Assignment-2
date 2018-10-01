@@ -122,9 +122,9 @@ public class Listener extends Thread{
 		for(int i=0; i<(len-1)/3; i++ ) {
 			
 			
-			int dx = Integer.parseInt(message[i+1]);
-			int dy = Integer.parseInt(message[i+2]);
-		    String letter =message[i+3];
+			int dx = Integer.parseInt(message[i*3+1]);
+			int dy = Integer.parseInt(message[i*3+2]);
+		    String letter =message[i*3+3];
 		    thisWord = thisWord + letter;
 
 		    
