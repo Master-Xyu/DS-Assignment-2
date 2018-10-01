@@ -25,7 +25,7 @@ public class scoreBoard {
 		this.score = score;
 	}
 	
-	scoreBoard(int num) {
+	public scoreBoard(int num) {
 		this.number = num;
 		score = new int[number];
 		for(int i= 0; i< num; i++) {
@@ -46,5 +46,42 @@ public class scoreBoard {
 		
 		this.score[i]= this.score[i] + sc;
 		
+	}
+	
+	public String[] getWinner() {
+		
+		int max = score[0];
+		int numOfMax = 1;
+        
+        for(int i=1; i<number;i++) {
+        	
+        	if(max == score[i]) {
+        		
+        		numOfMax++;
+        		
+        	}else if(max < score[i]) {
+        		
+        		max =  score[i];
+        		numOfMax = 1;
+        		
+        	}
+        }
+        
+        String[] str = new String[2*numOfMax];
+        
+        int j=0;
+        for(int i=1; i<number;i++) {
+        	
+        	if(max == score[i]) {
+        		
+        		str[j] = player[i];
+        		str[j+1] = "" + score[i];
+        		j += 2;
+        		
+        		
+        	}
+        }
+
+		return str;
 	}
 }
