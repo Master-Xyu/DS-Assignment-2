@@ -239,6 +239,7 @@ public class clientGUI implements MouseListener{
 					set.setLetter(wordKey[i]);
 					System.out.println("("+tx+","+ty+")"+"->"+"wordKey[i]");
 					pre.myclient.submitLetter(set);
+					clearChar();
 					isDone=2;
 					return;
 				}
@@ -463,6 +464,7 @@ public class clientGUI implements MouseListener{
 			pre.myclient.submitWord(word);
 			isDone=3;
 			pre.myclient.submit();
+			clearWord();
 			hideBlocks();
 		}
 	}
