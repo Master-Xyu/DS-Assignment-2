@@ -28,6 +28,7 @@ public class clientGUI implements MouseListener{
     public int height = Toolkit.getDefaultToolkit().getScreenSize().height;
     public int windowsWedth = 800;
     public int windowsHeight = 800;
+    private JTextField text1;
 	public JFrame frame;
 	int row = 20;
 	int col = 20;
@@ -115,7 +116,7 @@ public class clientGUI implements MouseListener{
 		label1.setForeground(Color.black);
 		label1.setOpaque(true);
 		container1.add(label1);
-		JTextField text1 = new JTextField();
+		text1 = new JTextField();
 		text1.setEditable(false);
 		text1.setForeground(Color.black);
 		text1.setOpaque(true);
@@ -454,6 +455,7 @@ public class clientGUI implements MouseListener{
 			op[i].setEnabled(false);
 		}
 		isDone=0;
+		text1.setText("Not your turn!");
 	}
 	
 	private void showBlocks() {
@@ -470,6 +472,9 @@ public class clientGUI implements MouseListener{
 	}
 	
 	public void myTurn() {
+		System.out.println(text1.getText());
+		text1.setText("It's your turn!");
+		System.out.println(text1.getText());
 		isDone=1;
 		showBlocks();
 	}

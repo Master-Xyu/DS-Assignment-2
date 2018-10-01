@@ -59,7 +59,7 @@ public class Listener extends Thread{
 			if(message[0].equals("turn")){
 				
 				isReady = true;
-				pre.gui.myTurn();
+				pre.window.gui.myTurn();
 			
 			}
 			else if(message[0].equals("alert") && message[1].equals("start")) {
