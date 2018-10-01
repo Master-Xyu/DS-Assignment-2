@@ -261,7 +261,7 @@ public class clientGUI implements MouseListener{
 					border[tx][ty].setText(wordKey[i]);
 					Coordinate set = new Coordinate();
 					set.setDx(tx);
-					set.setDy(tx);
+					set.setDy(ty);
 					set.setLetter(wordKey[i]);
 					System.out.println("("+tx+","+ty+")"+"->"+"wordKey[i]");
 					pre.myclient.submitLetter(set);
