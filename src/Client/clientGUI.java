@@ -475,12 +475,14 @@ public class clientGUI implements MouseListener{
 	}
 	
 	public void done() {
-		if(isDone==1||isDone==2)
-		{
-			hideBlocks();
-		}
-		pre.myclient.submit();
 		hideBlocks();
+		pre.myclient.submit();
+	}
+	
+	public void disconnect() {
+		frame.dispose();
+		pre.window.frame.setVisible(true);
+		pre.window.disconnect();
 	}
 
 
