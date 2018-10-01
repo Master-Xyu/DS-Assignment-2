@@ -77,7 +77,7 @@ public class GameThread extends Thread {
 				
 				message = getMessage(turn);
 				if(message[1].equals("pass")) {
-					pass[turn] = true;
+					//pass[turn] = true;
 					continue;
 				}
 				groupSend(turn, message);	
