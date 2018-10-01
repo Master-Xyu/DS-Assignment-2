@@ -486,7 +486,13 @@ public class clientGUI implements MouseListener{
 	}
 	
 	public void gameover() {
-		String result="GameOver!";
+		String res[]=pre.myclient.getScore().getWinner();
+		int num=res.length/2;
+		String result="GameOver!\nScore:"+res[1]+"\n Player:";
+		for(int i=0;i<num;i++)
+		{
+			result=result+res[i*2]+" ";
+		}
 		JOptionPane.showMessageDialog(null,result);
 		frame.dispose();
 		pre.window.frame.setVisible(true);
