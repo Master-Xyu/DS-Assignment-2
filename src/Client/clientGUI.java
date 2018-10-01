@@ -210,7 +210,7 @@ public class clientGUI implements MouseListener{
 		JButton k = new JButton("PASS");
 		k.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				pre.myclient.pass();
+				//pre.myclient.pass();
 				hideBlocks();
 			}
 		});

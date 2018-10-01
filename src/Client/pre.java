@@ -205,7 +205,7 @@ public class pre {
 		btnClose.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(isReady==1) {
-					myclient.disconnect();
+					//myclient.disconnect();
 				}
 				System.exit(0);
 			}
