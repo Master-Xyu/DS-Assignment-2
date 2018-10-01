@@ -11,6 +11,7 @@ public class Listener extends Thread{
 	
 	private DataInputStream in;
 	private DataOutputStream out;
+	private static int id;
 
 	
 	private boolean[][] state = new boolean[20][20];
@@ -69,17 +70,17 @@ public class Listener extends Thread{
 			}
 			else if(message[0].equals("alert") && message[1].equals("gameover")){
 				
-				System.exit(0);
+				pre.window.gui.gameover();
 				
 			}
 			else if(message[0].equals("alert") && message[1].equals("disconnected")) {
 				
-				System.exit(0);
+				pre.window.gui.disconnect();
 				
 			}
 			else if(message[0].equals("alert") && message[1].equals("Game is on!")) {
 				
-				System.exit(0);
+				pre.window.setWarning(message[1]);
 				
 			}
 			else if(message[0].equals("word")) {
@@ -110,7 +111,7 @@ public class Listener extends Thread{
 	
 	private void resolveWord(String[] message) {
 		
-		int len=message.length;
+		int len = message.length;
 		word.clear();
 		String thisWord = "";
 		for(int i=0; i<(len-1)/3; i++ ) {
@@ -127,7 +128,16 @@ public class Listener extends Thread{
 		}
 		
 		pre.window.gui.updateWord(word);
-		pre.window.gui.vote(thisWord, word);
+		
+		if(isReady) {
+			
+			isReady = false;
+			
+		}else {
+			
+			pre.window.gui.vote(thisWord, word);
+			
+		}
 		
 		wordLength = word.size();
 		
@@ -153,6 +163,8 @@ public class Listener extends Thread{
 		
 		int number = Integer.parseInt(message[2]);
 		this.setScore(new scoreBoard(number));
+		
+		id = Integer.parseInt(message[3]);
 		
 		String[] name = new String[number];
 		for(int i=0; i<number; i++) {

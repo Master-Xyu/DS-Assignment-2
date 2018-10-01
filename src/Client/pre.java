@@ -43,6 +43,7 @@ public class pre {
 	private JTextField textField_3;
 	public static pre window;
 	public static clientGUI gui;
+	private JButton btnReady;
 	private int isReady=0;
 
 	/**
@@ -191,7 +192,7 @@ public class pre {
 		frame.getContentPane().add(textField_1, gbc_textField_1);
 		textField_1.setColumns(10);
 		
-		final JButton btnReady = new JButton("READY");
+		btnReady = new JButton("READY");
 		btnReady.setFont(new Font("Arial", Font.PLAIN, 25));
 		GridBagConstraints gbc_btnReady = new GridBagConstraints();
 		gbc_btnReady.fill = GridBagConstraints.HORIZONTAL;
@@ -264,5 +265,16 @@ public class pre {
 		frame.setVisible(false);
 		window.gui = new clientGUI();
 		
+	}
+
+	public void disconnect() {
+		setWarning("Server Disconnect!");
+		textField_2.setText("");
+		textField_3.setText("");
+		btnReady.setVisible(false);
+	}
+	
+	public void setWarning(String mes) {
+		textField_1.setText(mes);
 	}
 }
