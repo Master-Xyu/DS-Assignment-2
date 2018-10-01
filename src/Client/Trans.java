@@ -53,12 +53,6 @@ public class Trans {
 				res[1] = (String) msg.get("num");
 				res[2] = (String) msg.get("state");
 			}
-			if(tmp[0].equals("word")) {
-				res = new String[3];
-				res[0] = (String) msg.get("command");
-				res[1] = (String) msg.get("num");
-				res[2] = (String) msg.get("state");
-			}
 			if(tmp[0].equals("letter")) {
 				res = new String[2];
 				res[0] = (String) msg.get("command");
@@ -94,29 +88,56 @@ public class Trans {
 	public static void send(DataOutputStream out, String[] message) {
 		try {
 			JSONObject response = new JSONObject();
-			if(message[0].equals("connect")) {
-				response.put("command",message[0]);
-				response.put("name",message[1]);
-			}
-			if(message[0].equals("alert")) {
-				response.put("command",message[0]);
-				response.put("content",message[1]);
-			}
-			if(message[0].equals("letter")) {
-				response.put("command",message[0]);
-				response.put("x",message[1]);
-				response.put("y",message[2]);
-				response.put("letter",message[3]);
-			}
-			if(message[0].equals("Word")) {
-				int len=message.length;
-				int number = (len-1)/3;
-				response.put("command",message[0]);
-				for(int i=1;i<=number;i++)
-				{
-					response.put("x"+i,message[1]);
-					response.put("y"+i,message[2]);
-					response.put("letter"+i,message[3]);
+			if(message.length>0) {
+				if(message[0].equals("Connect")) {
+					response.put("command",message[0]);
+					response.put("playername",message[1]);
+				}
+				if(message[0].equals("alert")) {
+					response.put("command",message[0]);
+					response.put("content",message[1]);
+					if(message[1].equals("start"))
+					{
+						response.put("content",message[1]);
+						response.put("number",message[2]);
+						response.put("num",message[3]);
+						for(int i=1;i<=message.length-4;i++)
+						{
+							String o=i+"";
+							response.put(o,message[i+3]);
+						}
+					}
+				}
+				if(message[0].equals("turn")) {
+					response.put("command",message[0]);
+					response.put("num",message[1]);
+				}
+
+				if(message[0].equals("score")) {
+					response.put("command",message[0]);
+					response.put("num",message[1]);
+					response.put("state",message[1]);
+				}
+				if(message[0].equals("connect")) {
+					response.put("command",message[0]);
+					response.put("name",message[1]);
+				}
+				if(message[0].equals("letter")) {
+					response.put("command",message[0]);
+					response.put("x",message[1]);
+					response.put("y",message[2]);
+					response.put("letter",message[3]);
+				}
+				if(message[0].equals("Word")) {
+					int len=message.length;
+					int number = (len-1)/3;
+					response.put("command",message[0]);
+					for(int i=1;i<=number;i++)
+					{
+						response.put("x"+i,message[1]);
+						response.put("y"+i,message[2]);
+						response.put("letter"+i,message[3]);
+					}
 				}
 			}
 			out.writeUTF(response.toJSONString());
