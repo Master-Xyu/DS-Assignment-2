@@ -70,17 +70,17 @@ public class Listener extends Thread{
 			}
 			else if(message[0].equals("alert") && message[1].equals("gameover")){
 				
-				System.exit(0);
+				pre.window.gui.gameover();
 				
 			}
 			else if(message[0].equals("alert") && message[1].equals("disconnected")) {
 				
-				System.exit(0);
+				pre.window.gui.disconnect();
 				
 			}
 			else if(message[0].equals("alert") && message[1].equals("Game is on!")) {
 				
-				System.exit(0);
+				pre.window.setWarning("Game is on!");
 				
 			}
 			else if(message[0].equals("alert") && message[1].equals("pass")) {
