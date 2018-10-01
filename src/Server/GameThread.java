@@ -69,13 +69,19 @@ public class GameThread extends Thread {
 					break;
 				tList.get(turn).turn(round);
 				message = getMessage(turn);
+				if(message[1].equals("pass")) {
+					pass[turn] = true;
+					continue;
+				}
 				groupSend(turn, message);
+				
 				message = getMessage(turn);
 				if(message[1].equals("pass")) {
 					pass[turn] = true;
 					continue;
 				}
-				groupSend(turn, message);			
+				groupSend(turn, message);	
+				
 				message = new String[3];
 				message[0] = "score";
 				message[1] = Integer.toString(turn);
