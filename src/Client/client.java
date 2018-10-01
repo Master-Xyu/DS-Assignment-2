@@ -240,6 +240,11 @@ public class client extends Thread{
 		Trans.send(out, message);
 		
 	}
+	
+	public void disconnect() {
+		String[] message= {"alert", "exit"};
+		Trans.send(out, message);
+	}
 
 	
 	
