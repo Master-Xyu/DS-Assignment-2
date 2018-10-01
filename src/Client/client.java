@@ -8,8 +8,6 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.ArrayList;
 
-import Server.Trans;
-
 import java.net.ConnectException;
 
 public class client extends Thread{
@@ -193,7 +191,6 @@ public class client extends Thread{
 		Trans.send(out, message);
 		
 		return "Ready required!";
-		
 		
 	}
 	

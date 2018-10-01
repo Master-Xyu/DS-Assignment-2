@@ -55,7 +55,7 @@ public class Listener extends Thread{
 	}
 
 	public void run() {
-		
+		while(true) {
 		try {
 			
 			String[] message = Trans.read(in);
@@ -100,6 +100,7 @@ public class Listener extends Thread{
 			
 			e.printStackTrace();
 			
+		}
 		}
 	}
 	

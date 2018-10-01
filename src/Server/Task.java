@@ -39,8 +39,9 @@ public class Task implements Callable<Boolean> {
 		
 		System.out.println(username + " connected");
 		
-		String[] message = {"alert","ready required"};
-		Trans.send(out, message);
+		//String[] message = {"alert","ready required"};
+		//Trans.send(out, message);
+		String[] message;
 		message = input();
 		if(message[1].equals("ready"))
 			ready = true;

@@ -18,7 +18,7 @@ public class Trans {
 			JSONObject msg = (JSONObject) parser.parse(in.readUTF());
 			tmp[0] = (String) msg.get("command");
 			tmp[1] = (String) msg.get("content");
-			if(tmp[0].equals("Connect")) {
+			if(tmp[0].equals("connect")) {
 				res = new String[2];
 				res[0] = (String) msg.get("command");
 				res[1] = (String) msg.get("name");
