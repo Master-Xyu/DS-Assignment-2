@@ -126,8 +126,8 @@ public class Listener extends Thread{
 			
 		}
 		
-		pre.gui.updateWord(word);
-		pre.gui.vote(thisWord, word);
+		pre.window.gui.updateWord(word);
+		pre.window.gui.vote(thisWord, word);
 		
 		wordLength = word.size();
 		
@@ -144,7 +144,7 @@ public class Listener extends Thread{
 	    Coordinate newLetter =new Coordinate(dx, dy, letter);
 	    matrixState.add(newLetter);
 	    
-	    pre.gui.updateLetter(newLetter);
+	    pre.window.gui.updateLetter(newLetter);
 	    
 		
 	}
