@@ -10,6 +10,7 @@ public class GameThread extends Thread {
 	private ArrayList<Future<Boolean>> fList;
 	private ArrayList<Task> tList;
 	public Boolean on = false;
+	private Boolean[] pass;
 	
 	public GameThread(ArrayList<Future<Boolean>> fList, ArrayList<Task> tList) {
 		this.fList = fList;
@@ -43,6 +44,7 @@ public class GameThread extends Thread {
 	}
 	
 	public void game(){
+		pass = new Boolean[tList.size()];
 		String[] message = new String[4 + tList.size()];
 		message[0] = "alert";
 		message[1] = "start";
@@ -57,16 +59,23 @@ public class GameThread extends Thread {
 		
 		int count = 0;
 		int round = 0;
-		while(true) {
+		Boolean end = false;
+		while(end == false) {
 			round++;
+			for(int i=0; i< tList.size(); i++)
+				pass[i] = false; 
 			for(int turn=0; turn<tList.size(); turn++) {
 				if(count++==400)
 					break;
 				tList.get(turn).turn(round);
-				message = tList.get(turn).getInMessage();
+				message = getMessage(turn);
 				groupSend(turn, message);
-				message = tList.get(turn).getInMessage();
-				groupSend(turn, message);
+				message = getMessage(turn);
+				if(message[1].equals("pass")) {
+					pass[turn] = true;
+					continue;
+				}
+				groupSend(turn, message);			
 				message = new String[3];
 				message[0] = "score";
 				message[1] = Integer.toString(turn);
@@ -79,8 +88,15 @@ public class GameThread extends Thread {
 				}
 				groupSend(100, message);
 			}
+			for(int i = 0; i< tList.size(); i++) {
+				end = true;
+				if(pass[i] == false) {
+					end = false;
+					break;
+				}
+			}
 			if(count == 400)
-				break;
+				end = true;
 		}
 		message = new String[2];
 		message[0] = "alert";
@@ -94,7 +110,7 @@ public class GameThread extends Thread {
 		for(int j=0; j<tList.size(); j++) {
 			if(j == i)
 				continue;
-			message = tList.get(j).getInMessage();
+			message = getMessage(j);
 			if(message[1].equals("disagree"))
 				agreed = false;
 		}
@@ -103,13 +119,24 @@ public class GameThread extends Thread {
 	
 	public void groupSend(int n, String[] message){
 		for(int j = 0; j<tList.size(); j++) {
-			if(n == j)
-				continue;
 			tList.get(j).output(message);
 		}
 	}
 	
 	public void disconnect() {
 		this.interrupt();
+	}
+	
+	public String[] getMessage(int i) {
+		String[] message = null;
+		while(message == null) {
+			message = tList.get(i).getInMessage();
+			try {
+				Thread.sleep(500);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+		return message;
 	}
 }

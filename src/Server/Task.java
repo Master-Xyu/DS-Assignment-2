@@ -105,7 +105,8 @@ public class Task implements Callable<Boolean> {
 		return this.username;
 	}
 	public String[] getInMessage() {
-		while(inMessage == null) {}
+		if(inMessage == null)
+			return null;
 		String[] message = new String[inMessage.length];
 		for(int i = 0; i< message.length; i++)
 			message[i]= new String(inMessage[i]);
