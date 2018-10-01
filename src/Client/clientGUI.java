@@ -44,6 +44,7 @@ public class clientGUI implements MouseListener{
 	String[] wordKey = {"A","B","C","D","E","F","G","H","I","J","K","L"
 			,"M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"};
 	JButton wordList[] = new JButton[wordKey.length];
+	JButton op[]=new JButton[4];
 
 	/**
 	 * Launch the application.
@@ -172,7 +173,7 @@ public class clientGUI implements MouseListener{
 	
 	private void showFunc() {
 		frame.getContentPane().add(container4,BorderLayout.SOUTH);
-		container4.setLayout(new GridLayout(1,3));
+		container4.setLayout(new GridLayout(1,4));
 		JButton x = new JButton("CANCEL");
 		x.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -185,6 +186,7 @@ public class clientGUI implements MouseListener{
 		x.setOpaque(true);
 		x.setBorderPainted(true); 
 		x.addMouseListener(this);
+		op[1] = x;
 		container4.add(x);
 		JButton y = new JButton("CLAIM");
 		y.addActionListener(new ActionListener() {
@@ -203,7 +205,22 @@ public class clientGUI implements MouseListener{
 		y.setOpaque(true);
 		y.setBorderPainted(true); 
 		y.addMouseListener(this);
+		op[2] = y;
 		container4.add(y);
+		JButton k = new JButton("PASS");
+		k.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				pre.myclient.pass();
+				hideBlocks();
+			}
+		});
+		k.setMargin(new Insets(0,0,0,0));
+		k.setBackground(Color.WHITE);
+		k.setOpaque(true);
+		k.setBorderPainted(true); 
+		k.addMouseListener(this);
+		op[3] = k;
+		container4.add(k);
 		JButton z = new JButton("EXIT");
 		z.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -215,6 +232,7 @@ public class clientGUI implements MouseListener{
 		z.setOpaque(true);
 		z.setBorderPainted(true); 
 		z.addMouseListener(this);
+		op[4] = z;
 		container4.add(z);
 		
 	}
@@ -420,6 +438,9 @@ public class clientGUI implements MouseListener{
 			}
 		for(int i=0;i<26;i++)
 			wordList[i].setEnabled(false);
+		for(int i=0;i<3;i++) {
+			op[i].setEnabled(false);
+		}
 	}
 	
 	private void showBlocks() {
@@ -430,6 +451,9 @@ public class clientGUI implements MouseListener{
 			}
 		for(int i=0;i<26;i++)
 			wordList[i].setEnabled(true);
+		for(int i=0;i<3;i++) {
+			op[i].setEnabled(true);
+		}
 	}
 	
 	public void myTurn() {

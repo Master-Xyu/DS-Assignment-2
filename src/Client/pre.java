@@ -43,6 +43,7 @@ public class pre {
 	private JTextField textField_3;
 	public static pre window;
 	public static clientGUI gui;
+	private int isReady=0;
 
 	/**
 	 * Launch the application.
@@ -203,6 +204,9 @@ public class pre {
 		JButton btnClose = new JButton("CLOSE");
 		btnClose.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if(isReady==1) {
+					myclient.disconnect();
+				}
 				System.exit(0);
 			}
 		});
@@ -250,6 +254,8 @@ public class pre {
 				String state = myclient.ready();
 				if(state.equals("online")) {
 					textField_1.setText("Ready!");
+					btnReady.setEnabled(false);
+					isReady=1;
 				}
 			}
 		});
