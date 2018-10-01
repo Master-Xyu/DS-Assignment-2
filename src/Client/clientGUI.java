@@ -193,6 +193,7 @@ public class clientGUI implements MouseListener{
 		JButton z = new JButton("EXIT");
 		z.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				pre.window.myclient.disconnect();
 				System.exit(0);
 			}
 		});
@@ -468,7 +469,6 @@ public class clientGUI implements MouseListener{
 		{
 			pre.myclient.submitWord(word);
 			isDone=3;
-			pre.myclient.submit();
 			clearWord();
 			hideBlocks();
 		}
