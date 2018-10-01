@@ -89,7 +89,7 @@ public class Trans {
 		try {
 			JSONObject response = new JSONObject();
 			if(message.length>0) {
-				if(message[0].equals("Connect")) {
+				if(message[0].equals("connect")) {
 					response.put("command",message[0]);
 					response.put("playername",message[1]);
 				}

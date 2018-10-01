@@ -19,7 +19,7 @@ public class Task implements Callable<Boolean> {
 	private Boolean turn;
 	private Boolean over;
 	private String username;
-	private String[] inMessage;
+	private String[] inMessage = null;
 	
 	public Task(Socket client) {
 		this.client = client;
