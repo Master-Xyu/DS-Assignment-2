@@ -231,6 +231,14 @@ public class client extends Thread{
 		}
 		
 	}
+	
+	public void submit() {
+		
+
+		String[] message= {"alert", "pass"};
+		Trans.send(out, message);
+		
+	}
 
 	
 	
