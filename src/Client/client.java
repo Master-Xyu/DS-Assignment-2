@@ -63,7 +63,7 @@ public class client extends Thread{
 			
 			String[] message = {"letter",  ""+ letter.getDx(), "" + letter.getDy(), letter.getLetter()};
 			Trans.send(out, message);
-			ls.setReady(false);
+			
 			return true;
 	
 		}
@@ -95,6 +95,7 @@ public class client extends Thread{
 			
 			
 			Trans.send(out, message);
+			ls.setReady(false);
 	
 		}
 		
