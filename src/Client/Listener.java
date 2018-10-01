@@ -110,15 +110,15 @@ public class Listener extends Thread{
 	
 	private void resolveWord(String[] message) {
 		
-		
+		int len=message.length;
 		word.clear();
 		String thisWord = "";
-		for(int i=1; i+3<message.length; i=i+3 ) {
+		for(int i=0; i<(len-1)/3; i++ ) {
 			
 			
-			int dx = Integer.parseInt(message[i]);
-			int dy = Integer.parseInt(message[i+1]);
-		    String letter =message[i+2];
+			int dx = Integer.parseInt(message[i+1]);
+			int dy = Integer.parseInt(message[i+2]);
+		    String letter =message[i+3];
 		    thisWord = thisWord + letter;
 
 		    
