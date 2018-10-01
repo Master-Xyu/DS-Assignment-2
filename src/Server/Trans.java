@@ -135,9 +135,9 @@ public class Trans {
 					response.put("command",message[0]);
 					for(int i=1;i<=number;i++)
 					{
-						response.put("x"+i,message[1]);
-						response.put("y"+i,message[2]);
-						response.put("letter"+i,message[3]);
+						response.put("x"+i,message[i*3-2]);
+						response.put("y"+i,message[i*3-1]);
+						response.put("letter"+i,message[i*3]);
 					}
 				}
 			}

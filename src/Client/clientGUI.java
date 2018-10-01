@@ -110,7 +110,7 @@ public class clientGUI implements MouseListener{
 		container1.add(label2);
 		for(int i=0;i<num;i++)
 		{
-			JButton x = new JButton();
+			JButton x = new JButton("");
 			x.setEnabled(false);
 			x.setText(players[i]+":"+scores[i]);
 			x.setMargin(new Insets(0,0,0,0));
@@ -269,7 +269,7 @@ public class clientGUI implements MouseListener{
 
 	private void select(int tx, int ty) {
 		
-		if(isDone==1) 
+		if(isDone==1&&border[tx][ty].getText().equals("")) 
 		{
 			clearWord();
 			clearChar();
@@ -475,6 +475,8 @@ public class clientGUI implements MouseListener{
 	}
 	
 	public void done() {
+		clearWord();
+		clearChar();
 		hideBlocks();
 		pre.myclient.submit();
 	}
