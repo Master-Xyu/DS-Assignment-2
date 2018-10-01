@@ -44,6 +44,7 @@ public class clientGUI implements MouseListener{
 	String[] wordKey = {"A","B","C","D","E","F","G","H","I","J","K","L"
 			,"M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"};
 	JButton wordList[] = new JButton[wordKey.length];
+	JButton op[]=new JButton[3];
 
 	/**
 	 * Launch the application.
@@ -185,6 +186,7 @@ public class clientGUI implements MouseListener{
 		x.setOpaque(true);
 		x.setBorderPainted(true); 
 		x.addMouseListener(this);
+		op[1] = x;
 		container4.add(x);
 		JButton y = new JButton("CLAIM");
 		y.addActionListener(new ActionListener() {
@@ -203,6 +205,7 @@ public class clientGUI implements MouseListener{
 		y.setOpaque(true);
 		y.setBorderPainted(true); 
 		y.addMouseListener(this);
+		op[2] = y;
 		container4.add(y);
 		JButton z = new JButton("EXIT");
 		z.addActionListener(new ActionListener() {
@@ -215,6 +218,7 @@ public class clientGUI implements MouseListener{
 		z.setOpaque(true);
 		z.setBorderPainted(true); 
 		z.addMouseListener(this);
+		op[3] = z;
 		container4.add(z);
 		
 	}
@@ -420,6 +424,9 @@ public class clientGUI implements MouseListener{
 			}
 		for(int i=0;i<26;i++)
 			wordList[i].setEnabled(false);
+		for(int i=0;i<2;i++) {
+			op[i].setEnabled(false);
+		}
 	}
 	
 	private void showBlocks() {
@@ -430,6 +437,9 @@ public class clientGUI implements MouseListener{
 			}
 		for(int i=0;i<26;i++)
 			wordList[i].setEnabled(true);
+		for(int i=0;i<2;i++) {
+			op[i].setEnabled(true);
+		}
 	}
 	
 	public void myTurn() {
