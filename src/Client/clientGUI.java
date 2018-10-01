@@ -133,6 +133,7 @@ public class clientGUI implements MouseListener{
 			x.setBackground(Color.white);
 			x.setOpaque(true);
 			x.setBorderPainted(true); 
+			x.setHorizontalAlignment(JButton.LEFT);
 			score[i] = x;
 			container1.add(x);
 		}
@@ -187,16 +188,16 @@ public class clientGUI implements MouseListener{
 		x.setOpaque(true);
 		x.setBorderPainted(true); 
 		x.addMouseListener(this);
-		op[1] = x;
+		op[0] = x;
 		container4.add(x);
 		JButton y = new JButton("CLAIM");
 		y.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(isDone==1&&word.size()!=0)
+				if(isDone==2&&word.size()!=0)
 				{
 					pre.myclient.submitWord(word);
 					System.out.println(word);
-					isDone=2;
+					isDone=3;
 					pre.myclient.submit();
 					hideBlocks();
 				}
@@ -208,12 +209,12 @@ public class clientGUI implements MouseListener{
 		y.setOpaque(true);
 		y.setBorderPainted(true); 
 		y.addMouseListener(this);
-		op[2] = y;
+		op[1] = y;
 		container4.add(y);
 		JButton k = new JButton("DONE");
 		k.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(isDone==0||isDone==1)
+				if(isDone==1||isDone==2)
 				{
 					hideBlocks();
 				}
@@ -226,7 +227,7 @@ public class clientGUI implements MouseListener{
 		k.setOpaque(true);
 		k.setBorderPainted(true); 
 		k.addMouseListener(this);
-		op[3] = k;
+		op[2] = k;
 		container4.add(k);
 		JButton z = new JButton("EXIT");
 		z.addActionListener(new ActionListener() {
@@ -239,7 +240,7 @@ public class clientGUI implements MouseListener{
 		z.setOpaque(true);
 		z.setBorderPainted(true); 
 		z.addMouseListener(this);
-		op[4] = z;
+		op[3] = z;
 		container4.add(z);
 		
 	}
@@ -280,14 +281,14 @@ public class clientGUI implements MouseListener{
 					set.setLetter(wordKey[i]);
 					pre.myclient.submitLetter(set);
 					System.out.println("("+tx+","+ty+")"+"->"+"wordKey[i]");
-					isDone=1;
+					isDone=2;
 				}
 			}
 	}
 
 	private void select(int tx, int ty) {
 		
-		if(isDone==0) 
+		if(isDone==1) 
 		{
 			clearWord();
 			clearChar();
@@ -296,7 +297,7 @@ public class clientGUI implements MouseListener{
 			border[tx][ty].setBackground(Color.red);
 			border[tx][ty].setEnabled(false);
 		}
-		else if(isDone==1&&word.size()==0)
+		else if(isDone==2&&word.size()==0)
 		{
 			clearChar();
 			Coordinate tmp=new Coordinate();
@@ -307,7 +308,7 @@ public class clientGUI implements MouseListener{
 			border[tx][ty].setBackground(Color.blue);
 			border[tx][ty].setEnabled(false);
 		}
-		else if(isDone==1&&word.size()!=0)
+		else if(isDone==2&&word.size()!=0)
 		{
 			clearChar();
 			Coordinate tmp=new Coordinate();
@@ -452,6 +453,7 @@ public class clientGUI implements MouseListener{
 		for(int i=0;i<3;i++) {
 			op[i].setEnabled(false);
 		}
+		isDone=0;
 	}
 	
 	private void showBlocks() {
@@ -468,7 +470,7 @@ public class clientGUI implements MouseListener{
 	}
 	
 	public void myTurn() {
-		isDone=0;
+		isDone=1;
 		showBlocks();
 	}
 
