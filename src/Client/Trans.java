@@ -54,7 +54,7 @@ public class Trans {
 				res[2] = (String) msg.get("state");
 			}
 			if(tmp[0].equals("letter")) {
-				res = new String[2];
+				res = new String[4];
 				res[0] = (String) msg.get("command");
 				res[1] = (String) msg.get("x");
 				res[2] = (String) msg.get("y");
