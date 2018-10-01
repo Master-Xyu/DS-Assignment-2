@@ -56,7 +56,7 @@ public class Listener extends Thread{
 		try {
 			
 			String[] message = Trans.read(in);
-			if(message[0].equals("alert") && message[1].equals("turn")){
+			if(message[0].equals("turn")){
 				
 				isReady = true;
 				pre.gui.myTurn();
