@@ -11,10 +11,12 @@ public class GameThread extends Thread {
 	private ArrayList<Task> tList;
 	public Boolean on = false;
 	private Boolean[] pass;
+	private ServerWindow sw;
 	
-	public GameThread(ArrayList<Future<Boolean>> fList, ArrayList<Task> tList) {
+	public GameThread(ArrayList<Future<Boolean>> fList, ArrayList<Task> tList, ServerWindow sw) {
 		this.fList = fList;
 		this.tList = tList;
+		this.sw = sw;
 	}
 	
 	public void run() {
@@ -38,6 +40,8 @@ public class GameThread extends Thread {
 		}
 		on = true;
 		ready = true;
+		
+		sw.appendMessage("Game starts!\n");
 		
 		game();	
 		on = false;
@@ -104,6 +108,7 @@ public class GameThread extends Thread {
 			if(count == 400)
 				end = true;
 		}
+		sw.appendMessage("Game over!\n");
 		message = new String[2];
 		message[0] = "alert";
 		message[1] = "gameover";
@@ -129,7 +134,9 @@ public class GameThread extends Thread {
 		}
 	}
 	
-	public void disconnect() {
+	public void disconnect(int i) {
+		sw.appendMessage(tList.get(i).getUsername() + " disconnected!\n");
+		sw.appendMessage("Game over!\n");
 		this.interrupt();
 	}
 	

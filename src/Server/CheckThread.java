@@ -14,13 +14,17 @@ public class CheckThread extends Thread {
 	ArrayList<Task> tList;
 	ServerSocket server;
 	ExecutorService es;
+	ServerWindow sw;
 	
-	public CheckThread(ArrayList<Future<Boolean>> fList, GameThread gt, ArrayList<Task> tList, ServerSocket server, ExecutorService es){
+	public CheckThread(ArrayList<Future<Boolean>> fList, GameThread gt,
+			ArrayList<Task> tList, ServerSocket server,
+			ExecutorService es, ServerWindow sw){
 		this.fList = fList;
 		this.gt = gt;
 		this.tList = tList;
 		this.server = server;
 		this.es = es;
+		this.sw = sw;
 	}
 	
 	public void run() {
@@ -33,8 +37,9 @@ public class CheckThread extends Thread {
 					Trans.send(new DataOutputStream(client.getOutputStream()), message);
 					continue;
 				}
-				Task t = new Task(client);
+				Task t = new Task(client, sw);
 				tList.add(t);
+				
 				Future<Boolean> f = es.submit(t);
 				fList.add(f);
 			} catch (IOException e) {
