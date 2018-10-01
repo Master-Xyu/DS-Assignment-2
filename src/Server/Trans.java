@@ -60,7 +60,7 @@ public class Trans {
 				res[2] = (String) msg.get("y");
 				res[3] = (String) msg.get("letter");
 			}
-			if(tmp[0].equals("Word")) {
+			if(tmp[0].equals("word")) {
 				int n=0;
 				while(msg.containsKey("letter"+(n+1)))
 				{
@@ -129,7 +129,7 @@ public class Trans {
 					response.put("y",message[2]);
 					response.put("letter",message[3]);
 				}
-				if(message[0].equals("Word")) {
+				if(message[0].equals("word")) {
 					int len=message.length;
 					int number = (len-1)/3;
 					response.put("command",message[0]);
