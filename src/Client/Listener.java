@@ -180,7 +180,7 @@ public class Listener extends Thread{
 	
 	private void scorePlus(String[] message) {
 		
-		getScore().update(Integer.parseInt(message[2]), wordLength);
+		getScore().update(Integer.parseInt(message[1]), wordLength);
 		
 	}
 	
