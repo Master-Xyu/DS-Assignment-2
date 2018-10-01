@@ -280,6 +280,7 @@ public class pre {
 		textField_1.setText("");
 		textField_2.setText("");
 		textField_3.setText("");
+		textField.setText("");
 		btnReady.setEnabled(true);
 		btnReady.setVisible(false);
 		
