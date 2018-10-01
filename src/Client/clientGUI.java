@@ -48,27 +48,10 @@ public class clientGUI implements MouseListener{
 	JButton op[]=new JButton[4];
 	int isDone=0;
 
-	/**
-	 * Launch the application.
-	 */
-	public void start() {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					clientGUI window = new clientGUI();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
-	/**
-	 * Create the application.
-	 */
 	public clientGUI() {
 		initialize();
+		frame.setVisible(true);
 	}
 
 	/**

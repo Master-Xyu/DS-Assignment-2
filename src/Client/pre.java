@@ -261,8 +261,8 @@ public class pre {
 		});
 	}
 	public void startgame() {
+		frame.setVisible(false);
 		window.gui = new clientGUI();
-		window.gui.start();
-		window.frame.setVisible(false);
+		
 	}
 }
