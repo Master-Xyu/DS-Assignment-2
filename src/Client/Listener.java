@@ -70,17 +70,17 @@ public class Listener extends Thread{
 			}
 			else if(message[0].equals("alert") && message[1].equals("gameover")){
 				
-				pre.window.gui.gameover();
+				System.exit(0);
 				
 			}
 			else if(message[0].equals("alert") && message[1].equals("disconnected")) {
 				
-				pre.window.gui.disconnect();
+				System.exit(0);
 				
 			}
 			else if(message[0].equals("alert") && message[1].equals("Game is on!")) {
 				
-				pre.window.setWarning(message[1]);
+				System.exit(0);
 				
 			}
 			else if(message[0].equals("word")) {
@@ -117,9 +117,9 @@ public class Listener extends Thread{
 		for(int i=0; i<(len-1)/3; i++ ) {
 			
 			
-			int dx = Integer.parseInt(message[i*3+1]);
-			int dy = Integer.parseInt(message[i*3+2]);
-		    String letter =message[i*3+3];
+			int dx = Integer.parseInt(message[i+1]);
+			int dy = Integer.parseInt(message[i+2]);
+		    String letter =message[i+3];
 		    thisWord = thisWord + letter;
 
 		    
@@ -181,6 +181,7 @@ public class Listener extends Thread{
 	private void scorePlus(String[] message) {
 		
 		getScore().update(Integer.parseInt(message[1]), wordLength);
+		pre.window.gui.updateScore(score);
 		
 	}
 	
