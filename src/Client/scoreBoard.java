@@ -70,7 +70,7 @@ public class scoreBoard {
         String[] str = new String[2*numOfMax];
         
         int j=0;
-        for(int i=1; i<number;i++) {
+        for(int i=0; i<number;i++) {
         	
         	if(max == score[i]) {
         		
