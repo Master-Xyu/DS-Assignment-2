@@ -20,13 +20,15 @@ public class Task implements Callable<Boolean> {
 	private Boolean over;
 	private String username;
 	private String[] inMessage = null;
+	private ServerWindow sw; 
 	
-	public Task(Socket client) {
+	public Task(Socket client, ServerWindow sw) {
 		this.client = client;
 		ready = false;
 		current = false;
 		turn = false;
 		over = false;
+		this.sw = sw;
 		try {
 			in = new DataInputStream(client.getInputStream());
 			out = new DataOutputStream(client.getOutputStream());
@@ -37,19 +39,21 @@ public class Task implements Callable<Boolean> {
 	public Boolean call() {
 		username = Trans.read(in)[1];
 		
-		System.out.println(username + " connected");
+		sw.appendMessage(username + " log in!\n");
 		
 		//String[] message = {"alert","ready required"};
 		//Trans.send(out, message);
 		String[] message;
 		message = input();
-		if(message[1].equals("ready"))
+		if(message[1].equals("ready")) {
+			sw.appendMessage(username + " is ready!\n");
 			ready = true;
+		}
 		else if(message[1].equals("exit"))
 			return true;
 		while(true) {
 			message = input();
-			if(message[1].equals("exit"))
+			if(message[1].equals("exit")) 
 				break;
 			if(message[1].equals("Y")) {	
 				ready = true;
