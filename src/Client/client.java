@@ -76,11 +76,11 @@ public class client extends Thread{
 	}
 	
 	public void submitWord(ArrayList<Coordinate> word){
-		
+		int num=word.size();
 		
 		if(ls.isReady()) {
 			
-			String[] message = new String[60];                   //possible maximum number of the information in 'word'
+			String[] message = new String[word.size()*3+1];                   //possible maximum number of the information in 'word'
 			
 			message[0] = "word";
 
