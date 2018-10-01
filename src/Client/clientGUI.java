@@ -191,6 +191,11 @@ public class clientGUI implements MouseListener{
 		op[2] = k;
 		container4.add(k);
 		JButton z = new JButton("EXIT");
+		z.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
 		z.setMargin(new Insets(0,0,0,0));
 		z.setBackground(Color.WHITE);
 		z.setOpaque(true);
