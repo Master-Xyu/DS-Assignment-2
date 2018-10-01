@@ -192,6 +192,7 @@ public class clientGUI implements MouseListener{
 				{
 					pre.myclient.submitWord(word);
 					System.out.println(word);
+					hideBlocks();
 				}
 					
 			}
@@ -253,6 +254,7 @@ public class clientGUI implements MouseListener{
 					set.setLetter(wordKey[i]);
 					pre.myclient.submitLetter(set);
 					System.out.println("("+tx+","+ty+")"+"->"+"wordKey[i]");
+					hideBlocks();
 				}
 			}
 	}
@@ -394,19 +396,44 @@ public class clientGUI implements MouseListener{
 		int number = loc.size();
 		for(int i=0;i<number;i++)
 		{
-			border[loc.get(i).getDx()][loc.get(i).getDy()].setEnabled(false);
+			//border[loc.get(i).getDx()][loc.get(i).getDy()].setEnabled(false);
 			blocks[loc.get(i).getDx()][loc.get(i).getDy()]=false;
-			updateBlocks();
+			//updateBlocks();
 		}
 	}
 
-	private void updateBlocks() {
+//	private void updateBlocks() {
+//		for(int i=0;i<20;i++)
+//			for(int j=0;j<20;j++)
+//			{
+//				border[i][j].setEnabled(blocks[i][j]);
+//			}
+//		
+//	}
+	
+	private void hideBlocks() {
+		for(int i=0;i<20;i++)
+			for(int j=0;j<20;j++)
+			{
+				border[i][j].setEnabled(false);
+			}
+		for(int i=0;i<26;i++)
+			wordList[i].setEnabled(false);
+	}
+	
+	private void showBlocks() {
 		for(int i=0;i<20;i++)
 			for(int j=0;j<20;j++)
 			{
 				border[i][j].setEnabled(blocks[i][j]);
 			}
-		
+		for(int i=0;i<26;i++)
+			wordList[i].setEnabled(true);
 	}
+	
+	public void myTurn() {
+		showBlocks();
+	}
+
 
 }
