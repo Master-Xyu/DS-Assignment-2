@@ -219,14 +219,14 @@ public class client extends Thread{
 		
 		if(voting.equals("yes")) {
 			
-			String[] message= {"alert", "Y"};
+			String[] message= {"alert", "agree"};
 			Trans.send(out, message);
 			
 		}
 	
 		else{
 			
-			String[] message= {"alert", "N"};
+			String[] message= {"alert", "disagree"};
 			Trans.send(out, message);
 			
 		}
