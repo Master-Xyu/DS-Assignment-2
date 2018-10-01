@@ -268,13 +268,20 @@ public class pre {
 	}
 
 	public void disconnect() {
+		initial();
 		setWarning("Server Disconnect!");
-		textField_2.setText("");
-		textField_3.setText("");
-		btnReady.setVisible(false);
 	}
 	
 	public void setWarning(String mes) {
 		textField_1.setText(mes);
+	}
+
+	public void initial() {
+		textField_1.setText("");
+		textField_2.setText("");
+		textField_3.setText("");
+		btnReady.setEnabled(true);
+		btnReady.setVisible(false);
+		
 	}
 }

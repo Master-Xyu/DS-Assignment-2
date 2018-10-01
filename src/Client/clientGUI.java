@@ -486,6 +486,11 @@ public class clientGUI implements MouseListener{
 	}
 	
 	public void gameover() {
+		String result="GameOver!";
+		JOptionPane.showMessageDialog(null,result);
+		frame.dispose();
+		pre.window.frame.setVisible(true);
+		pre.window.initial();
 	}
 
 
