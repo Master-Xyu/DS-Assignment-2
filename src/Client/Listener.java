@@ -20,14 +20,14 @@ public class Listener extends Thread{
 	
 	private scoreBoard score;
 
-	private boolean isReady1 = false;
+	private boolean isReady = false;
 	
-	public boolean isReady1() {
-		return isReady1;
+	public boolean isReady() {
+		return isReady;
 	}
 
 	public void setReady(boolean isReady) {
-		this.isReady1 = isReady;
+		this.isReady = isReady;
 	}
 
 	public Listener (DataInputStream in, DataOutputStream out) {
@@ -48,11 +48,8 @@ public class Listener extends Thread{
 		this.score = score;
 	}
 
-	private boolean isReady = false;
 	
-	public boolean isReady() {
-		return isReady1;
-	}
+
 
 	public void run() {
 		while(true) {
@@ -61,7 +58,8 @@ public class Listener extends Thread{
 			String[] message = Trans.read(in);
 			if(message[0].equals("alert") && message[1].equals("turn")){
 				
-				isReady1 = true;
+				isReady = true;
+				pre.gui.myTurn();
 			
 			}
 			else if(message[0].equals("alert") && message[1].equals("start")) {
@@ -73,7 +71,13 @@ public class Listener extends Thread{
 				
 				System.exit(0);
 				
-			}else if(message[0].equals("alert") && message[1].equals("disconnected")) {
+			}
+			else if(message[0].equals("alert") && message[1].equals("disconnected")) {
+				
+				System.exit(0);
+				
+			}
+			else if(message[0].equals("alert") && message[1].equals("Game is on!")) {
 				
 				System.exit(0);
 				
