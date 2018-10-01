@@ -175,19 +175,6 @@ public class clientGUI implements MouseListener{
 		op[0] = x;
 		container4.add(x);
 		JButton y = new JButton("CLAIM");
-		y.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if(isDone==2&&word.size()!=0)
-				{
-					pre.myclient.submitWord(word);
-					System.out.println(word);
-					isDone=3;
-					pre.myclient.submit();
-					hideBlocks();
-				}
-					
-			}
-		});
 		y.setMargin(new Insets(0,0,0,0));
 		y.setBackground(Color.WHITE);
 		y.setOpaque(true);
@@ -196,16 +183,6 @@ public class clientGUI implements MouseListener{
 		op[1] = y;
 		container4.add(y);
 		JButton k = new JButton("DONE");
-		k.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if(isDone==1||isDone==2)
-				{
-					hideBlocks();
-				}
-				pre.myclient.submit();
-				hideBlocks();
-			}
-		});
 		k.setMargin(new Insets(0,0,0,0));
 		k.setBackground(Color.WHITE);
 		k.setOpaque(true);
@@ -214,11 +191,6 @@ public class clientGUI implements MouseListener{
 		op[2] = k;
 		container4.add(k);
 		JButton z = new JButton("EXIT");
-		z.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				shutdown();
-			}
-		});
 		z.setMargin(new Insets(0,0,0,0));
 		z.setBackground(Color.WHITE);
 		z.setOpaque(true);
@@ -241,6 +213,8 @@ public class clientGUI implements MouseListener{
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
+		if(isDone==0)
+			return;
 		JButton button = (JButton)e.getSource();
 		for (int i=0;i<row;i++)
 			for (int j=0;j<col;j++)
@@ -266,8 +240,24 @@ public class clientGUI implements MouseListener{
 					System.out.println("("+tx+","+ty+")"+"->"+"wordKey[i]");
 					pre.myclient.submitLetter(set);
 					isDone=2;
+					return;
 				}
 			}
+		if(button.equals(op[1]))
+		{
+			claimWord();
+			return;
+		}
+		if(button.equals(op[2]))
+		{
+			done();
+			return;
+		}
+		if(button.equals(op[3]))
+		{
+			shutdown();
+			return;
+		}
 	}
 
 	private void select(int tx, int ty) {
@@ -466,6 +456,24 @@ public class clientGUI implements MouseListener{
 		System.out.println(text1.getText());
 		isDone=1;
 		showBlocks();
+	}
+	public void claimWord() {
+		if(isDone==2&&word.size()!=0)
+		{
+			pre.myclient.submitWord(word);
+			isDone=3;
+			pre.myclient.submit();
+			hideBlocks();
+		}
+	}
+	
+	public void done() {
+		if(isDone==1||isDone==2)
+		{
+			hideBlocks();
+		}
+		pre.myclient.submit();
+		hideBlocks();
 	}
 
 
