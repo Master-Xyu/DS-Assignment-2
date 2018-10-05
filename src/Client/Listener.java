@@ -80,7 +80,7 @@ public class Listener extends Thread{
 			}
 			else if(message[0].equals("alert") && message[1].equals("Game is on!")) {
 				
-				pre.window.setWarning("Game is on!");
+				//pre.window.setWarning("Game is on!");
 				
 			}
 			else if(message[0].equals("alert") && message[1].equals("pass")) {
