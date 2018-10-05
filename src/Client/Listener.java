@@ -179,7 +179,7 @@ public class Listener extends Thread{
 		}
 		
 		getScore().setPlayer(name);
-		pre.window.startgame();
+		pre.window.startgame(id);
 	}
 	
 	

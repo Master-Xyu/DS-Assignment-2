@@ -251,6 +251,12 @@ public class client extends Thread{
 		return ls.getScore();
 		
 	}
+
+
+	public void chat(String text) {
+		String[] message= {"chat",""+pre.window.myId, text};
+		Trans.send(out, message);
+	}
 	
 	
 }

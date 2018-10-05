@@ -45,6 +45,7 @@ public class pre {
 	public static clientGUI gui;
 	private JButton btnReady;
 	private int isReady=0;
+	public int myId;
 
 	/**
 	 * Launch the application.
@@ -261,7 +262,8 @@ public class pre {
 			}
 		});
 	}
-	public void startgame() {
+	public void startgame(int id) {
+		myId = id;
 		frame.setVisible(false);
 		window.gui = new clientGUI();
 		

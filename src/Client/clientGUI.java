@@ -3,12 +3,15 @@ package Client;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.EventQueue;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import java.awt.GridLayout;
@@ -21,21 +24,27 @@ import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Font;
 
 public class clientGUI implements MouseListener{
 
 	public int width = Toolkit.getDefaultToolkit().getScreenSize().width;
     public int height = Toolkit.getDefaultToolkit().getScreenSize().height;
-    public int windowsWedth = 800;
-    public int windowsHeight = 800;
+    public int windowsWedth = 2000;
+    public int windowsHeight = 2000;
     private JTextField text1;
 	public JFrame frame;
+	private JTextArea textArea;
+	private JTextField chatText;
 	int row = 20;
 	int col = 20;
 	Container container1 = new Container();
 	Container container2 = new Container();
 	Container container3 = new Container();
 	Container container4 = new Container();
+	Container container5 = new Container();
+	Container container6 = new Container();
+	public JButton submitChat;
 	JButton border[][] = new JButton[row][col];
 	JButton score[];
 	ArrayList<Coordinate> word= new ArrayList();
@@ -45,7 +54,7 @@ public class clientGUI implements MouseListener{
 	String[] wordKey = {"A","B","C","D","E","F","G","H","I","J","K","L"
 			,"M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"};
 	JButton wordList[] = new JButton[wordKey.length];
-	JButton op[]=new JButton[4];
+	JButton op[]=new JButton[3];
 	int isDone=0;
 
 
@@ -66,7 +75,7 @@ public class clientGUI implements MouseListener{
 		frame = new JFrame();
 		frame.setBackground(Color.red);
 		frame.setBounds((width - windowsWedth) / 2,
-                (height - windowsHeight) / 2, 800, 800);
+                (height - windowsHeight) / 2, 1000, 1000);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(new BorderLayout(10,10));
 		
@@ -74,9 +83,44 @@ public class clientGUI implements MouseListener{
 		showBoarder();
 		showWord();
 		showFunc();
+		showChat();
 		hideBlocks();
 	}
 	
+	private void showChat() {
+		frame.getContentPane().add(container5,BorderLayout.WEST);
+		container5.setPreferredSize(new Dimension(300, 800));
+		container5.setLayout(new BorderLayout());
+		textArea = new JTextArea(); 
+		textArea.setFont(new Font("Arial", Font.PLAIN, 25));
+		textArea.setEditable(false);
+		textArea.setForeground(Color.black);
+		textArea.setOpaque(true);
+		JScrollPane jsp=new JScrollPane(textArea);
+        chatText = new JTextField();
+		chatText.setForeground(Color.black);
+		chatText.setOpaque(true);
+		JLabel chatIcon = new JLabel("Chat Room",JLabel.CENTER);
+		chatIcon.setEnabled(false);
+		chatText.setForeground(Color.black);
+		chatText.setOpaque(true);
+		submitChat = new JButton("Submit");
+		submitChat.setFont(new Font("Arial", Font.PLAIN, 25));
+		submitChat.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				chat();
+			}
+		});
+		container5.add(chatIcon, BorderLayout.NORTH);
+		container5.add(jsp,BorderLayout.CENTER);
+		container5.add(container6,BorderLayout.SOUTH);
+		container6.setLayout(new BorderLayout());
+		container6.add(chatText,BorderLayout.CENTER);
+		container6.add(submitChat,BorderLayout.EAST);
+		container6.setPreferredSize(new Dimension(300, 20));
+		
+	}
+
 	public void updateScore(scoreBoard b) {
 		for(int i=0;i<b.getNumber();i++)
 		{
@@ -94,17 +138,16 @@ public class clientGUI implements MouseListener{
 		String[] players = b.getPlayer();
 		int[] scores = b.getScore();
 		frame.getContentPane().add(container1,BorderLayout.NORTH);
-		container1.setLayout(new GridLayout(num+3,20));
-		JLabel label1 = new JLabel("Instruction:"); 
-		label1.setForeground(Color.black);
-		label1.setOpaque(true);
-		container1.add(label1);
+		container1.setLayout(new GridLayout(num+2,20));
 		text1 = new JTextField();
+		text1.setFont(new Font("Arial", Font.PLAIN, 30));
 		text1.setEditable(false);
-		text1.setForeground(Color.black);
+		text1.setForeground(Color.RED);
 		text1.setOpaque(true);
+		text1.setHorizontalAlignment(JTextField.CENTER);
 		container1.add(text1);
-		JLabel label2 = new JLabel("Score:"); 
+		JLabel label2 = new JLabel("Score:",JLabel.CENTER); 
+		label2.setFont(new Font("Arial", Font.PLAIN, 30));
 		label2.setForeground(Color.black);
 		label2.setOpaque(true);
 		container1.add(label2);
@@ -117,7 +160,7 @@ public class clientGUI implements MouseListener{
 			x.setBackground(Color.white);
 			x.setOpaque(true);
 			x.setBorderPainted(true); 
-			x.setHorizontalAlignment(JButton.LEFT);
+			x.setHorizontalAlignment(JButton.CENTER);
 			score[i] = x;
 			container1.add(x);
 		}
@@ -159,38 +202,27 @@ public class clientGUI implements MouseListener{
 	
 	private void showFunc() {
 		frame.getContentPane().add(container4,BorderLayout.SOUTH);
-		container4.setLayout(new GridLayout(1,4));
-		JButton x = new JButton("CANCEL");
-		x.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				clearWord();
-				clearChar();
-			}
-		});
-		x.setMargin(new Insets(0,0,0,0));
-		x.setBackground(Color.WHITE);
-		x.setOpaque(true);
-		x.setBorderPainted(true); 
-		x.addMouseListener(this);
-		op[0] = x;
-		container4.add(x);
+		container4.setLayout(new GridLayout(1,3));
 		JButton y = new JButton("CLAIM");
+		y.setFont(new Font("Arial", Font.PLAIN, 30));
 		y.setMargin(new Insets(0,0,0,0));
 		y.setBackground(Color.WHITE);
 		y.setOpaque(true);
 		y.setBorderPainted(true); 
 		y.addMouseListener(this);
-		op[1] = y;
+		op[0] = y;
 		container4.add(y);
-		JButton k = new JButton("DONE");
+		JButton k = new JButton("PASS");
+		k.setFont(new Font("Arial", Font.PLAIN, 30));
 		k.setMargin(new Insets(0,0,0,0));
 		k.setBackground(Color.WHITE);
 		k.setOpaque(true);
 		k.setBorderPainted(true); 
 		k.addMouseListener(this);
-		op[2] = k;
+		op[1] = k;
 		container4.add(k);
 		JButton z = new JButton("EXIT");
+		z.setFont(new Font("Arial", Font.PLAIN, 30));
 		z.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				pre.window.myclient.disconnect();
@@ -202,7 +234,7 @@ public class clientGUI implements MouseListener{
 		z.setOpaque(true);
 		z.setBorderPainted(true); 
 		z.addMouseListener(this);
-		op[3] = z;
+		op[2] = z;
 		container4.add(z);
 		
 	}
@@ -250,17 +282,17 @@ public class clientGUI implements MouseListener{
 					return;
 				}
 			}
-		if(button.equals(op[1]))
+		if(button.equals(op[0]))
 		{
 			claimWord();
 			return;
 		}
-		if(button.equals(op[2]))
+		if(button.equals(op[1]))
 		{
 			done();
 			return;
 		}
-		if(button.equals(op[3]))
+		if(button.equals(op[2]))
 		{
 			shutdown();
 			return;
@@ -437,7 +469,7 @@ public class clientGUI implements MouseListener{
 			}
 		for(int i=0;i<26;i++)
 			wordList[i].setEnabled(false);
-		for(int i=0;i<3;i++) {
+		for(int i=0;i<2;i++) {
 			op[i].setEnabled(false);
 		}
 		isDone=0;
@@ -452,11 +484,18 @@ public class clientGUI implements MouseListener{
 			}
 		for(int i=0;i<26;i++)
 			wordList[i].setEnabled(true);
-		for(int i=0;i<3;i++) {
+		for(int i=0;i<2;i++) {
 			op[i].setEnabled(true);
 		}
 	}
-	
+	public void chat() {
+		if(chatText.getText()!="")
+		{
+			pre.myclient.chat(chatText.getText());
+			textArea.append(chatText.getText()+"\n");
+			chatText.setText("");
+		}
+	}
 	public void myTurn() {
 		System.out.println(text1.getText());
 		text1.setText("It's your turn!");
