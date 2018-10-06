@@ -41,6 +41,21 @@ public class midGUI {
 
 		
 	}
+
+	public void addList(String[] player) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void addTable(String table, String state, String[] player) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void chatMsg(int num, String string) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 
 }

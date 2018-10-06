@@ -44,7 +44,7 @@ public class pre {
 	public static clientGUI gui;
 	private int isReady=0;
 	public int myId;
-	private static midGUI mid;
+	public static midGUI mid;
 
 	/**
 	 * Launch the application.

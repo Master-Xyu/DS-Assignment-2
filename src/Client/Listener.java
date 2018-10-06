@@ -73,7 +73,7 @@ public class Listener extends Thread{
 				pre.window.gui.gameover();
 				
 			}
-			else if(message[0].equals("alert") && message[1].equals("disconnected")) {
+			else if(message[0].equals("alert") && message[1].equals("server down")) {
 				
 				pre.window.gui.disconnect();
 				
@@ -93,10 +93,29 @@ public class Listener extends Thread{
 				resolveWord(message);
 				
 			}
+			else if(message[0].equals("chat")) {
+				int num = Integer.parseInt(message[1]);
+				pre.window.mid.chatMsg(num,message[2]);
+				
+			}
 			else if(message[0].equals("letter")) {
 				
 				fillLetter(message);
 				
+			}
+			else if(message[0].equals("list") && message[1].equals("wait")) {
+				String player[] = new String[message.length-2];
+				for(int i=2;i<message.length;i++)
+					player[i-2] = message[i];
+				pre.window.mid.addList(player);
+			}
+			else if(message[0].equals("list") && !message[1].equals("wait")) {
+				String table = message[1];
+				String state = message[2];
+				String player[] = new String[message.length-3];
+				for(int i=3;i<message.length;i++)
+					player[i-3] = message[i];
+				pre.window.mid.addTable(table,state,player);
 			}
 			else if(message[0].equals("score") && message[2].equals("plus")) {
 				

@@ -239,6 +239,18 @@ public class client extends Thread{
 		
 	}
 	
+	public void join(String table) {
+		String[] message= {"join", table};
+		Trans.send(out, message);
+		
+	}
+
+	public void leave(String table) {
+		String[] message= {"leave", table};
+		Trans.send(out, message);
+	}
+	
+	
 	public void disconnect() {
 		String[] message= {"alert", "exit"};
 		Trans.send(out, message);
