@@ -3,6 +3,7 @@ package Server;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.util.concurrent.CountDownLatch;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -11,7 +12,7 @@ import org.json.simple.parser.ParseException;
 public class Trans {
 
 	public static String[] read(DataInputStream in) {
-		String tmp[] = new String[2];
+		String tmp[] = new String[50];
 		String res[] = null;
 		try {
 			JSONParser parser = new JSONParser();
@@ -74,6 +75,55 @@ public class Trans {
 					res[(i-1)*3+2]=(String) msg.get("y"+i);
 					res[(i-1)*3+3]=(String) msg.get("letter"+i);
 				}
+			}
+			if(tmp[0].equals("list"))
+			{
+				tmp[1] = (String) msg.get("type");
+				if(tmp[1].equals("wait"))
+				{
+					int c1=0;
+					while(msg.containsKey("player"+(c1+1)))
+					{
+						tmp[c1+2] = (String) msg.get("player"+c1);
+						c1++;
+					}
+					res = new String[2+c1];
+					for(int c2=0;c2<c1+2;c2++)
+						res[c2] = tmp[c2];
+				}
+				else
+				{
+					tmp[2] = (String) msg.get("state");
+					int c1=0;
+					while(msg.containsKey("player"+(c1+1)))
+					{
+						tmp[c1+3] = (String) msg.get("player"+c1);
+						c1++;
+					}
+					res = new String[3+c1];
+					for(int c2=0;c2<c1+3;c2++)
+						res[c2] = tmp[c2];
+					
+				}
+			}
+			if(tmp[0].equals("join"))
+			{
+				res = new String[2];
+				res[0] = tmp[0];
+				res[1] = (String) msg.get("table");
+			}
+			if(tmp[0].equals("leave"))
+			{
+				res = new String[2];
+				res[0] = tmp[0];
+				res[1] = (String) msg.get("table");
+			}
+			if(tmp[0].equals("chat"))
+			{
+				res = new String[3];
+				res[0] = tmp[0];
+				res[1] = (String) msg.get("num");
+				res[2] = (String) msg.get("chat");
 			}
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
@@ -140,8 +190,47 @@ public class Trans {
 						response.put("letter"+i,message[i*3]);
 					}
 				}
+				if(message[0].equals("list")) {
+					int len = message.length;
+					if(len>2)
+					{
+						response.put("command", message[0]);
+						response.put("type", message[1]);
+						if(message[1].equals("wait"))
+						{
+							int count = 1;
+							while(count<=len-2)
+							{
+								String tmp = "player"+count;
+								response.put(tmp, message[count+1]);
+							}
+						}
+						else 
+						{
+							response.put("state", message[2]);
+							int count = 1;
+							while(count<=len-3)
+							{
+								String tmp = "player"+count;
+								response.put(tmp, message[count+2]);
+							}
+						}
+					}
+				}
+				if(message[0].equals("join")) {
+					response.put("command", message[0]);
+					response.put("table", message[1]);
+				}
+				if(message[0].equals("leave")) {
+					response.put("command", message[0]);
+					response.put("table", message[1]);
+				}
+				if(message[0].equals("chat")) {
+					response.put("command", message[0]);
+					response.put("num", message[1]);
+					response.put("chat", message[2]);
+				}
 			}
-			
 			out.writeUTF(response.toJSONString());
 			out.flush();
 		} catch (IOException e) {
