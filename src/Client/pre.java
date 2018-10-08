@@ -45,6 +45,9 @@ public class pre {
 	private int isReady=0;
 	public int myId;
 	public static midGUI mid;
+	private String[] tableState;
+	private String[][] seatState;
+	public  MyRender mr;
 
 	/**
 	 * Launch the application.
@@ -236,6 +239,30 @@ public class pre {
 		textField_2.setText("");
 		textField_3.setText("");
 		textField.setText("");
+	}
+	public void addList(String[] p) {
+		mr = new MyRender(p);
+	}
+	
+	public void addInfo(String state,String[] a) {
+		if(tableState == null)
+		{
+			tableState = new String[2];
+			seatState = new String[2][4];
+			tableState[0] = state;
+			for(int i=0;i<a.length;i++)
+			{
+				seatState[0][i] = a[i];
+			}
+		}
+		else 
+		{
+			tableState[1] = state;
+			for(int i=0;i<a.length;i++)
+			{
+				seatState[1][i] = a[i];
+			}
+		}
 	}
 	
 //	public void ready() {

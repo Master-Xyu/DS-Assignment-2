@@ -60,11 +60,11 @@ class MyRender extends AbstractCellEditor implements TableCellRenderer,ActionLis
     		if(button.equals(aa[i])&&aa[i].isEnabled())
     		{
     			System.out.println(i);
-    			pre.window.mid.mr.setRender(i);
-    			pre.window.mid.Tplayer.getColumnModel().getColumn(0).setCellEditor(pre.window.mid.mr);//���ñ༭��
-    			pre.window.mid.Tplayer.getColumnModel().getColumn(0).setCellRenderer(pre.window.mid.mr);
-    			pre.window.mid.Tplayer.getColumnModel().getColumn(1).setCellEditor(pre.window.mid.mr);//���ñ༭��
-    			pre.window.mid.Tplayer.getColumnModel().getColumn(1).setCellRenderer(pre.window.mid.mr);
+    			pre.window.mr.setRender(i);
+    			pre.window.mid.Tplayer.getColumnModel().getColumn(0).setCellEditor(pre.window.mr);//…Ë÷√±‡º≠∆˜
+    			pre.window.mid.Tplayer.getColumnModel().getColumn(0).setCellRenderer(pre.window.mr);
+    			pre.window.mid.Tplayer.getColumnModel().getColumn(1).setCellEditor(pre.window.mr);//…Ë÷√±‡º≠∆˜
+    			pre.window.mid.Tplayer.getColumnModel().getColumn(1).setCellRenderer(pre.window.mr);
     			pre.window.mid.model.fireTableDataChanged();
     		}
     	} 
