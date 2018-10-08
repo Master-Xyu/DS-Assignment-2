@@ -269,6 +269,13 @@ public class client extends Thread{
 		String[] message= {"chat",""+pre.window.myId, text};
 		Trans.send(out, message);
 	}
+
+
+	public void invite(String text) {
+		String[] message= {"invite",text};
+		Trans.send(out, message);
+		
+	}
 	
 	
 }

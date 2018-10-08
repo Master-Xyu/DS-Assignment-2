@@ -45,6 +45,7 @@ public class pre {
 	private int isReady=0;
 	public int myId;
 	public static midGUI mid;
+	public PlayerTable player;
 
 	/**
 	 * Launch the application.

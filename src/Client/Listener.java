@@ -95,7 +95,7 @@ public class Listener extends Thread{
 			}
 			else if(message[0].equals("chat")) {
 				int num = Integer.parseInt(message[1]);
-				pre.window.mid.chatMsg(num,message[2]);
+				pre.window.gui.chatMsg(num,message[2]);
 				
 			}
 			else if(message[0].equals("letter")) {
@@ -107,6 +107,7 @@ public class Listener extends Thread{
 				String player[] = new String[message.length-2];
 				for(int i=2;i<message.length;i++)
 					player[i-2] = message[i];
+				pre.window.player = new PlayerTable(player);
 				pre.window.mid.addList(player);
 			}
 			else if(message[0].equals("list") && !message[1].equals("wait")) {

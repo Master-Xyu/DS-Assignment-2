@@ -101,7 +101,6 @@ public class clientGUI implements MouseListener{
 		chatText.setForeground(Color.black);
 		chatText.setOpaque(true);
 		JLabel chatIcon = new JLabel("Chat Room",JLabel.CENTER);
-		chatIcon.setEnabled(false);
 		chatText.setForeground(Color.black);
 		chatText.setOpaque(true);
 		submitChat = new JButton("Submit");
@@ -495,6 +494,10 @@ public class clientGUI implements MouseListener{
 			textArea.append(chatText.getText()+"\n");
 			chatText.setText("");
 		}
+	}
+	public void chatMsg(int num,String message) {
+		pre.myclient.getScore();
+		textArea.append("player "+num+":"+message+"\n");
 	}
 	public void myTurn() {
 		System.out.println(text1.getText());
