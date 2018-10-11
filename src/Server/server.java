@@ -21,36 +21,40 @@ public class server {
 				break;
 		}
 		ServerSocket server = null;
-		ExecutorService es = Executors.newFixedThreadPool(10);
-		ArrayList<Future<Boolean>> fList = new ArrayList<Future<Boolean>>();
-		ArrayList<Task> tList = new ArrayList<Task>();
-		int clientID = 0;
-		GameThread gt = new GameThread(fList, tList, sw);
-		gt.start();
+		ExecutorService es = Executors.newFixedThreadPool(30);
+		ArrayList<Future<Boolean>> fList1 = new ArrayList<Future<Boolean>>();
+		ArrayList<Future<Boolean>> fList2 = new ArrayList<Future<Boolean>>();
+		ArrayList<Future<Boolean>> waitF = new ArrayList<Future<Boolean>>();
+		ArrayList<Task> tList1 = new ArrayList<Task>();
+		ArrayList<Task> tList2 = new ArrayList<Task>();
+		ArrayList<Task> waitT = new ArrayList<Task>();
+		
+		WaitingThread wThread = new WaitingThread(es, waitF, waitT, sw);
+		GameThread gt1 = new GameThread(fList1, tList1, sw, wThread);
+		GameThread gt2 = new GameThread(fList2, tList2, sw, wThread);
+		wThread.setTable(gt1, gt2);
+		sw.setWt(wThread);
+		
+		gt1.start();
+		gt2.start();
 		try {
 			server = new ServerSocket(port);
-			CheckThread ct = new CheckThread(fList, gt, tList, server, es, sw);
+			CheckThread ct = new CheckThread(server, sw, es);
+			ct.addWait(waitF, wThread, waitT);
 			ct.start();
 			sw.appendMessage("Server is online.\n");
 			while(true) {
-				if(gt.on == true) {					
-					for(int i=0; i < tList.size(); i++) {					
-						if(fList.get(i).isDone() == true) {
-							gt.disconnect(i);
-							fList.remove(i);
-							tList.remove(i);
-							for(int j=0; j < tList.size(); j++) {
-								tList.get(j).disconnect();
-							}
-							gt = new GameThread(fList, tList, sw);
-							ct.setGameThread(gt);
-							break;
-						}					
-					}
+				if(gt1.isAlive() == false) {
+					String[] message = new String[3];
+					for(int i=0; i<gt1.tList.size();i++)
+						gt1.tList.get(i).disconnect(gt1.disconnectedUser);
+					gt1.start();;
 				}
-				if(!gt.isAlive()) {
-					gt = new GameThread(fList, tList, sw);
-					ct.setGameThread(gt);
+				if(gt2.isAlive() == false) {
+					String[] message = new String[3];
+					for(int i=0; i<gt2.tList.size();i++)
+						gt2.tList.get(i).disconnect(gt1.disconnectedUser);
+					gt2.start();;
 				}
 			}
 		} catch (IOException e) {

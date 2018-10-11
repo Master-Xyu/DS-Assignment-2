@@ -1,22 +1,25 @@
 package Server;
 
 import java.util.ArrayList;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
 
 import javax.annotation.processing.RoundEnvironment;
 import javax.xml.ws.handler.MessageContext;
 
 public class GameThread extends Thread {
-	private ArrayList<Future<Boolean>> fList;
-	private ArrayList<Task> tList;
+	public ArrayList<Future<Boolean>> fList;
+	public ArrayList<Task> tList;
 	public Boolean on = false;
+	public WaitingThread wt;
 	private Boolean[] pass;
 	private ServerWindow sw;
-	
-	public GameThread(ArrayList<Future<Boolean>> fList, ArrayList<Task> tList, ServerWindow sw) {
+	public String disconnectedUser;
+	public GameThread(ArrayList<Future<Boolean>> fList, ArrayList<Task> tList, ServerWindow sw, WaitingThread wt) {
 		this.fList = fList;
 		this.tList = tList;
 		this.sw = sw;
+		this.wt = wt;
 	}
 	
 	public void run() {
@@ -44,7 +47,8 @@ public class GameThread extends Thread {
 		sw.appendMessage("Game starts!\n");
 		
 		game();	
-		on = false;
+		for(int i=0; i< tList.size();i++)
+			tList.get(i).ready = false;
 	}
 	
 	public void game(){
@@ -134,9 +138,10 @@ public class GameThread extends Thread {
 		}
 	}
 	
-	public void disconnect(int i) {
-		sw.appendMessage(tList.get(i).getUsername() + " disconnected!\n");
+	public void disconnect(Task t) {
+		sw.appendMessage(t.getUsername() + " disconnected!\n");
 		sw.appendMessage("Game over!\n");
+		this.disconnectedUser = t.getUsername();
 		this.interrupt();
 	}
 	
@@ -151,5 +156,10 @@ public class GameThread extends Thread {
 			}
 		}
 		return message;
+	}
+	
+	public void leave(Task t, Future<Boolean> f) {
+		tList.remove(t);
+		fList.remove(f);
 	}
 }

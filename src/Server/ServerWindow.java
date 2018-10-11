@@ -27,6 +27,7 @@ public class ServerWindow {
 	private JTextField textField;
 	private JTextPane textPane;
 	private JScrollPane scrollPane;
+	private WaitingThread wt;
 	/**
 	 * Create the application.
 	 */
@@ -73,6 +74,7 @@ public class ServerWindow {
 		JButton btnNewButton = new JButton("Stop server");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				wt.serverDown();
 				System.exit(0);
 			}
 		});
@@ -98,5 +100,8 @@ public class ServerWindow {
 		textPane.setText(textPane.getText() + m);
 		JScrollBar sBar = scrollPane.getVerticalScrollBar();
 		sBar.setValue(sBar.getMaximum());
+	}
+	public void setWt(WaitingThread wThread) {
+		this.wt = wThread;
 	}
 }

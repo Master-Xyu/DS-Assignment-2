@@ -9,22 +9,17 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
 
 public class CheckThread extends Thread {
-	ArrayList<Future<Boolean>> fList;
-	GameThread gt;
-	ArrayList<Task> tList;
+	WaitingThread wt;
+	ArrayList<Task> waitT;
+	ArrayList<Future<Boolean>> waitF;
 	ServerSocket server;
 	ExecutorService es;
 	ServerWindow sw;
 	
-	public CheckThread(ArrayList<Future<Boolean>> fList, GameThread gt,
-			ArrayList<Task> tList, ServerSocket server,
-			ExecutorService es, ServerWindow sw){
-		this.fList = fList;
-		this.gt = gt;
-		this.tList = tList;
+	public CheckThread(ServerSocket server, ServerWindow sw, ExecutorService es){		
 		this.server = server;
-		this.es = es;
 		this.sw = sw;
+		this.es = es;
 	}
 	
 	public void run() {
@@ -32,22 +27,23 @@ public class CheckThread extends Thread {
 			Socket client;
 			try {
 				client = server.accept();
-				if(gt.on == true) {					
+				if(waitT.size() == 10) {					
+					/**To do**/
 					String[] message= {"alert","Game is on!"};
 					Trans.send(new DataOutputStream(client.getOutputStream()), message);
 					continue;
-				}
-				Task t = new Task(client, sw);
-				tList.add(t);
+				}		
+				wt.join(client);
 				
-				Future<Boolean> f = es.submit(t);
-				fList.add(f);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		}
 	}
-	public void setGameThread(GameThread gt) {
-		this.gt = gt;
+	public void addWait(ArrayList<Future<Boolean>> fList, WaitingThread wt,
+			ArrayList<Task> tList) {
+		this.waitT = tList;
+		this.wt = wt;
+		this.waitF = fList;
 	}
 }
