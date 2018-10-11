@@ -88,6 +88,11 @@ public class Listener extends Thread{
 				isReady = false;
 				
 			}
+			else if(message[0].equals("alert") && message[1].equals("duplicated username")) {
+				
+				pre.window.invalidName();
+				
+			}
 			else if(message[0].equals("word")) {
 				
 				resolveWord(message);

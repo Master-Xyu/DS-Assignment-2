@@ -264,6 +264,9 @@ public class pre {
 			}
 		}
 	}
+	public void invalidName() {
+		JOptionPane.showMessageDialog(null,"Name exist! please change your name!");
+	}
 	
 //	public void ready() {
 //		textField_1.setText("Wait for the game to start!");
