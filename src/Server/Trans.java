@@ -203,6 +203,7 @@ public class Trans {
 							{
 								String tmp = "player"+count;
 								response.put(tmp, message[count+1]);
+								count++;
 							}
 						}
 						else 
@@ -213,6 +214,7 @@ public class Trans {
 							{
 								String tmp = "player"+count;
 								response.put(tmp, message[count+2]);
+								count++;
 							}
 						}
 					}
