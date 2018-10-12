@@ -76,13 +76,13 @@ public class WaitingThread extends Thread {
 	}
 	
 	public synchronized void refresh() {
-		String[] message1 = new String[30];
+		String[] message1 = new String[2+waitT.size()];
 		message1[0] = "list";
 		message1[1] = "wait";
 		for(int i = 0; i < waitT.size(); i++)
 			message1[2+i] = waitT.get(i).getUsername();
 		
-		String[] message2 = new String[7];
+		String[] message2 = new String[3 + table1.tList.size()];
 		message2[0] = "list";
 		message2[1] = "table1";
 		if(table1.on == true)
@@ -92,9 +92,9 @@ public class WaitingThread extends Thread {
 		for(int i = 0; i < table1.tList.size(); i++)
 			message2[3+i] = table1.tList.get(i).getUsername();
 		
-		String[] message3 = new String[7];
+		String[] message3 = new String[3 + table2.tList.size()];
 		message3[0] = "list";
-		message3[1] = "table1";
+		message3[1] = "table2";
 		if(table2.on == true)
 			message3[3] = "on";
 		else
