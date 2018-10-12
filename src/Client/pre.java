@@ -40,6 +40,7 @@ public class pre {
 	public static client myclient;
 	private JTextField textField_2;
 	private JTextField textField_3;
+	private JButton btnConnect;
 	public static pre window;
 	public static clientGUI gui;
 	private int isReady=0;
@@ -167,7 +168,7 @@ public class pre {
 		frame.getContentPane().add(textField, gbc_textField);
 		textField.setColumns(10);
 		
-		JButton btnConnect = new JButton("CONNECT");
+		btnConnect = new JButton("CONNECT");
 		btnConnect.setFont(new Font("Arial", Font.PLAIN, 25));
 		GridBagConstraints gbc_btnConnect = new GridBagConstraints();
 		gbc_btnConnect.insets = new Insets(0, 0, 5, 5);
@@ -196,9 +197,7 @@ public class pre {
 							int portnum = Integer.parseInt(textField_3.getText());
 							myclient = new client(address,portnum);
 							String state = myclient.connect(textField.getText());
-							if(state.equals("Ready required!")) {
-								enterGame();
-							}
+							btnConnect.setEnabled(false);
 						}
 					}
 				}
@@ -266,6 +265,7 @@ public class pre {
 	}
 	public void invalidName() {
 		JOptionPane.showMessageDialog(null,"Name exist! please change your name!");
+		btnConnect.setEnabled(true);
 	}
 	
 //	public void ready() {
