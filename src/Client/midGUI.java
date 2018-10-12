@@ -26,30 +26,16 @@ public class midGUI implements MouseListener {
 	private JFrame frame;
 	private Container Cplayer = new Container();
 	private Container Ctable = new Container();
+	private Container Cmenu = new Container();
 	private Container[] Ct = new Container[2];
 	private JButton[][] seat = new JButton[2][4];
+	private JButton btnReady;
+	private JButton btnLeave;
+	private JButton btnExit;
 	private JLabel[] img = new JLabel[4];
 	public  JTable Tplayer;
 	public  DefaultTableModel model;
 	private JScrollPane js;
-	
-	
-
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					midGUI window = new midGUI();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-				
-			}
-		});
-		
-	}
-	
 	
 
 	public midGUI() {
@@ -59,11 +45,12 @@ public class midGUI implements MouseListener {
 
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 1000, 1000);
+		frame.setBounds(100, 100, 927, 1265);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(new BorderLayout(10,10));
 		showPlayer();
 		showTable();
+		showMenu();
 
 	}
 
@@ -168,6 +155,20 @@ public class midGUI implements MouseListener {
 
 		
 	}
+	
+	private void showMenu() {
+		Cmenu.setLayout(new GridLayout(1,3,13,13)) ;
+		btnReady = new JButton("Ready");
+		btnReady.setEnabled(false);
+		btnLeave = new JButton("Leave");
+		btnLeave.setEnabled(false);
+		btnExit = new JButton("Exit");
+		Cmenu.add(btnReady);
+		Cmenu.add(btnLeave);
+		Cmenu.add(btnExit);
+		Cplayer.add(Cmenu,BorderLayout.SOUTH);
+		Cplayer.setPreferredSize(new Dimension(300, 50));
+	}
 
 
 
@@ -215,6 +216,24 @@ public class midGUI implements MouseListener {
 	@Override
 	public void mouseExited(MouseEvent e) {
 		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	public void updateList(boolean[][] state, String[] player) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	public void updateTable(String state, String table, String[] player) {
+		int tnum = Integer.parseInt(table.substring(4));
+		for(int i=0;i<4;i++)
+		{
+			
+		}
 		
 	}
 	

@@ -117,7 +117,10 @@ public class Listener extends Thread{
 				String player[] = new String[message.length-2];
 				for(int i=2;i<message.length;i++)
 					player[i-2] = message[i];
-				pre.window.addList(player);
+				if(pre.window.isEnter)
+					pre.window.mid.updateList(state,player);
+				else
+					pre.window.addList(player);
 			}
 			else if(message[0].equals("list") && !message[1].equals("wait")) {
 				String table = message[1];
@@ -125,7 +128,10 @@ public class Listener extends Thread{
 				String player[] = new String[message.length-3];
 				for(int i=3;i<message.length;i++)
 					player[i-3] = message[i];
-				pre.window.addInfo(state,player);
+				if(pre.window.isEnter)
+					pre.window.mid.updateTable(state,table,player);
+				else
+					pre.window.addInfo(state,player);
 			}
 			else if(message[0].equals("score") && message[2].equals("plus")) {
 				

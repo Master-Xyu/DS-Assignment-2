@@ -51,6 +51,7 @@ public class pre {
 	public String[] tableState;
 	public String[][] seatState;
 	public  MyRender mr;
+	public  boolean isEnter=false;
 
 	/**
 	 * Launch the application.
@@ -241,6 +242,7 @@ public class pre {
 		textField_3.setText("");
 		textField.setText("");
 		btnConnect.setEnabled(true);
+		isEnter = false;
 		flag=0;
 	}
 	public void addList(String[] p) {
@@ -274,6 +276,7 @@ public class pre {
 			{
 				frame.setVisible(false);
 				window.mid = new midGUI();
+				isEnter = true;
 			}
 		}
 	}
