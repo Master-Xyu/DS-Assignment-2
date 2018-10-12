@@ -93,6 +93,11 @@ public class Listener extends Thread{
 				pre.window.invalidName();
 				
 			}
+			else if(message[0].equals("alert") && message[1].equals("connected")) {
+				
+				pre.window.enterGame();
+				
+			}
 			else if(message[0].equals("word")) {
 				
 				resolveWord(message);
