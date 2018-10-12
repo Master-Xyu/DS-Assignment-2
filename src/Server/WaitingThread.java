@@ -60,6 +60,8 @@ public class WaitingThread extends Thread {
 		}
 		try {
 			int n = usernames.indexOf(t.getUsername());
+			if(n == -1)
+				throw new Exception();
 			String[] message= {"alert","duplicated username"};
 			Trans.send(new DataOutputStream(client.getOutputStream()), message);
 			return;
