@@ -229,10 +229,21 @@ public class midGUI implements MouseListener {
 
 
 	public void updateTable(String state, String table, String[] player) {
+		int len = player.length;
 		int tnum = Integer.parseInt(table.substring(4));
-		for(int i=0;i<4;i++)
+		int loc=0;
+		while(len>0)
 		{
-			
+			seat[tnum][loc].setIcon(null);
+			seat[tnum][loc].setText(player[len]);
+			len++;
+			loc++;
+		}
+		for(int k=loc;k<4;k++)
+		{
+			String imgPath = "img/p"+(k-1)+".ng";
+			ImageIcon pic=new ImageIcon(imgPath);
+			seat[tnum][k].setIcon(pic);
 		}
 		
 	}

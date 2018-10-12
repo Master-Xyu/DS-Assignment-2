@@ -233,7 +233,7 @@ public class clientGUI implements MouseListener{
 		z.setOpaque(true);
 		z.setBorderPainted(true); 
 		z.addMouseListener(this);
-		op[2] = z;
+		op[2] = z; 
 		container4.add(z);
 		
 	}

@@ -13,8 +13,12 @@ import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.ActionEvent;
 
-public class test {
+public class test implements MouseListener {
 
 	private JFrame frame;
 	private Container Cplayer = new Container();
@@ -26,6 +30,7 @@ public class test {
 	public  DefaultTableModel model;
 	private JScrollPane js;
 	public  MyRender mr;
+	public JButton btnTest;
 
 	/**
 	 * Launch the application.
@@ -59,11 +64,19 @@ public class test {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(new BorderLayout(10,10));
 		showTable();
+		showMenu();
 	}
 	
+	private void showMenu() {
+		btnTest=new JButton("test");
+		btnTest.addMouseListener(this);
+		Ctable.add(btnTest);
+		
+	}
+
 	private void showTable() {
 		frame.getContentPane().add(Ctable,BorderLayout.CENTER);
-		Ctable.setLayout(new GridLayout(2,2,13,13)) ;              
+		Ctable.setLayout(new GridLayout(3,1,13,13)) ;              
 		for(int i=0;i<2;i++)        
 		{   Ct[i] = new Container(); 
 			Ct[i].setLayout(new BorderLayout()) ;
@@ -110,6 +123,41 @@ public class test {
 			Ctable.add(Ct[i]) ;        
 		}        
 
+		
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		JButton button = (JButton)e.getSource();
+		if(button.equals(btnTest))
+		{
+			System.out.println("asdada");
+			seat[0][0].setIcon(null);
+			seat[0][0].setText("asdadad");
+		}
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
 		
 	}
 
