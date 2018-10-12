@@ -16,7 +16,7 @@ class MyRender extends AbstractCellEditor implements TableCellRenderer,ActionLis
     private static final long serialVersionUID = 1L;
     private JLabel[] name;
     private JButton[] aa;
-    private int num;
+    public int num;
     public MyRender(String[] names){
     	num = names.length;
     	aa = new JButton[num];
@@ -61,9 +61,9 @@ class MyRender extends AbstractCellEditor implements TableCellRenderer,ActionLis
     		{
     			System.out.println(i);
     			pre.window.mr.setRender(i);
-    			pre.window.mid.Tplayer.getColumnModel().getColumn(0).setCellEditor(pre.window.mr);//…Ë÷√±‡º≠∆˜
+    			pre.window.mid.Tplayer.getColumnModel().getColumn(0).setCellEditor(pre.window.mr);
     			pre.window.mid.Tplayer.getColumnModel().getColumn(0).setCellRenderer(pre.window.mr);
-    			pre.window.mid.Tplayer.getColumnModel().getColumn(1).setCellEditor(pre.window.mr);//…Ë÷√±‡º≠∆˜
+    			pre.window.mid.Tplayer.getColumnModel().getColumn(1).setCellEditor(pre.window.mr);
     			pre.window.mid.Tplayer.getColumnModel().getColumn(1).setCellRenderer(pre.window.mr);
     			pre.window.mid.model.fireTableDataChanged();
     		}

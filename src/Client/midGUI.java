@@ -9,20 +9,25 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
-public class midGUI {
+public class midGUI implements MouseListener {
 
 	private JFrame frame;
 	private Container Cplayer = new Container();
 	private Container Ctable = new Container();
-	private Container[] Ct = new Container[4];
-	private JButton[][] seat = new JButton[4][4];
+	private Container[] Ct = new Container[2];
+	private JButton[][] seat = new JButton[2][4];
 	private JLabel[] img = new JLabel[4];
 	public  JTable Tplayer;
 	public  DefaultTableModel model;
@@ -86,26 +91,54 @@ public class midGUI {
 			t4.setPreferredSize(new Dimension(100,100));
 			t5.setPreferredSize(new Dimension(100,100));
 			t6.setPreferredSize(new Dimension(100,100));
-			ImageIcon pic1=new ImageIcon("img/p1.png");
-			seat[i][0] = new JButton("",pic1);
+			if(pre.window.seatState[i][0].equals(""))
+			{
+				ImageIcon pic1=new ImageIcon("img/p1.png");
+				seat[i][0] = new JButton("",pic1);
+			}
+			else 
+			{
+				seat[i][0] = new JButton(pre.window.seatState[i][0]);
+			}
 			seat[i][0].setPreferredSize(new Dimension(100, 100));
 			t1.add(seat[i][0], BorderLayout.CENTER);
 			t1.add(t3, BorderLayout.EAST);
 			t1.add(t4, BorderLayout.WEST);
 			Ct[i].add(t1,BorderLayout.NORTH);
-			ImageIcon pic2=new ImageIcon("img/p2.png");
-			seat[i][1] = new JButton("",pic2);
+			if(pre.window.seatState[i][1].equals(""))
+			{
+				ImageIcon pic2=new ImageIcon("img/p2.png");
+				seat[i][1] = new JButton("",pic2);
+			}
+			else 
+			{
+				seat[i][1] = new JButton(pre.window.seatState[i][1]);
+			}
 			seat[i][1].setPreferredSize(new Dimension(100, 100));
 			Ct[i].add(seat[i][1],BorderLayout.EAST);
-			ImageIcon pic3=new ImageIcon("img/p3.png");
-			seat[i][2] = new JButton("",pic3);
+			if(pre.window.seatState[i][2].equals(""))
+			{
+				ImageIcon pic3=new ImageIcon("img/p3.png");
+				seat[i][2] = new JButton("",pic3);
+			}
+			else 
+			{
+				seat[i][2] = new JButton(pre.window.seatState[i][2]);
+			}
 			seat[i][2].setPreferredSize(new Dimension(100, 100));
 			t2.add(seat[i][2], BorderLayout.CENTER);
 			t2.add(t5, BorderLayout.EAST);
 			t2.add(t6, BorderLayout.WEST);
 			Ct[i].add(t2,BorderLayout.SOUTH);
-			ImageIcon pic4=new ImageIcon("img/p4.png");
-			seat[i][3] = new JButton("",pic4);
+			if(pre.window.seatState[i][3].equals(""))
+			{
+				ImageIcon pic4=new ImageIcon("img/p4.png");
+				seat[i][3] = new JButton("",pic4);
+			}
+			else 
+			{
+				seat[i][3] = new JButton(pre.window.seatState[i][3]);
+			}
 			seat[i][3].setPreferredSize(new Dimension(100, 100));
 			Ct[i].add(seat[i][3],BorderLayout.WEST);
 			Ctable.add(Ct[i]) ;        
@@ -123,18 +156,66 @@ public class midGUI {
 		playerLabel.setFont(new Font("Arial", Font.PLAIN, 30));
 		Cplayer.add(playerLabel,BorderLayout.NORTH);
 		String[] coloums = {"Player name:",""};
-		model = new DefaultTableModel(2,2);
+		model = new DefaultTableModel(pre.window.mr.num,2);
 		model.setColumnIdentifiers(coloums);
         Tplayer = new JTable(model);
-        Tplayer.getColumnModel().getColumn(0).setCellEditor(pre.window.mr);//…Ë÷√±‡º≠∆˜
+        Tplayer.getColumnModel().getColumn(0).setCellEditor(pre.window.mr);
         Tplayer.getColumnModel().getColumn(0).setCellRenderer(pre.window.mr);
-        Tplayer.getColumnModel().getColumn(1).setCellEditor(pre.window.mr);//…Ë÷√±‡º≠∆˜
+        Tplayer.getColumnModel().getColumn(1).setCellEditor(pre.window.mr);
         Tplayer.getColumnModel().getColumn(1).setCellRenderer(pre.window.mr);
         js = new JScrollPane(Tplayer);   
         Cplayer.add(js,BorderLayout.CENTER);
 
 		
 	}
-	
 
+
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		JButton button = (JButton)e.getSource();
+		for(int i=0;i<2;i++)
+			for(int j=0;j<4;j++)
+			{
+				if(button.equals(seat[i][j]))
+				{
+					pre.myclient.join("table"+(i+1));
+				}
+			}
+		
+		
+	}
+
+
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	
 }

@@ -83,7 +83,7 @@ public class Trans {
 					int c1=0;
 					while(msg.containsKey("player"+(c1+1)))
 					{
-						tmp[c1+2] = (String) msg.get("player"+c1);
+						tmp[c1+2] = (String) msg.get("player"+(c1+1));
 						c1++;
 					}
 					res = new String[2+c1];

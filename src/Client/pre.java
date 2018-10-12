@@ -35,6 +35,7 @@ public class pre {
     public int height = Toolkit.getDefaultToolkit().getScreenSize().height;
     public int windowsWedth = 600;
     public int windowsHeight = 800;
+    public String myName;
 	public static JFrame frame;
 	private JTextField textField;
 	public static client myclient;
@@ -47,8 +48,8 @@ public class pre {
 	private int isReady=0;
 	public int myId;
 	public static midGUI mid;
-	private String[] tableState;
-	private String[][] seatState;
+	public String[] tableState;
+	public String[][] seatState;
 	public  MyRender mr;
 
 	/**
@@ -197,7 +198,8 @@ public class pre {
 							String address = textField_2.getText();
 							int portnum = Integer.parseInt(textField_3.getText());
 							myclient = new client(address,portnum);
-							String state = myclient.connect(textField.getText());
+							myName = textField.getText();
+							String state = myclient.connect(myName);
 							btnConnect.setEnabled(false);
 						}
 					}
@@ -250,6 +252,11 @@ public class pre {
 		{
 			tableState = new String[2];
 			seatState = new String[2][4];
+			for(int i=0;i<2;i++)
+				for(int j=0;j<4;j++)
+				{
+					seatState[i][j] = "";
+				}
 			tableState[0] = state;
 			for(int i=0;i<a.length;i++)
 			{
