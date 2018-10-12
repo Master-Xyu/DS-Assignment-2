@@ -65,6 +65,8 @@ public class WaitingThread extends Thread {
 			return;
 		}catch(Exception e) {
 			usernames.add(t.getUsername());
+			String[] message= {"alert","connected"};
+			t.output(message);
 		}
 		waitT.add(t);
 		waitF.add(f);
