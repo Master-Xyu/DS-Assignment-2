@@ -238,6 +238,7 @@ public class pre {
 		textField_2.setText("");
 		textField_3.setText("");
 		textField.setText("");
+		btnConnect.setEnabled(true);
 		flag=0;
 	}
 	public void addList(String[] p) {
