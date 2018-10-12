@@ -86,21 +86,21 @@ public class WaitingThread extends Thread {
 		message2[0] = "list";
 		message2[1] = "table1";
 		if(table1.on == true)
-			message2[3] = "on";
+			message2[2] = "on";
 		else
-			message2[3] = "off";
+			message2[2] = "off";
 		for(int i = 0; i < table1.tList.size(); i++)
-			message2[3+i] = table1.tList.get(i).getUsername();
+			message2[2+i] = table1.tList.get(i).getUsername();
 		
 		String[] message3 = new String[3 + table2.tList.size()];
 		message3[0] = "list";
 		message3[1] = "table2";
 		if(table2.on == true)
-			message3[3] = "on";
+			message3[2] = "on";
 		else
-			message3[3] = "off";
+			message3[2] = "off";
 		for(int i = 0; i < table2.tList.size(); i++)
-			message3[3+i] = table2.tList.get(i).getUsername();
+			message3[2+i] = table2.tList.get(i).getUsername();
 		for(int i = 0; i < waitT.size(); i++) {
 			waitT.get(i).output(message1);
 			waitT.get(i).output(message2);
