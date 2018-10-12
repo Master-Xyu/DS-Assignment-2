@@ -41,6 +41,7 @@ public class pre {
 	private JTextField textField_2;
 	private JTextField textField_3;
 	private JButton btnConnect;
+	private int flag=0;
 	public static pre window;
 	public static clientGUI gui;
 	private int isReady=0;
@@ -225,8 +226,7 @@ public class pre {
 	}
 	
 	public void enterGame() {
-		frame.setVisible(false);
-		window.mid = new midGUI();
+		flag=1;
 	}
 
 	public void disconnect() {
@@ -238,6 +238,7 @@ public class pre {
 		textField_2.setText("");
 		textField_3.setText("");
 		textField.setText("");
+		flag=0;
 	}
 	public void addList(String[] p) {
 		mr = new MyRender(p);
@@ -260,6 +261,11 @@ public class pre {
 			for(int i=0;i<a.length;i++)
 			{
 				seatState[1][i] = a[i];
+			}
+			if(flag == 1)
+			{
+				frame.setVisible(false);
+				window.mid = new midGUI();
 			}
 		}
 	}
