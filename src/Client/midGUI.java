@@ -36,7 +36,6 @@ public class midGUI implements MouseListener {
 	public  JTable Tplayer;
 	public  DefaultTableModel model;
 	private JScrollPane js;
-	public int myState = 0;
 	public String myName;
 	
 
@@ -182,8 +181,7 @@ public class midGUI implements MouseListener {
 		btnExit = new JButton("Exit");
 		btnExit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				pre.window.myclient.disconnect();
-				System.exit(0);
+				disconnect();
 			}
 		});
 		Cmenu.add(btnReady);
@@ -249,6 +247,7 @@ public class midGUI implements MouseListener {
 		{
 			if(player[i].equals(myName))
 			{
+				pre.window.myState = 1;
 				btnReady.setText("Ready");
 				btnLeave.setEnabled(false);
 				btnReady.setEnabled(false);
@@ -275,7 +274,7 @@ public class midGUI implements MouseListener {
 			seat[tnum][loc].setText(player[loc]);
 			if(player[loc].equals(myName))
 			{
-				myState = 1;
+				pre.window.myState = 2;
 				btnLeave.setEnabled(true);
 				btnReady.setEnabled(true);
 			}
@@ -305,6 +304,21 @@ public class midGUI implements MouseListener {
 	public void changeReady() {
 		btnReady.setText("Ready");
 	}
+
+	public void ServerDisconnect() {
+		JOptionPane.showMessageDialog(null,"Disconnected with server");
+		frame.dispose();
+		pre.window.frame.setVisible(true);
+		pre.window.initial();
+	}
+	
+	public void disconnect() {
+		frame.dispose();
+		pre.window.myclient.disconnect();
+		pre.window.frame.setVisible(true);
+		pre.window.initial();
+	}
+
 	
 	
 }

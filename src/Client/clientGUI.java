@@ -224,8 +224,7 @@ public class clientGUI implements MouseListener{
 		z.setFont(new Font("Arial", Font.PLAIN, 30));
 		z.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				pre.window.myclient.disconnect();
-				System.exit(0);
+				disconnect();
 			}
 		});
 		z.setMargin(new Insets(0,0,0,0));
@@ -523,10 +522,12 @@ public class clientGUI implements MouseListener{
 		pre.window.myclient.submit();
 	}
 	
-	public void disconnect() {
+	public void serverDisconnect() {
+		JOptionPane.showMessageDialog(null,"Disconnected with server");
 		frame.dispose();
+		pre.window.mid.frame.dispose();
 		pre.window.frame.setVisible(true);
-		pre.window.disconnect();
+		pre.window.initial();
 	}
 	
 	public void gameover() {
@@ -546,6 +547,14 @@ public class clientGUI implements MouseListener{
 		pre.window.mid.changeReady();
 		pre.window.mid.frame.setVisible(true);
 		//pre.window.initial();
+	}
+	
+	public void disconnect() {
+		pre.window.myclient.disconnect();
+		frame.dispose();
+		pre.window.mid.frame.dispose();
+		pre.window.frame.setVisible(true);
+		pre.window.initial();
 	}
 
 

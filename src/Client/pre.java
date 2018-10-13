@@ -51,6 +51,7 @@ public class pre {
 	public String[] tableState;
 	public String[][] seatState;
 	public  MyRender mr;
+	public int myState;
 	public  boolean isEnter=false;
 
 	/**
@@ -75,6 +76,7 @@ public class pre {
 	 * Create the application.
 	 */
 	public pre() {
+		myState = 0;
 		initialize();
 	}
 
@@ -223,6 +225,7 @@ public class pre {
 	}
 	public void startgame(int id) {
 		myId = id;
+		myState = 3;
 		frame.setVisible(false);
 		window.gui = new clientGUI();
 		window.mid.frame.setVisible(false);
@@ -233,18 +236,20 @@ public class pre {
 		flag=1;
 	}
 
-	public void disconnect() {
-		initial();
+//	public void disconnect() {
+//		initial();
+//	}
+	
+	public void serverDisconnect() {
+		
+		
 	}
 	
 
 	public void initial() {
-		textField_2.setText("");
-		textField_3.setText("");
-		textField.setText("");
 		btnConnect.setEnabled(true);
 		isEnter = false;
-		flag=0;
+		myState = 0;
 	}
 	public void addList(String[] p) {
 		mr = new MyRender(p);
