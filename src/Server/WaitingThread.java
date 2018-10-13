@@ -111,16 +111,18 @@ public class WaitingThread extends Thread {
 			waitT.get(i).output(message2);
 			waitT.get(i).output(message3);
 		}
-		for(int i = 0; i < table1.tList.size(); i++) {
-			table1.tList.get(i).output(message1);
-			table1.tList.get(i).output(message2);
-			table1.tList.get(i).output(message3);
-		}
-		for(int i = 0; i < table2.tList.size(); i++) {
-			table2.tList.get(i).output(message1);
-			table2.tList.get(i).output(message2);
-			table2.tList.get(i).output(message3);
-		}
+		if(table1.on == false)
+			for(int i = 0; i < table1.tList.size(); i++) {
+				table1.tList.get(i).output(message1);
+				table1.tList.get(i).output(message2);
+				table1.tList.get(i).output(message3);
+			}
+		if(table2.on == false)
+			for(int i = 0; i < table2.tList.size(); i++) {
+				table2.tList.get(i).output(message1);
+				table2.tList.get(i).output(message2);
+				table2.tList.get(i).output(message3);
+			}
 	}
 	
 	public void userJoin(Task t, Future<Boolean> f) {
