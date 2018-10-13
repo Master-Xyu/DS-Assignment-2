@@ -29,6 +29,20 @@ class MyRender extends AbstractCellEditor implements TableCellRenderer,ActionLis
     	}
     }
     
+    public void update(String[] names) {
+    	name = null;
+    	aa = null;
+    	num = names.length;
+    	aa = new JButton[num];
+    	name = new JLabel[num];
+    	for(int i=0;i<num;i++) {
+    		aa[i] = new JButton("Invite");
+    		name[i] = new JLabel(names[i],JLabel.LEFT);
+    		aa[i].addActionListener(this);
+    		aa[i].setEnabled(false);
+    	}
+    }
+    
     public void setRender(int a) {
     	aa[a].setText("Invited!");
     	aa[a].setEnabled(false);

@@ -225,16 +225,25 @@ public class midGUI implements MouseListener {
 
 
 
-	public void updateList(boolean[][] state, String[] player) {
-		// TODO Auto-generated method stub
-		
+	public void updateList(String[] player) {
+		String[] coloums = {"Player name:",""};
+		model = null;
+		model = new DefaultTableModel(player.length,2);
+		model.setColumnIdentifiers(coloums);
+        Tplayer = new JTable(model);
+        pre.window.mr.update(player);
+        Tplayer.getColumnModel().getColumn(0).setCellEditor(pre.window.mr);
+        Tplayer.getColumnModel().getColumn(0).setCellRenderer(pre.window.mr);
+        Tplayer.getColumnModel().getColumn(1).setCellEditor(pre.window.mr);
+        Tplayer.getColumnModel().getColumn(1).setCellRenderer(pre.window.mr);
+        pre.window.mid.model.fireTableDataChanged();
 	}
 
 
 
 	public void updateTable(String state, String table, String[] player) {
 		int len = player.length;
-		int tnum = Integer.parseInt(table.substring(4));
+		int tnum = Integer.parseInt(table.substring(5));
 		int loc=0;
 		while(len>0)
 		{

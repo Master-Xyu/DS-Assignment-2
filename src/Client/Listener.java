@@ -118,7 +118,7 @@ public class Listener extends Thread{
 				for(int i=2;i<message.length;i++)
 					player[i-2] = message[i];
 				if(pre.window.isEnter)
-					pre.window.mid.updateList(state,player);
+					pre.window.mid.updateList(player);
 				else
 					pre.window.addList(player);
 			}
