@@ -225,6 +225,7 @@ public class pre {
 		myId = id;
 		frame.setVisible(false);
 		window.gui = new clientGUI();
+		window.mid.frame.setVisible(false);
 		
 	}
 	

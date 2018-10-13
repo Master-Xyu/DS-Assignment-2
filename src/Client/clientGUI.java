@@ -491,7 +491,7 @@ public class clientGUI implements MouseListener{
 		if(chatText.getText()!="")
 		{
 			pre.window.myclient.chat(chatText.getText());
-			textArea.append(chatText.getText()+"\n");
+			//textArea.append(chatText.getText()+"\n");
 			chatText.setText("");
 		}
 	}

@@ -23,7 +23,7 @@ import java.awt.event.MouseListener;
 
 public class midGUI implements MouseListener {
 
-	private JFrame frame;
+	public JFrame frame;
 	private Container Cplayer = new Container();
 	private Container Ctable = new Container();
 	private Container Cmenu = new Container();
