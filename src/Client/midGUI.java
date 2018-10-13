@@ -301,5 +301,10 @@ public class midGUI implements MouseListener {
 		pre.window.myclient.unready();
 		btnReady.setText("ready");
 	}
+
+	public void changeReady() {
+		btnReady.setText("Ready");
+	}
+	
 	
 }

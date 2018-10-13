@@ -543,6 +543,7 @@ public class clientGUI implements MouseListener{
 		else
 			pre.window.myclient.unconti();
 		frame.dispose();
+		pre.window.mid.changeReady();
 		pre.window.mid.frame.setVisible(true);
 		//pre.window.initial();
 	}
