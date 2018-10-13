@@ -249,6 +249,7 @@ public class midGUI implements MouseListener {
 		{
 			if(player[i].equals(myName))
 			{
+				btnReady.setText("Ready");
 				btnLeave.setEnabled(false);
 				btnReady.setEnabled(false);
 				break;
