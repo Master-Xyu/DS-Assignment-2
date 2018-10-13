@@ -530,7 +530,7 @@ public class clientGUI implements MouseListener{
 	public void gameover() {
 		String res[]=pre.window.myclient.getScore().getWinner();
 		int num=res.length/2;
-		String result="GameOver!\nScore:"+res[1]+"\n Player:";
+		String result="GameOver!\nScore:"+res[1]+"\n Winner:";
 		for(int i=0;i<num;i++)
 		{
 			result=result+res[i*2]+" ";
