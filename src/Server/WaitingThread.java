@@ -91,7 +91,7 @@ public class WaitingThread extends Thread {
 		else
 			message2[2] = "off";
 		for(int i = 0; i < table1.tList.size(); i++)
-			message2[2+i] = table1.tList.get(i).getUsername();
+			message2[3+i] = table1.tList.get(i).getUsername();
 		
 		String[] message3 = new String[3 + table2.tList.size()];
 		message3[0] = "list";
@@ -101,7 +101,7 @@ public class WaitingThread extends Thread {
 		else
 			message3[2] = "off";
 		for(int i = 0; i < table2.tList.size(); i++)
-			message3[2+i] = table2.tList.get(i).getUsername();
+			message3[3+i] = table2.tList.get(i).getUsername();
 		for(int i = 0; i < waitT.size(); i++) {
 			waitT.get(i).output(message1);
 			waitT.get(i).output(message2);
