@@ -41,6 +41,11 @@ class MyRender extends AbstractCellEditor implements TableCellRenderer,ActionLis
     		aa[i].addActionListener(this);
     		aa[i].setEnabled(false);
     	}
+    	pre.window.mid.Tplayer.getColumnModel().getColumn(0).setCellEditor(pre.window.mr);
+		pre.window.mid.Tplayer.getColumnModel().getColumn(0).setCellRenderer(pre.window.mr);
+		pre.window.mid.Tplayer.getColumnModel().getColumn(1).setCellEditor(pre.window.mr);
+		pre.window.mid.Tplayer.getColumnModel().getColumn(1).setCellRenderer(pre.window.mr);
+		pre.window.mid.model.fireTableDataChanged();
     }
     
     public void setRender(int a) {

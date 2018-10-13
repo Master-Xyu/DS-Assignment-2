@@ -240,7 +240,7 @@ public class midGUI implements MouseListener {
 
 
 	public void updateList(String[] player) {
-		for(int i=0;i<player.hashCode();i++)
+		for(int i=0;i<player.length;i++)
 		{
 			if(player[i].equals(myName))
 			{
@@ -249,16 +249,11 @@ public class midGUI implements MouseListener {
 			}
 		}
 		String[] coloums = {"Player name:",""};
-		model = null;
-		Tplayer=null;
+		model.getDataVector().removeAllElements();
 		model = new DefaultTableModel(player.length,2);
 		model.setColumnIdentifiers(coloums);
+        Tplayer.setModel(model);
         pre.window.mr.update(player);
-        Tplayer.getColumnModel().getColumn(0).setCellEditor(pre.window.mr);
-        Tplayer.getColumnModel().getColumn(0).setCellRenderer(pre.window.mr);
-        Tplayer.getColumnModel().getColumn(1).setCellEditor(pre.window.mr);
-        Tplayer.getColumnModel().getColumn(1).setCellRenderer(pre.window.mr);
-        pre.window.mid.model.fireTableDataChanged();
 	}
 
 
