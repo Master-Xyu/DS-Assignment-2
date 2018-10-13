@@ -36,11 +36,14 @@ public class midGUI implements MouseListener {
 	public  JTable Tplayer;
 	public  DefaultTableModel model;
 	private JScrollPane js;
+	public int myState = 0;
+	public String myName;
 	
 
 	public midGUI() {
 		initialize();
 		frame.setVisible(true);
+		myName = pre.window.myName;
 	}
 
 	private void initialize() {
@@ -237,11 +240,19 @@ public class midGUI implements MouseListener {
 
 
 	public void updateList(String[] player) {
+		for(int i=0;i<player.hashCode();i++)
+		{
+			if(player[i].equals(myName))
+			{
+				btnLeave.setEnabled(false);
+				break;
+			}
+		}
 		String[] coloums = {"Player name:",""};
 		model = null;
+		Tplayer=null;
 		model = new DefaultTableModel(player.length,2);
 		model.setColumnIdentifiers(coloums);
-        Tplayer = new JTable(model);
         pre.window.mr.update(player);
         Tplayer.getColumnModel().getColumn(0).setCellEditor(pre.window.mr);
         Tplayer.getColumnModel().getColumn(0).setCellRenderer(pre.window.mr);
@@ -260,6 +271,12 @@ public class midGUI implements MouseListener {
 		{
 			seat[tnum][loc].setIcon(null);
 			seat[tnum][loc].setText(player[loc]);
+			if(player[loc].equals(myName))
+			{
+				myState = 1;
+				btnLeave.setEnabled(true);
+			}
+				
 			len--;
 			loc++;
 		}
