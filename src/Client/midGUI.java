@@ -166,6 +166,11 @@ public class midGUI implements MouseListener {
 	private void showMenu() {
 		Cmenu.setLayout(new GridLayout(1,3,13,13)) ;
 		btnReady = new JButton("Ready");
+		btnReady.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ready();
+			}
+		});
 		btnReady.setEnabled(false);
 		btnLeave = new JButton("Leave");
 		btnLeave.addActionListener(new ActionListener() {
@@ -245,6 +250,7 @@ public class midGUI implements MouseListener {
 			if(player[i].equals(myName))
 			{
 				btnLeave.setEnabled(false);
+				btnReady.setEnabled(false);
 				break;
 			}
 		}
@@ -270,6 +276,7 @@ public class midGUI implements MouseListener {
 			{
 				myState = 1;
 				btnLeave.setEnabled(true);
+				btnReady.setEnabled(true);
 			}
 				
 			len--;
@@ -282,6 +289,16 @@ public class midGUI implements MouseListener {
 			seat[tnum][k].setIcon(pic);
 		}
 		
+	}
+	
+	public void ready() {
+		pre.window.myclient.ready();
+		btnReady.setText("Unready");
+	}
+	
+	public void unready() {
+		pre.window.myclient.unready();
+		btnReady.setText("ready");
 	}
 	
 }

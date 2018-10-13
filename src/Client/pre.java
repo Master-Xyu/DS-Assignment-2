@@ -285,13 +285,4 @@ public class pre {
 		btnConnect.setEnabled(true);
 	}
 	
-//	public void ready() {
-//		textField_1.setText("Wait for the game to start!");
-//		String state = myclient.ready();
-//		if(state.equals("online")) {
-//			textField_1.setText("Ready!");
-//			btnReady.setEnabled(false);
-//			isReady=1;
-//		}
-//	}
 }

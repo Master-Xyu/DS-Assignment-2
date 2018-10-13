@@ -193,10 +193,9 @@ public class client extends Thread{
 		
 	}
 	
-	public String ready() {
+	public void ready() {
 		String[] message= {"alert", "ready"};
 		Trans.send(out, message);
-		return "online";
 	}
 	
 	/*
@@ -275,6 +274,12 @@ public class client extends Thread{
 		String[] message= {"invite",text};
 		Trans.send(out, message);
 		
+	}
+
+
+	public void unready() {
+		String[] message= {"alert", "unready"};
+		Trans.send(out, message);
 	}
 	
 	
