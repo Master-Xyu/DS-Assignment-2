@@ -134,6 +134,13 @@ public class Task implements Callable<Boolean> {
 				gt.groupSend(100, message);
 				continue;
 			}
+			else if(message[0].equals("invite")) {
+				for(int i=0; i<wt.waitT.size(); i++) 
+					if(wt.waitT.get(i).getUsername().equals(message[2])) {
+						wt.waitT.get(i).output(message);
+					}
+				continue;
+			}
 			inMessage = new String[message.length];
 			for(int i = 0; i< message.length; i++)
 				inMessage[i]= new String(message[i]);
