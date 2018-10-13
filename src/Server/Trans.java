@@ -37,6 +37,13 @@ public class Trans {
 						res[i+3] = (String) msg.get(o);
 					}
 				}
+				else if(tmp[1].equals("disconnected"))
+				{
+					res=new String[3];
+					res[0] = (String) msg.get("command");
+					res[1] = (String) msg.get("content");
+					res[2] = (String) msg.get("user");
+				}
 				else {
 					res = new String[2];
 					res[0] = (String) msg.get("command");
@@ -148,7 +155,6 @@ public class Trans {
 					response.put("content",message[1]);
 					if(message[1].equals("start"))
 					{
-						response.put("content",message[1]);
 						response.put("number",message[2]);
 						response.put("num",message[3]);
 						for(int i=1;i<=message.length-4;i++)
@@ -156,6 +162,10 @@ public class Trans {
 							String o=i+"";
 							response.put(o,message[i+3]);
 						}
+					}
+					if(message[1].equals("disconnected"))
+					{
+						response.put("user",message[2]);
 					}
 				}
 				if(message[0].equals("turn")) {
