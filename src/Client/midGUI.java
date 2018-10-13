@@ -307,9 +307,7 @@ public class midGUI implements MouseListener {
 
 	public void ServerDisconnect() {
 		JOptionPane.showMessageDialog(null,"Disconnected with server");
-		frame.dispose();
-		pre.window.frame.setVisible(true);
-		pre.window.initial();
+		System.exit(0);
 	}
 	
 	public void disconnect() {

@@ -524,10 +524,7 @@ public class clientGUI implements MouseListener{
 	
 	public void serverDisconnect() {
 		JOptionPane.showMessageDialog(null,"Disconnected with server");
-		frame.dispose();
-		pre.window.mid.frame.dispose();
-		pre.window.frame.setVisible(true);
-		pre.window.initial();
+		System.exit(0);
 	}
 	
 	public void gameover() {
