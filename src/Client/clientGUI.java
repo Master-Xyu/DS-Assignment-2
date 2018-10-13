@@ -131,7 +131,7 @@ public class clientGUI implements MouseListener{
 	
 
 	private void showInfo() {
-		scoreBoard b = pre.myclient.getScore();
+		scoreBoard b = pre.window.myclient.getScore();
 		int num = b.getNumber();
 		score = new JButton[num];
 		String[] players = b.getPlayer();
@@ -275,7 +275,7 @@ public class clientGUI implements MouseListener{
 					set.setDy(ty);
 					set.setLetter(wordKey[i]);
 					System.out.println("("+tx+","+ty+")"+"->"+"wordKey[i]");
-					pre.myclient.submitLetter(set);
+					pre.window.myclient.submitLetter(set);
 					clearChar();
 					isDone=2;
 					return;
@@ -426,13 +426,13 @@ public class clientGUI implements MouseListener{
 		{
 			for(int i=0;i<number;i++)
 				border[loc.get(i).getDx()][loc.get(i).getDy()].setBackground(Color.WHITE);
-			pre.myclient.vote("yes");
+			pre.window.myclient.vote("yes");
 		}
 		else 
 		{
 			for(int i=0;i<number;i++)
 				border[loc.get(i).getDx()][loc.get(i).getDy()].setBackground(Color.WHITE);
-			pre.myclient.vote("no");
+			pre.window.myclient.vote("no");
 		}
 	}
 	
@@ -490,13 +490,13 @@ public class clientGUI implements MouseListener{
 	public void chat() {
 		if(chatText.getText()!="")
 		{
-			pre.myclient.chat(chatText.getText());
+			pre.window.myclient.chat(chatText.getText());
 			textArea.append(chatText.getText()+"\n");
 			chatText.setText("");
 		}
 	}
 	public void chatMsg(int num,String message) {
-		pre.myclient.getScore();
+		pre.window.myclient.getScore();
 		textArea.append("player "+num+":"+message+"\n");
 	}
 	public void myTurn() {
@@ -509,7 +509,7 @@ public class clientGUI implements MouseListener{
 	public void claimWord() {
 		if(isDone==2&&word.size()!=0)
 		{
-			pre.myclient.submitWord(word);
+			pre.window.myclient.submitWord(word);
 			isDone=3;
 			clearWord();
 			hideBlocks();
@@ -520,7 +520,7 @@ public class clientGUI implements MouseListener{
 		clearWord();
 		clearChar();
 		hideBlocks();
-		pre.myclient.submit();
+		pre.window.myclient.submit();
 	}
 	
 	public void disconnect() {
@@ -530,7 +530,7 @@ public class clientGUI implements MouseListener{
 	}
 	
 	public void gameover() {
-		String res[]=pre.myclient.getScore().getWinner();
+		String res[]=pre.window.myclient.getScore().getWinner();
 		int num=res.length/2;
 		String result="GameOver!\nScore:"+res[1]+"\n Player:";
 		for(int i=0;i<num;i++)

@@ -167,6 +167,12 @@ public class midGUI implements MouseListener {
 		btnLeave = new JButton("Leave");
 		btnLeave.setEnabled(false);
 		btnExit = new JButton("Exit");
+		btnExit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				pre.window.myclient.disconnect();
+				System.exit(0);
+			}
+		});
 		Cmenu.add(btnReady);
 		Cmenu.add(btnLeave);
 		Cmenu.add(btnExit);
@@ -184,7 +190,7 @@ public class midGUI implements MouseListener {
 			{
 				if(button.equals(seat[i][j]))
 				{
-					pre.myclient.join("table"+(i+1));
+					pre.window.myclient.join("table"+(i+1));
 				}
 			}
 		
