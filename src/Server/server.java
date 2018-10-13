@@ -44,17 +44,25 @@ public class server {
 			ct.start();
 			sw.appendMessage("Server is online.\n");
 			while(true) {
-				if(gt1.isAlive() == false) {
-					String[] message = new String[3];
+				if(gt1.isDisconnected == true) {
+					gt1.interrupt();
+					String disconnectedUser = gt1.disconnectedUser;
 					for(int i=0; i<gt1.tList.size();i++)
-						gt1.tList.get(i).disconnect(gt1.disconnectedUser);
-					gt1.start();
+						gt1.tList.get(i).disconnect(disconnectedUser);
+					gt1 = new GameThread(fList1, tList1, sw, wThread);
+					for(int i=0; i<gt1.tList.size();i++)
+						gt1.tList.get(i).gt = gt1;
+					wThread.table1 = gt1;
 				}
-				if(gt2.isAlive() == false) {
-					String[] message = new String[3];
+				if(gt2.isDisconnected == true) {
+					gt2.interrupt();
+					String disconnectedUser = gt2.disconnectedUser;
 					for(int i=0; i<gt2.tList.size();i++)
-						gt2.tList.get(i).disconnect(gt1.disconnectedUser);
-					gt2.start();
+						gt2.tList.get(i).disconnect(disconnectedUser);
+					gt2 = new GameThread(fList2, tList2, sw, wThread);
+					for(int i=0; i<gt2.tList.size();i++)
+						gt2.tList.get(i).gt = gt2;
+					wThread.table2 = gt2;
 				}
 			}
 		} catch (IOException e) {

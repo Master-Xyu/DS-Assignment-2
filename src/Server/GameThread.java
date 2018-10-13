@@ -15,6 +15,7 @@ public class GameThread extends Thread {
 	private Boolean[] pass;
 	private ServerWindow sw;
 	public String disconnectedUser;
+	public Boolean isDisconnected = false;
 	public GameThread(ArrayList<Future<Boolean>> fList, ArrayList<Task> tList, ServerWindow sw, WaitingThread wt) {
 		this.fList = fList;
 		this.tList = tList;
@@ -140,11 +141,13 @@ public class GameThread extends Thread {
 		}
 	}
 	
-	public void disconnect(Task t) {
+	public void disconnect(Task t, Future<Boolean> f) {
 		sw.appendMessage(t.getUsername() + " disconnected!\n");
 		sw.appendMessage("Game over!\n");
-		this.disconnectedUser = t.getUsername();
-		this.interrupt();
+		this.disconnectedUser = t.getUsername();		
+		this.tList.remove(t);
+		this.fList.remove(f);
+		this.isDisconnected = true;
 	}
 	
 	public String[] getMessage(int i) {
