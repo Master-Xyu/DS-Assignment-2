@@ -84,7 +84,7 @@ public class Trans {
 					int c1=0;
 					while(msg.containsKey("player"+(c1+1)))
 					{
-						tmp[c1+2] = (String) msg.get("player"+c1);
+						tmp[c1+2] = (String) msg.get("player"+(c1+1));
 						c1++;
 					}
 					res = new String[2+c1];
@@ -97,7 +97,7 @@ public class Trans {
 					int c1=0;
 					while(msg.containsKey("player"+(c1+1)))
 					{
-						tmp[c1+3] = (String) msg.get("player"+c1);
+						tmp[c1+3] = (String) msg.get("player"+(c1+1));
 						c1++;
 					}
 					res = new String[3+c1];
@@ -192,7 +192,7 @@ public class Trans {
 				}
 				if(message[0].equals("list")) {
 					int len = message.length;
-					if(len>2)
+					if(len>=2)
 					{
 						response.put("command", message[0]);
 						response.put("type", message[1]);
