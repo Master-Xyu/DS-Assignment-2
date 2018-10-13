@@ -23,7 +23,7 @@ public class Task implements Callable<Boolean> {
 	private int table = 0;
 	private WaitingThread wt;
 	public Future<Boolean> f;
-	public GameThread gt;
+	public GameThread gt = null;
 	
 	public Task(Socket client, ServerWindow sw, WaitingThread wt) {
 		this.client = client;
@@ -110,8 +110,9 @@ public class Task implements Callable<Boolean> {
 				ready = false;
 			}
 			else if(message[1].equals("exit")) {
-				gt.leave(this, this.f);
-				gt.disconnect(this);
+				if(gt != null)
+					gt.leave(this, this.f);
+					gt.disconnect(this);
 				wt.refresh();
 				wt.deleteUser(username);
 				break;
@@ -149,7 +150,7 @@ public class Task implements Callable<Boolean> {
 		String[] message = new String[3];
 		message[0] = "alert";
 		message[1] = "disconnected";
-		message[3] = user;
+		message[2] = user;
 		output(message);
 		ready = false;
 	}

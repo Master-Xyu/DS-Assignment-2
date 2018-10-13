@@ -49,6 +49,8 @@ public class GameThread extends Thread {
 		game();	
 		for(int i=0; i< tList.size();i++)
 			tList.get(i).ready = false;
+		this.on = false;
+		run();
 	}
 	
 	public void game(){

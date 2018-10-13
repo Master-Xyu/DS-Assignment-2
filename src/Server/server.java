@@ -48,13 +48,13 @@ public class server {
 					String[] message = new String[3];
 					for(int i=0; i<gt1.tList.size();i++)
 						gt1.tList.get(i).disconnect(gt1.disconnectedUser);
-					gt1.start();;
+					gt1.start();
 				}
 				if(gt2.isAlive() == false) {
 					String[] message = new String[3];
 					for(int i=0; i<gt2.tList.size();i++)
 						gt2.tList.get(i).disconnect(gt1.disconnectedUser);
-					gt2.start();;
+					gt2.start();
 				}
 			}
 		} catch (IOException e) {
