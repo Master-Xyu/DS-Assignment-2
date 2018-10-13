@@ -254,7 +254,7 @@ public class midGUI implements MouseListener {
 		while(len>0)
 		{
 			seat[tnum][loc].setIcon(null);
-			seat[tnum][loc].setText(player[len]);
+			seat[tnum][loc].setText(player[loc]);
 			len++;
 			loc++;
 		}
