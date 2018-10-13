@@ -148,6 +148,7 @@ public class GameThread extends Thread {
 		this.tList.remove(t);
 		this.fList.remove(f);
 		this.isDisconnected = true;
+		System.out.println("gt");
 	}
 	
 	public String[] getMessage(int i) {
@@ -157,7 +158,6 @@ public class GameThread extends Thread {
 			try {
 				Thread.sleep(500);
 			} catch (InterruptedException e) {
-				e.printStackTrace();
 			}
 		}
 		return message;

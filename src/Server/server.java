@@ -45,11 +45,26 @@ public class server {
 			sw.appendMessage("Server is online.\n");
 			while(true) {
 				if(gt1.isDisconnected == true) {
+					System.out.println("server1");
+					try {
+						Thread.sleep(500);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					System.out.println("server2");
 					gt1.interrupt();
 					String disconnectedUser = gt1.disconnectedUser;
+					String[] message = new String[3];
+					message[0] = "alert";
+					message[1] = "disconnected";
+					message[2] = disconnectedUser;
+					
 					for(int i=0; i<gt1.tList.size();i++)
-						gt1.tList.get(i).disconnect(disconnectedUser);
+						gt1.tList.get(i).output(message);
+					System.out.println("server3");
 					gt1 = new GameThread(fList1, tList1, sw, wThread);
+					
 					for(int i=0; i<gt1.tList.size();i++)
 						gt1.tList.get(i).gt = gt1;
 					wThread.table1 = gt1;

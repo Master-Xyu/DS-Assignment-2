@@ -111,8 +111,9 @@ public class Task implements Callable<Boolean> {
 			}
 			else if(message[1].equals("exit")) {
 				if(gt != null) {
-					gt.leave(this, this.f);
+					//gt.leave(this, this.f);
 					gt.disconnect(this, this.f);
+					System.out.println("taks");
 				}
 				wt.deleteUser(username);
 				break;
