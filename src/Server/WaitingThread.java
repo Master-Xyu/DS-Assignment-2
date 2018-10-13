@@ -44,9 +44,14 @@ public class WaitingThread extends Thread {
 						table2.fList.add(f);
 						t.gt = table2;
 					}
-					refresh();
 				}
-				
+			}
+			refresh();
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 		}
 	}
@@ -73,7 +78,6 @@ public class WaitingThread extends Thread {
 		}
 		waitT.add(t);
 		waitF.add(f);
-		refresh();
 	}
 	
 	public synchronized void refresh() {
