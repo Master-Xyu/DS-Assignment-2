@@ -92,7 +92,16 @@ public class Task implements Callable<Boolean> {
 		*/
 		while(true) {
 			message = input();
-			if(message[1].equals("ready")) {
+			if(message[0].equals("leave") || message[1].equals("N")) {
+				ready = false;
+				gt.leave(this, f);
+				gt = null;
+				inMessage = null;
+				table = 0;
+				wt.userJoin(this, this.f);
+				continue;
+			}
+			else if(message[1].equals("ready")) {
 				sw.appendMessage(username + " is ready!\n");
 				ready = true;
 			}
@@ -103,16 +112,7 @@ public class Task implements Callable<Boolean> {
 				wt.deleteUser(username);
 				break;
 			}
-			else if(message[0].equals("leave") || message[1].equals("N")) {
-				ready = false;
-				gt.leave(this, f);
-				gt = null;
-				inMessage = null;
-				table = 0;
-				wt.userJoin(this, this.f);
-				wt.refresh();	
-				continue;
-			}
+
 			else if(message[1].equals("Y")) {	
 				ready = false;
 				inMessage = null;

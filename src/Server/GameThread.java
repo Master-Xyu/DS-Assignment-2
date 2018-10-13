@@ -132,7 +132,7 @@ public class GameThread extends Thread {
 		return agreed;
 	}
 	
-	public void groupSend(int n, String[] message){
+	public synchronized void groupSend(int n, String[] message){
 		for(int j = 0; j<tList.size(); j++) {
 			tList.get(j).output(message);
 		}
