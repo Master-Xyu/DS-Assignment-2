@@ -537,10 +537,14 @@ public class clientGUI implements MouseListener{
 		{
 			result=result+res[i*2]+" ";
 		}
-		JOptionPane.showMessageDialog(null,result);
+		result+="\n Continue?";
+		if(JOptionPane.showConfirmDialog(null, result, "GameOver", JOptionPane.YES_NO_OPTION)==0)
+			pre.window.myclient.conti();
+		else
+			pre.window.myclient.unconti();
 		frame.dispose();
-		pre.window.frame.setVisible(true);
-		pre.window.initial();
+		pre.window.mid.frame.setVisible(true);
+		//pre.window.initial();
 	}
 
 

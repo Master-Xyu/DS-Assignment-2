@@ -281,6 +281,19 @@ public class client extends Thread{
 		String[] message= {"alert", "unready"};
 		Trans.send(out, message);
 	}
+
+
+	public void conti() {
+		String[] message= {"alert", "Y"};
+		Trans.send(out, message);
+		
+	}
+	
+	public void unconti() {
+		String[] message= {"alert", "N"};
+		Trans.send(out, message);
+		
+	}
 	
 	
 }
