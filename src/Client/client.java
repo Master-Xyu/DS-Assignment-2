@@ -245,8 +245,8 @@ public class client extends Thread{
 		
 	}
 
-	public void leave(String table) {
-		String[] message= {"leave", table};
+	public void leave() {
+		String[] message= {"leave"};
 		Trans.send(out, message);
 	}
 	

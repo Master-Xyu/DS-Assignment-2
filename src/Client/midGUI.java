@@ -165,6 +165,11 @@ public class midGUI implements MouseListener {
 		btnReady = new JButton("Ready");
 		btnReady.setEnabled(false);
 		btnLeave = new JButton("Leave");
+		btnLeave.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				pre.window.myclient.leave();
+			}
+		});
 		btnLeave.setEnabled(false);
 		btnExit = new JButton("Exit");
 		btnExit.addActionListener(new ActionListener() {

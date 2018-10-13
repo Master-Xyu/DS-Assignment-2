@@ -113,9 +113,8 @@ public class Trans {
 			}
 			if(tmp[0].equals("leave"))
 			{
-				res = new String[2];
+				res = new String[1];
 				res[0] = tmp[0];
-				res[1] = (String) msg.get("table");
 			}
 			if(tmp[0].equals("chat"))
 			{
@@ -223,7 +222,6 @@ public class Trans {
 				}
 				if(message[0].equals("leave")) {
 					response.put("command", message[0]);
-					response.put("table", message[1]);
 				}
 				if(message[0].equals("chat")) {
 					response.put("command", message[0]);
