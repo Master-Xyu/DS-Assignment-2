@@ -90,6 +90,10 @@ public class Listener extends Thread{
 				isReady = false;
 				
 			}
+			else if(message[0].equals("alert") && message[1].equals("disconnected")) {
+				if(pre.window.myState == 3)
+					pre.window.gui.playerDisconnect(message[2]);
+			}
 			else if(message[0].equals("alert") && message[1].equals("duplicated username")) {
 				
 				pre.window.invalidName();
