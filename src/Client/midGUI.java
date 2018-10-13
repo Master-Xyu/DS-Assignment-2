@@ -88,6 +88,7 @@ public class midGUI implements MouseListener {
 				seat[i][0] = new JButton(pre.window.seatState[i][0]);
 			}
 			seat[i][0].setPreferredSize(new Dimension(100, 100));
+			seat[i][0].addMouseListener(this);
 			t1.add(seat[i][0], BorderLayout.CENTER);
 			t1.add(t3, BorderLayout.EAST);
 			t1.add(t4, BorderLayout.WEST);
@@ -102,6 +103,7 @@ public class midGUI implements MouseListener {
 				seat[i][1] = new JButton(pre.window.seatState[i][1]);
 			}
 			seat[i][1].setPreferredSize(new Dimension(100, 100));
+			seat[i][1].addMouseListener(this);
 			Ct[i].add(seat[i][1],BorderLayout.EAST);
 			if(pre.window.seatState[i][2].equals(""))
 			{
@@ -113,6 +115,7 @@ public class midGUI implements MouseListener {
 				seat[i][2] = new JButton(pre.window.seatState[i][2]);
 			}
 			seat[i][2].setPreferredSize(new Dimension(100, 100));
+			seat[i][2].addMouseListener(this);
 			t2.add(seat[i][2], BorderLayout.CENTER);
 			t2.add(t5, BorderLayout.EAST);
 			t2.add(t6, BorderLayout.WEST);
@@ -127,6 +130,7 @@ public class midGUI implements MouseListener {
 				seat[i][3] = new JButton(pre.window.seatState[i][3]);
 			}
 			seat[i][3].setPreferredSize(new Dimension(100, 100));
+			seat[i][3].addMouseListener(this);
 			Ct[i].add(seat[i][3],BorderLayout.WEST);
 			Ctable.add(Ct[i]) ;        
 		}      
