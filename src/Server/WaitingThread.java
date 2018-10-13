@@ -44,8 +44,9 @@ public class WaitingThread extends Thread {
 						table2.fList.add(f);
 						t.gt = table2;
 					}
+					refresh();
 				}
-				refresh();
+				
 			}
 		}
 	}
