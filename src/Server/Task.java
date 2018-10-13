@@ -105,6 +105,10 @@ public class Task implements Callable<Boolean> {
 				sw.appendMessage(username + " is ready!\n");
 				ready = true;
 			}
+			else if(message[1].equals("unready")) {
+				sw.appendMessage(username + " is unready!\n");
+				ready = false;
+			}
 			else if(message[1].equals("exit")) {
 				gt.leave(this, this.f);
 				gt.disconnect(this);
