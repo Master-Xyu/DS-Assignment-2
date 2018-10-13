@@ -77,7 +77,7 @@ public class Listener extends Thread{
 				if(pre.window.myState == 3)
 					pre.window.gui.serverDisconnect();
 				if(pre.window.myState == 2||pre.window.myState == 1)
-				pre.window.mid.ServerDisconnect();
+					pre.window.mid.ServerDisconnect();
 				
 			}
 			else if(message[0].equals("alert") && message[1].equals("Game is on!")) {
