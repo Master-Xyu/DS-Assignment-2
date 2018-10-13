@@ -555,7 +555,7 @@ public class clientGUI implements MouseListener{
 	}
 
 	public void playerDisconnect(String player) {
-		JOptionPane.showMessageDialog(null,"player"+player+"Disconnecte!");
+		JOptionPane.showMessageDialog(null,"player:"+player+" Disconnected!");
 		gameover();
 		
 	}
