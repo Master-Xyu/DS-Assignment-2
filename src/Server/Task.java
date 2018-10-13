@@ -120,9 +120,11 @@ public class Task implements Callable<Boolean> {
 			}
 			else if(message[0].equals("join")) {
 				table = Integer.parseInt(message[1].substring(5));
+				continue;
 			}
 			else if(message[0].equals("chat")) {
 				gt.groupSend(100, message);
+				continue;
 			}
 			inMessage = new String[message.length];
 			for(int i = 0; i< message.length; i++)

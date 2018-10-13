@@ -34,7 +34,7 @@ public class server {
 		GameThread gt2 = new GameThread(fList2, tList2, sw, wThread);
 		wThread.setTable(gt1, gt2);
 		sw.setWt(wThread);
-		
+		wThread.start();
 		gt1.start();
 		gt2.start();
 		try {
