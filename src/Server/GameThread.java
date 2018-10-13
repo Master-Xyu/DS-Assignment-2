@@ -71,6 +71,7 @@ public class GameThread extends Thread {
 		int count = 0;
 		int round = 0;
 		Boolean end = false;
+		String turnUser = null;
 		while(end == false) {
 			round++;
 			for(int i=0; i< tList.size(); i++)
@@ -79,19 +80,25 @@ public class GameThread extends Thread {
 				if(count++==400)
 					break;
 				tList.get(turn).turn(round);
-				message = getMessage(turn);
+				turnUser = tList.get(turn).getUsername();
+				message = getMessage(turnUser);
+				System.out.println("1");
 				groupSend(turn, message);
 				if(message[1].equals("pass")) {
 					pass[turn] = true;
 					continue;
 				}				
 				
-				message = getMessage(turn);
+				System.out.println("12");
+				
+				message = getMessage(turnUser);
 				groupSend(turn, message);
 				if(message[1].equals("pass")) {
 					//pass[turn] = true;
 					continue;
 				}	
+				
+				System.out.println("123");
 				
 				message = new String[3];
 				message[0] = "score";
@@ -124,11 +131,13 @@ public class GameThread extends Thread {
 	
 	public Boolean vote(int i){
 		String[] message;
+		String user;
 		Boolean agreed = true;
 		for(int j=0; j<tList.size(); j++) {
 			if(j == i)
 				continue;
-			message = getMessage(j);
+			user = tList.get(j).getUsername();
+			message = getMessage(user);
 			if(message[1].equals("disagree"))
 				agreed = false;
 		}
@@ -148,18 +157,28 @@ public class GameThread extends Thread {
 		this.tList.remove(t);
 		this.fList.remove(f);
 		this.isDisconnected = true;
-		System.out.println("gt");
+		try {
+			Thread.sleep(500);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
-	public String[] getMessage(int i) {
+	public String[] getMessage(String user) {
 		String[] message = null;
 		while(message == null) {
-			message = tList.get(i).getInMessage();
 			try {
 				Thread.sleep(500);
 			} catch (InterruptedException e) {
+
 			}
+			for(int i = 0; i<tList.size(); i++)
+				if(tList.get(i).getUsername().equals(user)) {					
+					message = tList.get(i).getInMessage();
+				}
 		}
+		System.out.println("1");
 		return message;
 	}
 	

@@ -27,7 +27,7 @@ public class ServerWindow {
 	private JTextField textField;
 	private JTextPane textPane;
 	private JScrollPane scrollPane;
-	private WaitingThread wt;
+	private WaitingThread wt = null;
 	/**
 	 * Create the application.
 	 */
@@ -74,7 +74,8 @@ public class ServerWindow {
 		JButton btnNewButton = new JButton("Stop server");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				wt.serverDown();
+				if(wt != null)
+					wt.serverDown();
 				System.exit(0);
 			}
 		});

@@ -104,17 +104,19 @@ public class Task implements Callable<Boolean> {
 			else if(message[1].equals("ready")) {
 				sw.appendMessage(username + " is ready!\n");
 				ready = true;
+				continue;
 			}
 			else if(message[1].equals("unready")) {
 				sw.appendMessage(username + " is unready!\n");
 				ready = false;
+				continue;
 			}
 			else if(message[1].equals("exit")) {
-				if(gt != null) {
-					//gt.leave(this, this.f);
-					gt.disconnect(this, this.f);
-					System.out.println("taks");
-				}
+				if(gt != null) 
+					if(gt.on == true) {
+						gt.interrupt();
+						gt.disconnect(this, this.f);
+					}
 				wt.deleteUser(username);
 				break;
 			}
