@@ -249,7 +249,7 @@ public class midGUI implements MouseListener {
 
 	public void updateTable(String state, String table, String[] player) {
 		int len = player.length;
-		int tnum = Integer.parseInt(table.substring(5));
+		int tnum = Integer.parseInt(table.substring(5))-1;
 		int loc=0;
 		while(len>0)
 		{
