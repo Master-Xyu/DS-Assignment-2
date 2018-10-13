@@ -239,7 +239,7 @@ public class clientGUI implements MouseListener{
 	}
 	
 	public void shutdown() {
-		pre.frame.setVisible(true);
+		pre.window.frame.setVisible(true);
 		frame.dispose();
 	}
 	
