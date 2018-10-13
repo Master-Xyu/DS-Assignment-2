@@ -64,7 +64,6 @@ class MyRender extends AbstractCellEditor implements TableCellRenderer,ActionLis
     public Component getTableCellRendererComponent(JTable table, Object value,
             boolean isSelected, boolean hasFocus, int row, int column) {
         // TODO Auto-generated method stub
-    	System.out.print(name[row].getText());
     	if(column==1)
     		return aa[row];
     	else
