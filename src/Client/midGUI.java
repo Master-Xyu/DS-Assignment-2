@@ -260,7 +260,7 @@ public class midGUI implements MouseListener {
 		}
 		for(int k=loc;k<4;k++)
 		{
-			String imgPath = "img/p"+(k-1)+".ng";
+			String imgPath = "img/p"+(k+1)+".ng";
 			ImageIcon pic=new ImageIcon(imgPath);
 			seat[tnum][k].setIcon(pic);
 		}
