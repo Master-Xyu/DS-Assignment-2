@@ -97,6 +97,7 @@ public class Task implements Callable<Boolean> {
 				gt.leave(this, f);
 				gt = null;
 				inMessage = null;
+				sw.appendMessage(username + " leave" +" table" + table + ".\n");
 				table = 0;
 				wt.userJoin(this, this.f);
 				continue;
@@ -112,6 +113,7 @@ public class Task implements Callable<Boolean> {
 				continue;
 			}
 			else if(message[1].equals("exit")) {
+				sw.appendMessage(username + " disconnected!\n");
 				if(gt != null) {
 					if(gt.on == true) {
 						gt.interrupt();
@@ -137,6 +139,7 @@ public class Task implements Callable<Boolean> {
 			}
 			else if(message[0].equals("join")) {
 				table = Integer.parseInt(message[1].substring(5));
+				sw.appendMessage(username + " join" +" table" + table + ".\n");
 				continue;
 			}
 			else if(message[0].equals("chat")) {
@@ -144,6 +147,7 @@ public class Task implements Callable<Boolean> {
 				continue;
 			}
 			else if(message[0].equals("invite")) {
+				sw.appendMessage(username + " invite " +message[2]+" join table" + table + ".\n");
 				for(int i=0; i<wt.waitT.size(); i++) 
 					if(wt.waitT.get(i).getUsername().equals(message[2])) {
 						wt.waitT.get(i).output(message);

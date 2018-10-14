@@ -16,11 +16,13 @@ public class GameThread extends Thread {
 	private ServerWindow sw;
 	public String disconnectedUser;
 	public Boolean isDisconnected = false;
-	public GameThread(ArrayList<Future<Boolean>> fList, ArrayList<Task> tList, ServerWindow sw, WaitingThread wt) {
+	public int table;
+	public GameThread(ArrayList<Future<Boolean>> fList, ArrayList<Task> tList, ServerWindow sw, WaitingThread wt, int table) {
 		this.fList = fList;
 		this.tList = tList;
 		this.sw = sw;
 		this.wt = wt;
+		this.table = table;
 	}
 	
 	public void run() {
@@ -45,7 +47,7 @@ public class GameThread extends Thread {
 		on = true;
 		ready = true;
 		
-		sw.appendMessage("Game starts!\n");
+		sw.appendMessage("Table " + table + " game starts!\n");
 		
 		game();	
 		for(int i=0; i< tList.size();i++)
@@ -151,8 +153,7 @@ public class GameThread extends Thread {
 	}
 	
 	public void disconnect(Task t, Future<Boolean> f) {
-		sw.appendMessage(t.getUsername() + " disconnected!\n");
-		sw.appendMessage("Game over!\n");
+		sw.appendMessage("Table " + table + " game over!\n");
 		this.disconnectedUser = t.getUsername();		
 		this.tList.remove(t);
 		this.fList.remove(f);
