@@ -89,6 +89,7 @@ public class midGUI implements MouseListener {
 			{
 				seat[i][0] = new JButton(pre.window.seatState[i][0]);
 			}
+			seat[i][0].setFont(new Font("Arial", Font.PLAIN, 30));
 			seat[i][0].setPreferredSize(new Dimension(100, 100));
 			seat[i][0].addMouseListener(this);
 			t1.add(seat[i][0], BorderLayout.CENTER);
@@ -104,6 +105,7 @@ public class midGUI implements MouseListener {
 			{
 				seat[i][1] = new JButton(pre.window.seatState[i][1]);
 			}
+			seat[i][1].setFont(new Font("Arial", Font.PLAIN, 30));
 			seat[i][1].setPreferredSize(new Dimension(100, 100));
 			seat[i][1].addMouseListener(this);
 			Ct[i].add(seat[i][1],BorderLayout.EAST);
@@ -116,6 +118,7 @@ public class midGUI implements MouseListener {
 			{
 				seat[i][2] = new JButton(pre.window.seatState[i][2]);
 			}
+			seat[i][2].setFont(new Font("Arial", Font.PLAIN, 30));
 			seat[i][2].setPreferredSize(new Dimension(100, 100));
 			seat[i][2].addMouseListener(this);
 			t2.add(seat[i][2], BorderLayout.CENTER);
@@ -131,6 +134,7 @@ public class midGUI implements MouseListener {
 			{
 				seat[i][3] = new JButton(pre.window.seatState[i][3]);
 			}
+			seat[i][3].setFont(new Font("Arial", Font.PLAIN, 30));
 			seat[i][3].setPreferredSize(new Dimension(100, 100));
 			seat[i][3].addMouseListener(this);
 			Ct[i].add(seat[i][3],BorderLayout.WEST);
@@ -284,6 +288,7 @@ public class midGUI implements MouseListener {
 		}
 		for(int k=loc;k<4;k++)
 		{
+			seat[tnum][k].setIcon(null);
 			String imgPath = "img/p"+(k+1)+".png";
 			ImageIcon pic=new ImageIcon(imgPath);
 			seat[tnum][k].setIcon(pic);
