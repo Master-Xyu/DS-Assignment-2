@@ -1,5 +1,0 @@
-1. 连接之后，服务器依次给客户端发三个包，分别是等待列表（list,wait,<所有用户名>），第一桌（list,table1,on/off,<所有用户名>)，第二桌（list,table2,on/off,<所有用户名>)。
-2. 加入桌客户端发送（join,table1/2),离开桌发送（leave,table1/2).
-3. 聊天信息发送（chat,本机编号，聊天内容）
-4. 游戏结束后，询问是否继续，继续发送（alert，Y），留在桌上，不继续发送（alert，N），退回大厅
-5. 服务器挂掉会发送（alert,server down)
