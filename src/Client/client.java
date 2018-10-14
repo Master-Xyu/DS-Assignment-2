@@ -41,11 +41,9 @@ public class client extends Thread{
 			state = true;
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
-			System.out.println("Cannot connect to Server!");
 			return false;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			System.out.println("asdasdad!");
 			return false;
 		}
 		return true;

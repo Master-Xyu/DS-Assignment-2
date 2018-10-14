@@ -50,7 +50,7 @@ public class ServerWindow {
 	private void initialize() {
 		frmDictionaryserver = new JFrame();
 		frmDictionaryserver.setTitle("DictionaryServer");
-		frmDictionaryserver.setBounds(100, 100, 450, 300);
+		frmDictionaryserver.setBounds(100, 100, 455, 308);
 		frmDictionaryserver.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmDictionaryserver.getContentPane().setLayout(null);
 		

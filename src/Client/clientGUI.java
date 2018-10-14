@@ -273,7 +273,6 @@ public class clientGUI implements MouseListener{
 					set.setDx(tx);
 					set.setDy(ty);
 					set.setLetter(wordKey[i]);
-					System.out.println("("+tx+","+ty+")"+"->"+"wordKey[i]");
 					pre.window.myclient.submitLetter(set);
 					clearChar();
 					isDone=2;
@@ -499,9 +498,7 @@ public class clientGUI implements MouseListener{
 		textArea.append("player "+num+":"+message+"\n");
 	}
 	public void myTurn() {
-		System.out.println(text1.getText());
 		text1.setText("It's your turn!");
-		System.out.println(text1.getText());
 		isDone=1;
 		showBlocks();
 	}
