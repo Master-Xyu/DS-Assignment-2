@@ -30,8 +30,8 @@ public class server {
 		ArrayList<Task> waitT = new ArrayList<Task>();
 		
 		WaitingThread wThread = new WaitingThread(es, waitF, waitT, sw);
-		GameThread gt1 = new GameThread(fList1, tList1, sw, wThread);
-		GameThread gt2 = new GameThread(fList2, tList2, sw, wThread);
+		GameThread gt1 = new GameThread(fList1, tList1, sw, wThread, 1);
+		GameThread gt2 = new GameThread(fList2, tList2, sw, wThread, 2);
 		wThread.setTable(gt1, gt2);
 		sw.setWt(wThread);
 		wThread.start();
@@ -55,7 +55,7 @@ public class server {
 					for(int i=0; i<gt1.tList.size();i++)
 						gt1.tList.get(i).output(message);
 					
-					gt1 = new GameThread(fList1, tList1, sw, wThread);					
+					gt1 = new GameThread(fList1, tList1, sw, wThread, 1);					
 					for(int i=0; i<gt1.tList.size();i++)
 						gt1.tList.get(i).gt = gt1;
 					gt1.start();
@@ -69,7 +69,7 @@ public class server {
 					message[2] = disconnectedUser;
 					for(int i=0; i<gt2.tList.size();i++)
 						gt2.tList.get(i).output(message);
-					gt2 = new GameThread(fList2, tList2, sw, wThread);
+					gt2 = new GameThread(fList2, tList2, sw, wThread, 2);
 					
 					for(int i=0; i<gt2.tList.size();i++)
 						gt2.tList.get(i).gt = gt2;
