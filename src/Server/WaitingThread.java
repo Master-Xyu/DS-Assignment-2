@@ -72,7 +72,7 @@ public class WaitingThread extends Thread {
 			Trans.send(new DataOutputStream(client.getOutputStream()), message);
 			return;
 		}catch(Exception e) {
-			sw.appendMessage(t.getUsername() + " log in!\n");
+			sw.appendMessage(t.getUsername() + "  log in!\n");
 			usernames.add(t.getUsername());
 			String[] message= {"alert","connected"};
 			t.output(message);
