@@ -270,10 +270,9 @@ public class client extends Thread{
 	}
 
 
-	public void invite(String text) {
-		String[] message= {"invite",text};
+	public void invite(String name,String table) {
+		String[] message= {"invite",pre.window.myName,name,table};
 		Trans.send(out, message);
-		
 	}
 
 

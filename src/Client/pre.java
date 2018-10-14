@@ -250,12 +250,15 @@ public class pre {
 		btnConnect.setEnabled(true);
 		isEnter = false;
 		myState = 0;
+		flag = 0;
 	}
 	public void addList(String[] p) {
 		mr = new MyRender(p);
 	}
 	
 	public void addInfo(String state,String[] a) {
+		if(flag == 0)
+			return;
 		if(tableState == null)
 		{
 			tableState = new String[2];

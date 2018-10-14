@@ -119,6 +119,10 @@ public class Listener extends Thread{
 				fillLetter(message);
 				
 			}
+			else if(message[0].equals("invite")) {
+				pre.window.mid.beInvited(message[1],message[3]);
+				
+			}
 			else if(message[0].equals("list") && message[1].equals("wait")) {
 				String player[] = new String[message.length-2];
 				for(int i=2;i<message.length;i++)

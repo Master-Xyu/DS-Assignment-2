@@ -131,6 +131,14 @@ public class Trans {
 				res[1] = (String) msg.get("num");
 				res[2] = (String) msg.get("chat");
 			}
+			if(tmp[0].equals("invite"))
+			{
+				res = new String[4];
+				res[0] = tmp[0];
+				res[1] = (String) msg.get("name1");
+				res[2] = (String) msg.get("name2");
+				res[3] = (String) msg.get("table");
+			}
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -239,6 +247,12 @@ public class Trans {
 					response.put("command", message[0]);
 					response.put("num", message[1]);
 					response.put("chat", message[2]);
+				}
+				if(message[0].equals("invite")) {
+					response.put("command", message[0]);
+					response.put("name1", message[1]);
+					response.put("name2", message[2]);
+					response.put("table", message[3]);
 				}
 			}
 			out.writeUTF(response.toJSONString());

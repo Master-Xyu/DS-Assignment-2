@@ -282,7 +282,6 @@ public class midGUI implements MouseListener {
 				btnLeave.setEnabled(true);
 				btnReady.setEnabled(true);
 			}
-				
 			len--;
 			loc++;
 		}
@@ -318,8 +317,24 @@ public class midGUI implements MouseListener {
 	public void disconnect() {
 		frame.dispose();
 		pre.window.myclient.disconnect();
-		pre.window.frame.setVisible(true);
-		pre.window.initial();
+		System.exit(0);
+	}
+
+	public void invite(String name) {
+		String table = "";
+		for(int i=0;i<2;i++)
+			for(int j=0;j<4;j++)
+			{
+				if(seat[i][j].getText().equals(pre.window.myName))
+					table = "table"+(i+1);
+			}
+		pre.window.myclient.invite(name,table);
+	}
+
+	public void beInvited(String name, String table) {
+		String result = "Agree to join "+name+" in "+table+"?";
+		if(JOptionPane.showConfirmDialog(null, result, "Invite", JOptionPane.YES_NO_OPTION)==0)
+			pre.window.myclient.join(table);
 	}
 
 	

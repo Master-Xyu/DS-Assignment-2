@@ -41,6 +41,14 @@ class MyRender extends AbstractCellEditor implements TableCellRenderer,ActionLis
     		aa[i].addActionListener(this);
     		aa[i].setEnabled(false);
     	}
+    	if(pre.window.myState==2)
+    	{
+    		for(int i=0;i<num;i++)
+    		{
+    			if(!name[i].getText().equals(pre.window.myName))
+    				aa[i].setEnabled(true);
+    		}
+    	}
     	pre.window.mid.Tplayer.getColumnModel().getColumn(0).setCellEditor(pre.window.mr);
 		pre.window.mid.Tplayer.getColumnModel().getColumn(0).setCellRenderer(pre.window.mr);
 		pre.window.mid.Tplayer.getColumnModel().getColumn(1).setCellEditor(pre.window.mr);
@@ -49,9 +57,7 @@ class MyRender extends AbstractCellEditor implements TableCellRenderer,ActionLis
     }
     
     public void setRender(int a) {
-    	aa[a].setText("Invited!");
-    	aa[a].setEnabled(false);
-    	pre.window.myclient.invite(name[a].getText());
+
     }
  
     @Override
@@ -77,13 +83,7 @@ class MyRender extends AbstractCellEditor implements TableCellRenderer,ActionLis
     	{
     		if(button.equals(aa[i])&&aa[i].isEnabled())
     		{
-    			System.out.println(i);
-    			pre.window.mr.setRender(i);
-    			pre.window.mid.Tplayer.getColumnModel().getColumn(0).setCellEditor(pre.window.mr);
-    			pre.window.mid.Tplayer.getColumnModel().getColumn(0).setCellRenderer(pre.window.mr);
-    			pre.window.mid.Tplayer.getColumnModel().getColumn(1).setCellEditor(pre.window.mr);
-    			pre.window.mid.Tplayer.getColumnModel().getColumn(1).setCellRenderer(pre.window.mr);
-    			pre.window.mid.model.fireTableDataChanged();
+    			pre.window.mid.invite(name[i].getText());
     		}
     	} 
     }
