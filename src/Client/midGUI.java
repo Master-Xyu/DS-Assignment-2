@@ -67,7 +67,7 @@ public class midGUI implements MouseListener {
 		{   Ct[i] = new Container(); 
 			Ct[i].setLayout(new BorderLayout()) ;
 			Ct[i].setPreferredSize(new Dimension(400,400));
-			ImageIcon icon = new ImageIcon("src/Client/img/2.png");
+			ImageIcon icon = new ImageIcon(this.getClass().getClassLoader().getResource("Client/img/2.png"));
 			img[i] = new JLabel();
 			img[i].setIcon(icon);
 			img[i].setPreferredSize(new Dimension(300, 300));
@@ -86,7 +86,7 @@ public class midGUI implements MouseListener {
 			t6.setPreferredSize(new Dimension(100,100));
 			if(pre.window.seatState[i][0].equals(""))
 			{
-				ImageIcon pic1=new ImageIcon("src/Client/img/p1.png");
+				ImageIcon pic1=new ImageIcon(this.getClass().getClassLoader().getResource("Client/img/p1.png"));
 				seat[i][0] = new JButton("",pic1);
 			}
 			else 
@@ -111,7 +111,7 @@ public class midGUI implements MouseListener {
 			Ct[i].add(t1,BorderLayout.NORTH);
 			if(pre.window.seatState[i][1].equals(""))
 			{
-				ImageIcon pic2=new ImageIcon("src/Client/img/p2.png");
+				ImageIcon pic2=new ImageIcon(this.getClass().getClassLoader().getResource("Client/img/p2.png"));
 				seat[i][1] = new JButton("",pic2);
 			}
 			else 
@@ -124,7 +124,7 @@ public class midGUI implements MouseListener {
 			Ct[i].add(seat[i][1],BorderLayout.EAST);
 			if(pre.window.seatState[i][2].equals(""))
 			{
-				ImageIcon pic3=new ImageIcon("src/Client/img/p3.png");
+				ImageIcon pic3=new ImageIcon(this.getClass().getClassLoader().getResource("Client/img/p3.png"));
 				seat[i][2] = new JButton("",pic3);
 			}
 			else 
@@ -140,7 +140,7 @@ public class midGUI implements MouseListener {
 			Ct[i].add(t2,BorderLayout.SOUTH);
 			if(pre.window.seatState[i][3].equals(""))
 			{
-				ImageIcon pic4=new ImageIcon("src/Client/img/p4.png");
+				ImageIcon pic4=new ImageIcon(this.getClass().getClassLoader().getResource("Client/img/p4.png"));
 				seat[i][3] = new JButton("",pic4);
 			}
 			else 
@@ -303,8 +303,8 @@ public class midGUI implements MouseListener {
 		{	
 			seat[tnum][k].setText("");
 			seat[tnum][k].setIcon(null);
-			String imgPath = "src/Client/img/p"+(k+1)+".png";
-			ImageIcon pic=new ImageIcon(imgPath);
+			String imgPath = "Client/img/p"+(k+1)+".png";
+			ImageIcon pic=new ImageIcon(this.getClass().getClassLoader().getResource(imgPath));
 			seat[tnum][k].setIcon(pic);
 		}
 		
