@@ -37,6 +37,8 @@ public class midGUI implements MouseListener {
 	public  DefaultTableModel model;
 	private JScrollPane js;
 	public String myName;
+	private JLabel[] tstate;
+	private JLabel[] label;
 	
 
 	public midGUI() {
@@ -57,6 +59,8 @@ public class midGUI implements MouseListener {
 	}
 
 	private void showTable() {
+		tstate = new JLabel[2];
+		label = new JLabel[2];
 		frame.getContentPane().add(Ctable,BorderLayout.CENTER);
 		Ctable.setLayout(new GridLayout(2,2,13,13)) ;              
 		for(int i=0;i<2;i++)        
@@ -95,6 +99,13 @@ public class midGUI implements MouseListener {
 			t1.add(seat[i][0], BorderLayout.CENTER);
 			t1.add(t3, BorderLayout.EAST);
 			t1.add(t4, BorderLayout.WEST);
+			tstate[i] = new JLabel(pre.window.tableState[i]);
+			t3.setLayout(new BorderLayout());
+			t3.add(tstate[i],BorderLayout.CENTER);
+			label[i] = new JLabel("table"+(i+1));
+			t4.setLayout(new BorderLayout());
+			t4.add(label[i],BorderLayout.CENTER);
+			t4.add(label[i]);
 			Ct[i].add(t1,BorderLayout.NORTH);
 			if(pre.window.seatState[i][1].equals(""))
 			{
@@ -272,6 +283,7 @@ public class midGUI implements MouseListener {
 		int len = player.length;
 		int tnum = Integer.parseInt(table.substring(5))-1;
 		int loc=0;
+		tstate[tnum].setText(state);
 		while(len>0)
 		{
 			seat[tnum][loc].setIcon(null);
