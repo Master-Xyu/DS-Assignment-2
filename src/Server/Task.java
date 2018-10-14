@@ -112,11 +112,20 @@ public class Task implements Callable<Boolean> {
 				continue;
 			}
 			else if(message[1].equals("exit")) {
-				if(gt != null) 
+				if(gt != null) {
 					if(gt.on == true) {
 						gt.interrupt();
 						gt.disconnect(this, this.f);
 					}
+					else{
+						gt.tList.remove(this);
+						gt.fList.remove(this);
+					}
+				}
+				else {
+					wt.waitT.remove(this);
+					wt.waitF.remove(f);
+				}
 				wt.deleteUser(username);
 				break;
 			}
