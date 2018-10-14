@@ -111,7 +111,7 @@ public class midGUI implements MouseListener {
 			Ct[i].add(t1,BorderLayout.NORTH);
 			if(pre.window.seatState[i][1].equals(""))
 			{
-				ImageIcon pic2=new ImageIcon("src/Client/img/img/p2.png");
+				ImageIcon pic2=new ImageIcon("src/Client/img/p2.png");
 				seat[i][1] = new JButton("",pic2);
 			}
 			else 
@@ -300,7 +300,8 @@ public class midGUI implements MouseListener {
 			loc++;
 		}
 		for(int k=loc;k<4;k++)
-		{
+		{	
+			seat[tnum][k].setText("");
 			seat[tnum][k].setIcon(null);
 			String imgPath = "src/Client/img/p"+(k+1)+".png";
 			ImageIcon pic=new ImageIcon(imgPath);
