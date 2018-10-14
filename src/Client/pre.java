@@ -78,6 +78,7 @@ public class pre {
 	public pre() {
 		myState = 0;
 		initialize();
+		myclient = new client();
 	}
 
 	/**
@@ -200,10 +201,15 @@ public class pre {
 						else {
 							String address = textField_2.getText();
 							int portnum = Integer.parseInt(textField_3.getText());
-							myclient = new client(address,portnum);
-							myName = textField.getText();
-							String state = myclient.connect(myName);
-							btnConnect.setEnabled(false);
+							if(myclient.Connect(address,portnum))
+							{
+								myName = textField.getText();
+								String state = myclient.connect(myName);
+								btnConnect.setEnabled(false);
+							}
+							else
+								JOptionPane.showMessageDialog(null,"Cannot connect to server");
+
 						}
 					}
 				}

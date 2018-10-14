@@ -6,6 +6,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 
 import java.net.Socket;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 
 import java.net.ConnectException;
@@ -24,12 +25,8 @@ public class client extends Thread{
 
 
 	
-	
-	public client(String address,int port) {
-		
+	public boolean Connect(String address,int port) {
 		try {
-			
-	
 			Socket socket = new Socket(address, port);
 			
 			this.in = new DataInputStream(socket.getInputStream());
@@ -37,23 +34,22 @@ public class client extends Thread{
 			
 			//String[] message= {"alert","connect"};
 			//Trans.send(out, message);
-	
+
 			this.ls = new Listener(in, out);
 			ls.start();
 			
 			state = true;
-			
-			
-			
-		} catch (ConnectException e) {
-			
-			e.printStackTrace();
-			
+		} catch (UnknownHostException e) {
+			// TODO Auto-generated catch block
+			System.out.println("Cannot connect to Server!");
+			return false;
 		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			System.out.println("asdasdad!");
+			return false;
+		}
+		return true;
 
-			e.printStackTrace();
-			
-		} 
 	}
 	
 	

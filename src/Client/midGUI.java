@@ -100,9 +100,11 @@ public class midGUI implements MouseListener {
 			t1.add(t3, BorderLayout.EAST);
 			t1.add(t4, BorderLayout.WEST);
 			tstate[i] = new JLabel(pre.window.tableState[i]);
+			tstate[i].setFont(new Font("Arial", Font.PLAIN, 30));
 			t3.setLayout(new BorderLayout());
 			t3.add(tstate[i],BorderLayout.CENTER);
 			label[i] = new JLabel("table"+(i+1));
+			label[i].setFont(new Font("Arial", Font.PLAIN, 30));
 			t4.setLayout(new BorderLayout());
 			t4.add(label[i],BorderLayout.CENTER);
 			t4.add(label[i]);
